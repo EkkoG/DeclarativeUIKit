@@ -1,13 +1,6 @@
 
 import UIKit
 
-extension UIView {
-    @discardableResult
-    public func apply(_ closure: (Self) -> Void) -> Self {
-        closure(self)
-        return self
-    }
-}
 
 extension UIView {
     private struct AssociatedKeys {
