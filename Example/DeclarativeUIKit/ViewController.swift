@@ -66,13 +66,38 @@ class ViewController: UIViewController {
                             }
                         }
 
-                        UIButton().apply { button in
-                            button.setTitle("Continue Deleting Account", for: .normal)
-                            button.setTitleColor(.black, for: .normal)
+                        CircleView {
+                            UIButton().apply { button in
+                                button.setTitle("Continue Deleting Account", for: .normal)
+                                button.setTitleColor(.white, for: .normal)
+                            }.applyAutoLayout { view in
+                                view.snp.makeConstraints { make in
+                                    make.edges.equalToSuperview()
+                                    make.width.equalTo(250)
+                                    make.height.equalTo(40)
+                                }
+                            }
+                        }.apply { view in
+                            view.backgroundColor = .red.withAlphaComponent(0.6)
                         }
-                        UIButton().apply { button in
-                            button.setTitle("Cancel", for: .normal)
-                            button.setTitleColor(.black, for: .normal)
+                        UISpace().applyAutoLayout { view in
+                            view.snp.makeConstraints { make in
+                                make.height.equalTo(5)
+                            }
+                        }
+                        CircleView {
+                            UIButton().apply { button in
+                                button.setTitle("Cancel", for: .normal)
+                                button.setTitleColor(.white, for: .normal)
+                            }.applyAutoLayout { view in
+                                view.snp.makeConstraints { make in
+                                    make.edges.equalToSuperview()
+                                    make.width.equalTo(250)
+                                    make.height.equalTo(40)
+                                }
+                            }
+                        }.apply { view in
+                            view.backgroundColor = .gray.withAlphaComponent(0.6)
                         }
                         UISpace()
                     }.apply { stack in
