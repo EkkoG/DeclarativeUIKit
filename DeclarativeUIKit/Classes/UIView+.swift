@@ -26,8 +26,9 @@ extension UIView {
 }
 
 extension UIView {
-    public func body(@BodyBuilder closure: () -> BodyBuilderItemable) {
+    public func body(@BodyBuilder closure: () -> BodyBuilderItemable) -> Self{
         add(item: closure())
+        return self
     }
     public convenience init(@BodyBuilder closure: () -> BodyBuilderItemable) {
         self.init(frame: .zero)

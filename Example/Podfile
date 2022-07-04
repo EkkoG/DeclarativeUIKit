@@ -4,6 +4,7 @@ platform :ios, '10.0'
 
 target 'DeclarativeUIKit_Example' do
   pod 'DeclarativeUIKit', :path => '../'
+  pod 'SnapKit'
 
   target 'DeclarativeUIKit_Tests' do
     inherit! :search_paths

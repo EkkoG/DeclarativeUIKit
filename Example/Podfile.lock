@@ -1,0 +1,23 @@
+PODS:
+  - DeclarativeUIKit (0.1.0)
+  - SnapKit (5.6.0)
+
+DEPENDENCIES:
+  - DeclarativeUIKit (from `../`)
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  DeclarativeUIKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DeclarativeUIKit: e46d54f8c41818ba53db5863810f22850ef4adfb
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+
+PODFILE CHECKSUM: fd77a99a99f9eb884c5ae5116ba69724db26a220
+
+COCOAPODS: 1.11.3
