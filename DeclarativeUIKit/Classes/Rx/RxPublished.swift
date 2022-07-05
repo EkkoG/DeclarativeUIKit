@@ -21,7 +21,7 @@ import RxCocoa
 ///   $value: BehaviorRelay<Int>
 ///   として参照できる
 @propertyWrapper
-public final class RxProperty<Value> {
+public final class RxPublished<Value> {
     public var projectedValue: Observable<Value> { relay.asObservable() }
     public var wrappedValue: Value {
         get { relay.value }
@@ -39,7 +39,7 @@ public final class RxProperty<Value> {
 /// @RxPropertyとの違いは、projectedValueの型がObservable<Value>なので
 /// メインスレッドでの購読が保証されている
 @propertyWrapper
-final public class RxUIProperty<Value> {
+final public class RxUIPublished<Value> {
     public var projectedValue: Observable<Value> { relay.asDriver().asObservable() }
     public var wrappedValue: Value {
         get { relay.value }

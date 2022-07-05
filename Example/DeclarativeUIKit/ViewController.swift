@@ -14,8 +14,8 @@ import RxSwift
 
 class ViewController: UIViewController {
 
-    @RxUIProperty var text = "Hello"
-    @RxUIProperty var text1 = "Hello"
+    @RxUIPublished var text = "Hello"
+    @RxUIPublished var text1 = "Hello"
 
     override func viewDidLoad() {
         super.viewDidLoad()
