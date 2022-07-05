@@ -5,6 +5,11 @@
 import UIKit
 
 extension UIStackView {
+    convenience init(@BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
+        self.init(frame: .zero)
+        addArranged(item: _arrangedSubviewsBuilder())
+    }
+
     private func _addArranged(_ view: UIView) {
         self.addArrangedSubview(view)
         if let builder = view.autolayoutBuilder {

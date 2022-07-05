@@ -4,6 +4,9 @@ platform :ios, '10.0'
 
 target 'DeclarativeUIKit_Example' do
   pod 'DeclarativeUIKit', :path => '../'
+  pod 'DeclarativeUIKit/Rx', :path => '../'
+  pod 'DeclarativeUIKit/ApplyStyleKit', :path => '../'
+  pod 'DeclarativeUIKit/Combine', :path => '../'
   pod 'SnapKit'
 
   target 'DeclarativeUIKit_Tests' do

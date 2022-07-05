@@ -8,18 +8,26 @@
 
 import UIKit
 import DeclarativeUIKit
+import ApplyStyleKit
 import SnapKit
+import RxSwift
 
 class ViewController: UIViewController {
+
+    @RxUIProperty var text = "Hello"
+    @RxUIProperty var text1 = "Hello"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         var stack: VStack?
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.text1 = "World"
+        }
         view.body {
-            UILabel().apply { label in
+            UILabel().text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) }).apply { label in
                 label.text = "Hello, World!"
-            }.applyAutoLayout { view in
+            }.A.textColor(.black).asView.applyAutoLayout { view in
                 view.snp.makeConstraints { make in
                     make.centerX.equalToSuperview()
                     make.top.equalToSuperview().offset(70)

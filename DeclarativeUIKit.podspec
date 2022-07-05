@@ -30,8 +30,29 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.3'
 
-  s.source_files = 'DeclarativeUIKit/Classes/**/*'
-  
+
+  s.subspec 'Core' do |cs|
+    cs.source_files = 'DeclarativeUIKit/Classes/Core/**/*'
+  end
+
+  s.subspec 'Rx' do |rs|
+    rs.source_files = 'DeclarativeUIKit/Classes/Rx/**/*'
+    rs.dependency 'RxSwift'
+    rs.dependency 'RxCocoa'
+  end
+
+  s.subspec 'Combine' do |cs|
+    cs.source_files = 'DeclarativeUIKit/Classes/Combine/**/*'
+    cs.frameworks = 'Combine'
+  end
+
+  s.subspec 'ApplyStyleKit' do |as|
+    as.source_files = 'DeclarativeUIKit/Classes/ApplyStyleKit/**/*'
+    as.dependency 'ApplyStyleKit'
+  end
+
+  s.default_subspec = 'Core' 
+
   # s.resource_bundles = {
   #   'DeclarativeUIKit' => ['DeclarativeUIKit/Assets/*.png']
   # }

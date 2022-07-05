@@ -4,10 +4,9 @@
 
 import UIKit
 
-open class VStack: UIStackView {
+open class HStack: UIStackView {
     public convenience init(@BodyBuilder arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
-        self.init(frame: .zero)
-        self.axis = .vertical
-        addArranged(item: arrangedSubviewsBuilder())
+        self.init(_arrangedSubviewsBuilder: arrangedSubviewsBuilder)
+        self.axis = .horizontal
     }
 }
