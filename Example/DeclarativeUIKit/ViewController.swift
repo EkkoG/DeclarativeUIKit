@@ -43,12 +43,7 @@ class ViewController: UIViewController {
                         }
                         UILabel().alias("标题").apply { label in
                             label.text = "Delete your account?"
-                        }
-                        UISpace().applyAutoLayout { view in
-                            view.snp.makeConstraints { make in
-                                make.height.equalTo(8)
-                            }
-                        }
+                        }.customSpacing(8)
                         HStack {
                             UILabel().apply { label in
                                 label.text = "ahh"
@@ -67,12 +62,7 @@ class ViewController: UIViewController {
                                 make.leading.equalToSuperview().offset(16)
                                 make.trailing.equalToSuperview().offset(-16)
                             }
-                        }
-                        UISpace().applyAutoLayout { view in
-                            view.snp.makeConstraints { make in
-                                make.height.equalTo(40)
-                            }
-                        }
+                        }.customSpacing(20)
 
                         CircleView {
                             UIButton().apply { button in
@@ -87,12 +77,7 @@ class ViewController: UIViewController {
                             }
                         }.apply { view in
                             view.backgroundColor = .red.withAlphaComponent(0.6)
-                        }
-                        UISpace().applyAutoLayout { view in
-                            view.snp.makeConstraints { make in
-                                make.height.equalTo(5)
-                            }
-                        }
+                        }.customSpacing(10)
                         CircleView {
                             UIButton().apply { button in
                                 button.setTitle("Cancel", for: .normal)

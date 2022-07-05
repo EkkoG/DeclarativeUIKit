@@ -15,6 +15,13 @@ extension UIStackView {
         if let builder = view.autolayoutBuilder {
             builder(view)
         }
+        if #available(iOS 11.0, *) {
+            if let customSpacing = view.customSpacing {
+                self.setCustomSpacing(customSpacing, after: view)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     public func addArranged(item: BodyBuilderItemable) {
