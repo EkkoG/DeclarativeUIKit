@@ -6,11 +6,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension UIControl {
+extension RxObject where Base: UIControl {
     @discardableResult
     public func isEnabled(_ isEnabled: Observable<Bool>) -> Self {
         isEnabled.subscribe { s in
-            self.isEnabled = s.element ?? true
+            base.isEnabled = s.element ?? true
         }
         return self
     }
@@ -18,7 +18,7 @@ extension UIControl {
     @discardableResult
     public func isSelected(_ isSelected: Observable<Bool>) -> Self {
         isSelected.subscribe { s in
-            self.isSelected = s.element ?? false
+            base.isSelected = s.element ?? false
         }
         return self
     }
@@ -26,7 +26,7 @@ extension UIControl {
     @discardableResult
     public func isHighlighted(_ isHighlighted: Observable<Bool>) -> Self {
         isHighlighted.subscribe { s in
-            self.isHighlighted = s.element ?? false
+            base.isHighlighted = s.element ?? false
         }
         return self
     }

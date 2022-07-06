@@ -26,10 +26,12 @@ extension UIView {
 }
 
 extension UIView {
+    @discardableResult
     public func body(@BodyBuilder closure: () -> BodyBuilderItemable) -> Self{
         add(item: closure())
         return self
     }
+
     public convenience init(@BodyBuilder closure: () -> BodyBuilderItemable) {
         self.init(frame: .zero)
 

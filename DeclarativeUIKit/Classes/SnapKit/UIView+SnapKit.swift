@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-extension UIView {
+extension SnapObject where Base: UIView {
     @discardableResult
     public func makeConstraints(_ closure: @escaping (ConstraintMaker) -> Void) -> Self {
-        self.applyAutoLayout { view in
+        base.applyAutoLayout { view in
             view.snp.makeConstraints { (make) in
                 closure(make)
             }

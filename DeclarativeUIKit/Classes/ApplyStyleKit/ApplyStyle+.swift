@@ -5,9 +5,3 @@ extension ApplyStyleProtocol {
         return applyStyle
     }
 }
-
-extension StyleObject {
-    public var asView: Base {
-        return base
-    }
-}

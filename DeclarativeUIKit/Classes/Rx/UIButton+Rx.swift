@@ -6,11 +6,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension UIButton {
+extension RxObject where Base: UIButton {
     @discardableResult
     public func title(_ title: Observable<String>, for state: UIControl.State = .normal) -> Self {
         title.subscribe { s in
-            self.setTitle(s.element ?? "", for: state)
+            base.setTitle(s.element ?? "", for: state)
         }
         return self
     }
@@ -18,7 +18,7 @@ extension UIButton {
     @discardableResult
     public func titleColor(_ titleColor: Observable<UIColor>, for state: UIControl.State = .normal) -> Self {
         titleColor.subscribe { s in
-            self.setTitleColor(s.element ?? .clear, for: state)
+            base.setTitleColor(s.element ?? .clear, for: state)
         }
         return self
     }
@@ -26,7 +26,7 @@ extension UIButton {
     @discardableResult
     public func image(_ image: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
         image.subscribe { s in
-            self.setImage(s.element, for: state)
+            base.setImage(s.element, for: state)
         }
         return self
     }
@@ -34,7 +34,7 @@ extension UIButton {
     @discardableResult
     public func backgroundImage(_ backgroundImage: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
         backgroundImage.subscribe { s in
-            self.setBackgroundImage(s.element, for: state)
+            base.setBackgroundImage(s.element, for: state)
         }
         return self
     }
@@ -42,7 +42,7 @@ extension UIButton {
     @discardableResult
     public func attributedTitle(_ attributedTitle: Observable<NSAttributedString>, for state: UIControl.State = .normal) -> Self {
         attributedTitle.subscribe { s in
-            self.setAttributedTitle(s.element, for: state)
+            base.setAttributedTitle(s.element, for: state)
         }
         return self
     }
@@ -50,7 +50,7 @@ extension UIButton {
     @discardableResult
     public func contentEdgeInsets(_ contentEdgeInsets: Observable<UIEdgeInsets>) -> Self {
         contentEdgeInsets.subscribe { s in
-            self.contentEdgeInsets = s.element ?? .zero
+            base.contentEdgeInsets = s.element ?? .zero
         }
         return self
     }

@@ -6,11 +6,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension UIView {
+extension RxObject where Base: UIView {
     @discardableResult
     public func backgroundColor(_ color: Observable<UIColor>) -> Self {
         color.subscribe { s in
-            self.backgroundColor = s.element ?? .clear
+            base.backgroundColor = s.element ?? .clear
         }
         return self
     }
@@ -18,7 +18,7 @@ extension UIView {
     @discardableResult
     public func alpha(_ alpha: Observable<CGFloat>) -> Self {
         alpha.subscribe { s in
-            self.alpha = s.element ?? 0
+            base.alpha = s.element ?? 0
         }
         return self
     }
@@ -26,7 +26,7 @@ extension UIView {
     @discardableResult
     public func isHidden(_ isHidden: Observable<Bool>) -> Self {
         isHidden.subscribe { s in
-            self.isHidden = s.element ?? true
+            base.isHidden = s.element ?? true
         }
         return self
     }
@@ -34,7 +34,7 @@ extension UIView {
     @discardableResult
     public func isUserInteractionEnabled(_ isUserInteractionEnabled: Observable<Bool>) -> Self {
         isUserInteractionEnabled.subscribe { s in
-            self.isUserInteractionEnabled = s.element ?? true
+            base.isUserInteractionEnabled = s.element ?? true
         }
         return self
     }

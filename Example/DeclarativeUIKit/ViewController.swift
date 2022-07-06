@@ -25,17 +25,21 @@ class ViewController: UIViewController {
             self.text1 = "World"
         }
         view.body {
-            UILabel().text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) }).apply { label in
+            UILabel().apply { label in
+                label.R.text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) })
                 label.A.textColor(.black)
                         .text("Hello, World!")
-            }.makeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.top.equalToSuperview().offset(70)
+                label.S.makeConstraints { make in
+                    make.centerX.equalToSuperview()
+                    make.top.equalToSuperview().offset(70)
+                }
             }
             UIView {
                 UIView().alias("圆角背景").body {
                     UIStackView.V {
-                        UISpace().height(32)
+                        UISpace().apply { space in
+                            space.S.height(32)
+                        }
                         UILabel().alias("标题").apply { label in
                             label.text = "Delete your account?"
                         }.spacingAfterSelf(8)
@@ -52,19 +56,21 @@ class ViewController: UIViewController {
                             label.text = "Your Favourite Meditation and Music、your progress of mediation journey will be permanently deleted."
                             label.numberOfLines = 0
                             label.textAlignment = .center
-                        }.makeConstraints { make in
-                            make.leading.equalToSuperview().offset(16)
-                            make.trailing.equalToSuperview().offset(-16)
+                            label.S.makeConstraints { make in
+                                make.leading.equalToSuperview().offset(16)
+                                make.trailing.equalToSuperview().offset(-16)
+                            }
                         }.spacingAfterSelf(20)
 
                         CircleView {
                             UIButton().apply { button in
                                 button.setTitle("Continue Deleting Account", for: .normal)
                                 button.setTitleColor(.white, for: .normal)
-                            }.makeConstraints { make in
-                                make.edges.equalToSuperview()
-                                make.width.equalTo(250)
-                                make.height.equalTo(40)
+                                button.S.makeConstraints { make in
+                                    make.edges.equalToSuperview()
+                                    make.width.equalTo(250)
+                                    make.height.equalTo(40)
+                                }
                             }
                         }.apply { view in
                             view.backgroundColor = .red.withAlphaComponent(0.6)
@@ -73,10 +79,11 @@ class ViewController: UIViewController {
                             UIButton().apply { button in
                                 button.setTitle("Cancel", for: .normal)
                                 button.setTitleColor(.white, for: .normal)
-                            }.makeConstraints { make in
-                                make.edges.equalToSuperview()
-                                make.width.equalTo(250)
-                                make.height.equalTo(40)
+                                button.S.makeConstraints { make in
+                                    make.edges.equalToSuperview()
+                                    make.width.equalTo(250)
+                                    make.height.equalTo(40)
+                                }
                             }
                         }.apply { view in
                             view.backgroundColor = .gray.withAlphaComponent(0.6)
@@ -84,21 +91,24 @@ class ViewController: UIViewController {
                         UISpace()
                     }.apply { stack in
                         stack.alignment = .center
-                    }.assign(to: &stack).makeConstraints { make in
-                        make.edges.equalToSuperview()
-                    }
+                        stack.S.makeConstraints { make in
+                            make.edges.equalToSuperview()
+                        }
+                    }.assign(to: &stack)
                 }.apply { view in
                     view.backgroundColor = .white
                     view.layer.cornerRadius = 8
                     view.clipsToBounds = true
-                }.makeConstraints { make in
-                    make.width.height.equalTo(300)
-                    make.center.equalToSuperview()
+                    view.S.makeConstraints { make in
+                        make.width.height.equalTo(300)
+                        make.center.equalToSuperview()
+                    }
                 }
-            }.makeConstraints { make in
-                make.edges.equalToSuperview()
             }.apply { view in
                 view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                view.S.makeConstraints { make in
+                    make.edges.equalToSuperview()
+                }
             }
         }
     }

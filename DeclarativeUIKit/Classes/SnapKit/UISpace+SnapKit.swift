@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-extension UISpace {
+extension SnapObject where Base: UISpace {
     @discardableResult
     public func height(_ height: CGFloat) -> Self {
         self.makeConstraints { (make) in

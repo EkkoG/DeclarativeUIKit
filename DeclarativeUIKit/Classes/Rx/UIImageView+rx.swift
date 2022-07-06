@@ -6,11 +6,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension UIImageView {
+extension RxObject where Base: UIImageView {
     @discardableResult
     public func image(_ image: Observable<UIImage?>) -> Self {
         image.subscribe { s in
-            self.image = s.element ?? nil
+            base.image = s.element ?? nil
         }
         return self
     }
