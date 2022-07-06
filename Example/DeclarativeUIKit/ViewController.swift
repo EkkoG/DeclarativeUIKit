@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var stack: VStack?
+        var stack: UIStackView?
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.text1 = "World"
         }
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
             }
             UIView {
                 UIView().alias("圆角背景").body {
-                    VStack {
+                    UIStackView.V {
                         UISpace().applyAutoLayout { view in
                             view.snp.makeConstraints { make in
                                 make.height.equalTo(32)
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
                         UILabel().alias("标题").apply { label in
                             label.text = "Delete your account?"
                         }.customSpacing(8)
-                        HStack {
+                        UIStackView.H {
                             UILabel().apply { label in
                                 label.text = "ahh"
                             }
