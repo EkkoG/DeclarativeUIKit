@@ -37,9 +37,7 @@ class ViewController: UIViewController {
             UIView {
                 UIView().alias("圆角背景").body {
                     UIStackView.V {
-                        UISpace().apply { space in
-                            space.S.height(32)
-                        }
+                        UISpace(height: 32)
                         UILabel().alias("标题").apply { label in
                             label.text = "Delete your account?"
                         }.spacingAfterSelf(8)

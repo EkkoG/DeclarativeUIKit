@@ -1,9 +1,22 @@
 import UIKit
 import SnapKit
 
+extension UISpace {
+    public convenience init(height: CGFloat) {
+        self.init()
+        self.S.height(height)
+    }
+
+    public convenience init(width: CGFloat) {
+        self.init()
+        self.S.width(width)
+    }
+}
+
 extension SnapObject where Base: UISpace {
+
     @discardableResult
-    public func height(_ height: CGFloat) -> Self {
+    func height(_ height: CGFloat) -> Self {
         self.makeConstraints { (make) in
             make.height.equalTo(height)
         }
@@ -11,7 +24,7 @@ extension SnapObject where Base: UISpace {
     }
 
     @discardableResult
-    public func width(_ width: CGFloat) -> Self {
+    func width(_ width: CGFloat) -> Self {
         self.makeConstraints { (make) in
             make.width.equalTo(width)
         }
