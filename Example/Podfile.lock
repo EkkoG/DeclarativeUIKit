@@ -9,6 +9,8 @@ PODS:
   - DeclarativeUIKit/Rx (0.1.0):
     - RxCocoa
     - RxSwift
+  - DeclarativeUIKit/SnapKit (0.1.0):
+    - SnapKit
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -22,6 +24,7 @@ DEPENDENCIES:
   - DeclarativeUIKit/ApplyStyleKit (from `../`)
   - DeclarativeUIKit/Combine (from `../`)
   - DeclarativeUIKit/Rx (from `../`)
+  - DeclarativeUIKit/SnapKit (from `../`)
   - SnapKit
 
 SPEC REPOS:
@@ -38,12 +41,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ApplyStyleKit: 0343b87f29764f0b8f80fb49d00361642da12ee6
-  DeclarativeUIKit: 517ff4774f44018e9e9b078c78f7bc39e5df8c38
+  DeclarativeUIKit: db93e98b07798e34827fe907bddd17b37d1d1b74
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 2abc015535f7443dab8640dded18f295b5be92c8
+PODFILE CHECKSUM: ec561059590ddc577522fe9ff8c19e50b3d87724
 
 COCOAPODS: 1.11.3

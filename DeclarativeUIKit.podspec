@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/3138493/DeclarativeUIKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.3'
+  s.ios.deployment_target = '10.0'
 
 
   s.subspec 'Core' do |cs|
@@ -49,6 +49,11 @@ TODO: Add long description of the pod here.
   s.subspec 'ApplyStyleKit' do |as|
     as.source_files = 'DeclarativeUIKit/Classes/ApplyStyleKit/**/*'
     as.dependency 'ApplyStyleKit'
+  end
+
+  s.subspec 'SnapKit' do |ss|
+    ss.source_files = 'DeclarativeUIKit/Classes/SnapKit/**/*'
+    ss.dependency 'SnapKit'
   end
 
   s.default_subspec = 'Core' 

@@ -7,6 +7,7 @@ target 'DeclarativeUIKit_Example' do
   pod 'DeclarativeUIKit/Rx', :path => '../'
   pod 'DeclarativeUIKit/ApplyStyleKit', :path => '../'
   pod 'DeclarativeUIKit/Combine', :path => '../'
+  pod 'DeclarativeUIKit/SnapKit', :path => '../'
   pod 'SnapKit'
 
   target 'DeclarativeUIKit_Tests' do
