@@ -26,8 +26,9 @@ class ViewController: UIViewController {
         }
         view.body {
             UILabel().text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) }).apply { label in
-                label.text = "Hello, World!"
-            }.A.textColor(.black).asView.makeConstraints { make in
+                label.A.textColor(.black)
+                        .text("Hello, World!")
+            }.makeConstraints { make in
                 make.centerX.equalToSuperview()
                 make.top.equalToSuperview().offset(70)
             }
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
                         UISpace().height(32)
                         UILabel().alias("标题").apply { label in
                             label.text = "Delete your account?"
-                        }.customSpacing(8)
+                        }.spacingAfterSelf(8)
                         UIStackView.H {
                             UILabel().apply { label in
                                 label.text = "ahh"
@@ -54,7 +55,7 @@ class ViewController: UIViewController {
                         }.makeConstraints { make in
                             make.leading.equalToSuperview().offset(16)
                             make.trailing.equalToSuperview().offset(-16)
-                        }.customSpacing(20)
+                        }.spacingAfterSelf(20)
 
                         CircleView {
                             UIButton().apply { button in
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
                             }
                         }.apply { view in
                             view.backgroundColor = .red.withAlphaComponent(0.6)
-                        }.customSpacing(10)
+                        }.spacingAfterSelf(10)
                         CircleView {
                             UIButton().apply { button in
                                 button.setTitle("Cancel", for: .normal)

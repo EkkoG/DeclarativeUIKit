@@ -4,4 +4,5 @@
 
 import Foundation
 
-public typealias UISpace = UIView
+public class UISpace: UIView {
+}

@@ -38,9 +38,7 @@ extension UIView {
 
     private func _addSubview(_ view: UIView) {
         self.addSubview(view)
-        if let builder = view.autolayoutBuilder {
-            builder(view)
-        }
+        view.autolayoutBuilder?(view)
     }
 
 

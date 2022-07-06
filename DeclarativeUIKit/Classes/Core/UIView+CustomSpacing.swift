@@ -19,7 +19,7 @@ extension UIView {
         }
     }
     @discardableResult
-    public func customSpacing(_ customSpacing: CGFloat?) -> Self {
+    public func spacingAfterSelf(_ customSpacing: CGFloat?) -> Self {
         self.customSpacing = customSpacing
         return self
     }

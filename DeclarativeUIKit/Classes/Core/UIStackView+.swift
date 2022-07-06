@@ -24,9 +24,8 @@ extension UIStackView {
 
     private func _addArranged(_ view: UIView) {
         self.addArrangedSubview(view)
-        if let builder = view.autolayoutBuilder {
-            builder(view)
-        }
+        view.autolayoutBuilder?(view)
+
         if #available(iOS 11.0, *) {
             if let customSpacing = view.customSpacing {
                 self.setCustomSpacing(customSpacing, after: view)
