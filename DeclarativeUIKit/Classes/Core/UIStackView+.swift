@@ -5,6 +5,18 @@
 import UIKit
 
 extension UIStackView {
+    public static func V(_ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
+        let stackView = UIStackView.init(closure: arrangedSubviewsBuilder)
+        stackView.axis = .vertical
+        return stackView
+    }
+
+    public static func H(_ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
+        let stackView = UIStackView.init(closure: arrangedSubviewsBuilder)
+        stackView.axis = .horizontal
+        return stackView
+    }
+
     convenience init(@BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
         self.init(frame: .zero)
         addArranged(item: _arrangedSubviewsBuilder())
