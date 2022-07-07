@@ -3,6 +3,9 @@
 //
 
 import UIKit
+#if canImport(RxSwift)
+import RxSwift
+#endif
 
 extension UIStackView {
     public static func V(@BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
@@ -43,6 +46,10 @@ extension UIStackView {
             views.forEach { addArranged(item: $0) }
         case .nested(let items):
             items.forEach { addArranged(item: $0) }
+        #if canImport(RxSwift)
+        case .forEach(let items):
+            items.allItems().forEach { add(item: $0) }
+        #endif
         case .none:
             break
         }

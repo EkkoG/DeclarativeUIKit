@@ -9,6 +9,9 @@ public enum BodyBuilderItem {
     case single(UIView)
     case multiple([UIView])
     case nested([BodyBuilderItemable])
+    #if canImport(RxSwift)
+    case forEach(AnyForEach)
+    #endif
 }
 public protocol BodyBuilderItemable {
     var bodyBuilderItem: BodyBuilderItem { get }

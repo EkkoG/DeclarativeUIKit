@@ -51,7 +51,7 @@ class ViewController: UIViewController {
                                 maker.leading.trailing.equalToSuperview()
                             }
                         }
-                        ["ahh", "ahhh"].map { s in
+                        ["ahh", "ahhh", "ahh"].map { s in
                             UILabel().apply { label in
                                 label.A.text(s).textAlignment(.center)
                             }

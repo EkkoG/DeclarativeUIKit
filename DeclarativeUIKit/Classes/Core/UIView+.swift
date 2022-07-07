@@ -1,6 +1,9 @@
 
 import UIKit
 
+#if canImport(RxSwift)
+import RxSwift
+#endif
 
 extension UIView {
     private struct AssociatedKeys {
@@ -54,6 +57,10 @@ extension UIView {
             items.forEach { add(item: $0) }
         case .none:
             break
+        #if canImport(RxSwift)
+        case .forEach(let items):
+            items.allItems().forEach { add(item: $0) }
+        #endif
         }
     }
 }
