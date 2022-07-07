@@ -74,4 +74,8 @@ public struct BodyBuilderItems: BodyBuilderItemable {
     public static func buildEither(second: BodyBuilderItemable) -> Result {
         second
     }
+
+    public static func buildArray(_ components: [BodyBuilderItemable]) -> Result {
+        BodyBuilderItems(items: components)
+    }
 }

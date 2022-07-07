@@ -35,9 +35,27 @@ class ViewController: UIViewController {
                 }
             }
             UIView {
+
                 UIView().alias("圆角背景").body {
                     UIStackView.V {
-                        UISpace(height: 32)
+                        UIStackView.H {
+                            for i in 0..<5 {
+                                UILabel().apply { label in
+                                    label.A.text("\(i)").textAlignment(.center)
+                                }
+                            }
+                        }.apply { view in
+                            view.distribution = .fillEqually
+                            view.S.makeConstraints { maker in
+                                maker.height.equalTo(30)
+                                maker.leading.trailing.equalToSuperview()
+                            }
+                        }
+                        ["ahh", "ahhh"].map { s in
+                            UILabel().apply { label in
+                                label.A.text(s).textAlignment(.center)
+                            }
+                        }
                         UILabel().alias("标题").apply { label in
                             label.text = "Delete your account?"
                         }.spacingAfterSelf(8)
@@ -98,7 +116,8 @@ class ViewController: UIViewController {
                     view.layer.cornerRadius = 8
                     view.clipsToBounds = true
                     view.S.makeConstraints { make in
-                        make.width.height.equalTo(300)
+                        make.width.equalTo(300)
+                        make.height.equalTo(400)
                         make.center.equalToSuperview()
                     }
                 }
