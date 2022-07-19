@@ -1,18 +1,16 @@
 # DeclarativeUIKit
 
-[中文介绍](README-zh.md)
+一个可以使 UIKit 具有 SwiftUI 那样声明式写法能力的简单软件库，无自定义控件，支持 UIKit 所有原生及其自定义组件.
 
-A simple library(only 200+ line of code of Core) make UIKit declaretive like SwiftUI, no custom component, all UIKit original component.
+配合使用 [ApplyStyleKit](https://github.com/shindyu/ApplyStyleKit) 实现链式调用.
 
-Use [ApplyStyleKit](https://github.com/shindyu/ApplyStyleKit) to call API chainable.
+配合使用 [RxSwift](https://github.com/ReactiveX/RxSwift) 使控件数据自动更新。
 
-Use [RxSwift](https://github.com/ReactiveX/RxSwift) to make UI component update automatic when data update.
+同时可以完全配合 AutoLayout 相关 API 使用，即使在 resultBuilder 里。
 
-Also work perfectly with Autolayout or it's API wrapper like SnapKit, no limit when apply layout constraint in resulutBuilder.
+当有 DeclarativeUIKit 做不到的事时，可以回落到命令式 UIKit 的写法，就像之前那样，完全没有问题。
 
-When something DeclarativeUIKit can't do, you can use do it imperative way, likt normal UIKit usage, it's ok.
-
-## Usage
+## 使用方法
 
 ```swift
 class ViewController: UIViewController {
@@ -141,15 +139,15 @@ class ViewController: UIViewController {
 }
 
 ```
-## Example
+## 示例
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+## 要求
 
 iOS 10+
 
-## Installation
+## 安装
 
 DeclarativeUIKit is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -158,10 +156,10 @@ it, simply add the following line to your Podfile:
 pod 'EGDeclarativeUIKit', :git => 'https://github.com/EkkoG/DeclarativeUIKit.git'
 ```
 
-## Author
+## 作者
 
 EkkoG, beijiu572@gmail.com
 
-## License
+## 开源协议
 
 DeclarativeUIKit is available under the MIT license. See the LICENSE file for more info.
