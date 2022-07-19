@@ -10,7 +10,7 @@ Use [RxSwift](https://github.com/ReactiveX/RxSwift) to make UI component update 
 
 Also work perfectly with Autolayout or it's API wrapper like SnapKit, no limit when apply layout constraint in resulutBuilder.
 
-When something DeclarativeUIKit can't do, you can use do it imperative way, likt normal UIKit usage, it's ok.
+When something DeclarativeUIKit can't do, you can do it imperative way, like normal UIKit usage, it's ok.
 
 ## Usage
 
