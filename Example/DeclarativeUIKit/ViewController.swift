@@ -16,11 +16,11 @@ class ViewController: UIViewController {
 
     @RxUIPublished var text = "Hello"
     @RxUIPublished var text1 = "Hello"
+    var stack: UIStackView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var stack: UIStackView?
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.text1 = "World"
         }
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
             }
             UIView {
 
-                UIView().alias("圆角背景").body {
+                UIView().alias("Round cornder backgound").body {
                     UIStackView.V {
                         UIStackView.H {
                             for i in 0..<5 {
@@ -56,19 +56,19 @@ class ViewController: UIViewController {
                                 label.A.text(s).textAlignment(.center)
                             }
                         }
-                        UILabel().alias("标题").apply { label in
+                        UILabel().alias("Title").apply { label in
                             label.text = "Delete your account?"
                         }.spacingAfterSelf(8)
                         UIStackView.H {
                             UILabel().apply { label in
                                 label.text = "ahh"
                             }
-                            UILabel().alias("红色警告").apply { label in
+                            UILabel().alias("Red Alert").apply { label in
                                 label.text = "Deleting account is permanent"
                                 label.textColor = .red.withAlphaComponent(0.4)
                             }
                         }
-                        UILabel().alias("长文本，解释").apply { label in
+                        UILabel().alias("Long text, desc of alert.").apply { label in
                             label.text = "Your Favourite Meditation and Music、your progress of mediation journey will be permanently deleted."
                             label.numberOfLines = 0
                             label.textAlignment = .center
