@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DeclarativeUIKit
+import EGDeclarativeUIKit
 import ApplyStyleKit
 import SnapKit
 import RxSwift
