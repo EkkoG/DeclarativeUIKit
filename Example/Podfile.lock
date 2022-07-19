@@ -1,15 +1,15 @@
 PODS:
   - ApplyStyleKit (0.3.1)
-  - DeclarativeUIKit (0.1.0):
-    - DeclarativeUIKit/Core (= 0.1.0)
-  - DeclarativeUIKit/ApplyStyleKit (0.1.0):
+  - EGDeclarativeUIKit (0.1.0):
+    - EGDeclarativeUIKit/Core (= 0.1.0)
+  - EGDeclarativeUIKit/ApplyStyleKit (0.1.0):
     - ApplyStyleKit
-  - DeclarativeUIKit/Combine (0.1.0)
-  - DeclarativeUIKit/Core (0.1.0)
-  - DeclarativeUIKit/Rx (0.1.0):
+  - EGDeclarativeUIKit/Combine (0.1.0)
+  - EGDeclarativeUIKit/Core (0.1.0)
+  - EGDeclarativeUIKit/Rx (0.1.0):
     - RxCocoa
     - RxSwift
-  - DeclarativeUIKit/SnapKit (0.1.0):
+  - EGDeclarativeUIKit/SnapKit (0.1.0):
     - SnapKit
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
@@ -20,11 +20,11 @@ PODS:
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
-  - DeclarativeUIKit (from `../`)
-  - DeclarativeUIKit/ApplyStyleKit (from `../`)
-  - DeclarativeUIKit/Combine (from `../`)
-  - DeclarativeUIKit/Rx (from `../`)
-  - DeclarativeUIKit/SnapKit (from `../`)
+  - EGDeclarativeUIKit (from `../`)
+  - EGDeclarativeUIKit/ApplyStyleKit (from `../`)
+  - EGDeclarativeUIKit/Combine (from `../`)
+  - EGDeclarativeUIKit/Rx (from `../`)
+  - EGDeclarativeUIKit/SnapKit (from `../`)
   - SnapKit
 
 SPEC REPOS:
@@ -36,17 +36,17 @@ SPEC REPOS:
     - SnapKit
 
 EXTERNAL SOURCES:
-  DeclarativeUIKit:
+  EGDeclarativeUIKit:
     :path: "../"
 
 SPEC CHECKSUMS:
   ApplyStyleKit: 0343b87f29764f0b8f80fb49d00361642da12ee6
-  DeclarativeUIKit: db93e98b07798e34827fe907bddd17b37d1d1b74
+  EGDeclarativeUIKit: d99268a971394e52eaf3a658d311445160941db0
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: ec561059590ddc577522fe9ff8c19e50b3d87724
+PODFILE CHECKSUM: 9ac5c38ec7a56c5ad2e324977088692b8027ec44
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

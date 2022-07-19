@@ -3,11 +3,11 @@ use_frameworks!
 platform :ios, '10.0'
 
 target 'DeclarativeUIKit_Example' do
-  pod 'DeclarativeUIKit', :path => '../'
-  pod 'DeclarativeUIKit/Rx', :path => '../'
-  pod 'DeclarativeUIKit/ApplyStyleKit', :path => '../'
-  pod 'DeclarativeUIKit/Combine', :path => '../'
-  pod 'DeclarativeUIKit/SnapKit', :path => '../'
+  pod 'EGDeclarativeUIKit', :path => '../'
+  pod 'EGDeclarativeUIKit/Rx', :path => '../'
+  pod 'EGDeclarativeUIKit/ApplyStyleKit', :path => '../'
+  pod 'EGDeclarativeUIKit/Combine', :path => '../'
+  pod 'EGDeclarativeUIKit/SnapKit', :path => '../'
   pod 'SnapKit'
 
   target 'DeclarativeUIKit_Tests' do
