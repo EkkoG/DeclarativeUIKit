@@ -38,14 +38,24 @@ class ViewController: UIViewController {
 
                 UIView().alias("Round cornder backgound").body {
                     UIStackView.V {
-                        UIStackView.H {
-                            for i in 0..<5 {
-                                UILabel().apply { label in
-                                    label.A.text("\(i)").textAlignment(.center)
+                        UIScrollView().body {
+                            UIStackView.H {
+                                for i in 0..<50 {
+                                    UILabel().apply { label in
+                                        label.A.text("\(i)").textAlignment(.center)
+                                        label.A.backgroundColor(.random)
+                                        label.S.makeConstraints { make in
+                                            make.width.equalTo(30)
+                                        }
+                                    }
+                                }
+                            }.apply { view in
+                                view.distribution = .fillEqually
+                                view.S.makeConstraints { maker in
+                                    maker.edges.equalToSuperview()
                                 }
                             }
                         }.apply { view in
-                            view.distribution = .fillEqually
                             view.S.makeConstraints { maker in
                                 maker.height.equalTo(30)
                                 maker.leading.trailing.equalToSuperview()
@@ -137,3 +147,14 @@ class ViewController: UIViewController {
 
 }
 
+extension CGFloat {
+    static var random: CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(red: .random, green: .random, blue: .random, alpha: 1.0)
+    }
+}

@@ -4,6 +4,7 @@ platform :ios, '10.0'
 
 target 'DeclarativeUIKit_Example' do
   pod 'EGDeclarativeUIKit', :path => '../'
+  pod 'EGDeclarativeUIKit/Ext', :path => '../'
   pod 'EGDeclarativeUIKit/Rx', :path => '../'
   pod 'EGDeclarativeUIKit/ApplyStyleKit', :path => '../'
   pod 'EGDeclarativeUIKit/Combine', :path => '../'

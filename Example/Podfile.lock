@@ -2,10 +2,12 @@ PODS:
   - ApplyStyleKit (0.3.1)
   - EGDeclarativeUIKit (0.1.0):
     - EGDeclarativeUIKit/Core (= 0.1.0)
+    - EGDeclarativeUIKit/Ext (= 0.1.0)
   - EGDeclarativeUIKit/ApplyStyleKit (0.1.0):
     - ApplyStyleKit
   - EGDeclarativeUIKit/Combine (0.1.0)
   - EGDeclarativeUIKit/Core (0.1.0)
+  - EGDeclarativeUIKit/Ext (0.1.0)
   - EGDeclarativeUIKit/Rx (0.1.0):
     - RxCocoa
     - RxSwift
@@ -23,6 +25,7 @@ DEPENDENCIES:
   - EGDeclarativeUIKit (from `../`)
   - EGDeclarativeUIKit/ApplyStyleKit (from `../`)
   - EGDeclarativeUIKit/Combine (from `../`)
+  - EGDeclarativeUIKit/Ext (from `../`)
   - EGDeclarativeUIKit/Rx (from `../`)
   - EGDeclarativeUIKit/SnapKit (from `../`)
   - SnapKit
@@ -41,12 +44,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ApplyStyleKit: 0343b87f29764f0b8f80fb49d00361642da12ee6
-  EGDeclarativeUIKit: d99268a971394e52eaf3a658d311445160941db0
+  EGDeclarativeUIKit: 093d47b0d9bf0117da7d7951fff8cf0459b0d835
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 9ac5c38ec7a56c5ad2e324977088692b8027ec44
+PODFILE CHECKSUM: 5ee7048d5df4125ab7d8911272656ce5caa7f301
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

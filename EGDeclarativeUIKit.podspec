@@ -35,6 +35,10 @@ TODO: Add long description of the pod here.
     cs.source_files = 'DeclarativeUIKit/Classes/Core/**/*'
   end
 
+  s.subspec 'Ext' do |cs|
+    cs.source_files = 'DeclarativeUIKit/Classes/Ext/**/*'
+  end
+
   s.subspec 'Rx' do |rs|
     rs.source_files = 'DeclarativeUIKit/Classes/Rx/**/*'
     rs.dependency 'RxSwift'
@@ -56,7 +60,7 @@ TODO: Add long description of the pod here.
     ss.dependency 'SnapKit'
   end
 
-  s.default_subspec = 'Core' 
+  s.default_subspec = 'Core', 'Ext' 
 
   # s.resource_bundles = {
   #   'DeclarativeUIKit' => ['DeclarativeUIKit/Assets/*.png']

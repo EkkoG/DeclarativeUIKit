@@ -2,7 +2,7 @@
 
 [中文介绍](README-zh.md)
 
-A simple library(only 200+ line of code of Core) make UIKit declaretive like SwiftUI, no custom component, all UIKit original component.
+A simple library(only 200 line of code of Core) make UIKit declaretive like SwiftUI, no custom component, all UIKit original component.
 
 Use [ApplyStyleKit](https://github.com/shindyu/ApplyStyleKit) to call API chainable.
 
