@@ -17,7 +17,7 @@ extension UIStackView {
         return stackView
     }
 
-    convenience init(@BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
+    internal convenience init(@BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
         self.init(frame: .zero)
         addArranged(item: _arrangedSubviewsBuilder())
     }
