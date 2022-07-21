@@ -38,21 +38,14 @@ class ViewController: UIViewController {
 
                 UIView().alias("Round cornder backgound").body {
                     UIStackView.V {
-                        UIScrollView().body {
-                            UIStackView.H {
-                                for i in 0..<50 {
-                                    UILabel().apply { label in
-                                        label.A.text("\(i)").textAlignment(.center)
-                                        label.A.backgroundColor(.random)
-                                        label.S.makeConstraints { make in
-                                            make.width.equalTo(30)
-                                        }
+                        UIListView(with: NSLayoutConstraint.Axis.horizontal) {
+                            for i in 0..<50 {
+                                UILabel().apply { label in
+                                    label.A.text("\(i)").textAlignment(.center)
+                                    label.A.backgroundColor(.random)
+                                    label.S.makeConstraints { make in
+                                        make.width.equalTo(30)
                                     }
-                                }
-                            }.apply { view in
-                                view.distribution = .fillEqually
-                                view.S.makeConstraints { maker in
-                                    maker.edges.equalToSuperview()
                                 }
                             }
                         }.apply { view in
