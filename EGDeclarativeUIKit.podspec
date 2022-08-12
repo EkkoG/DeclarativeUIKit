@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/3138493/DeclarativeUIKit'
+  s.homepage         = 'https://github.com/EkkoG/DeclarativeUIKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '3138493' => 'beijiu572@gmail.com' }
