@@ -20,4 +20,5 @@ public extension Assignable {
 }
 
 extension UIView: Assignable {}
+extension Array: Assignable {}
 extension Optional: Assignable where Wrapped: Assignable {}
