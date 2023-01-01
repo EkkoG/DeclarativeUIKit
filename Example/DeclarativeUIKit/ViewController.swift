@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @RxUIPublished var text = "Hello"
     @RxUIPublished var text1 = "Hello"
     var stack: UIStackView?
+    var ahh: [UIView]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
                             UILabel().apply { label in
                                 label.A.text(s).textAlignment(.center)
                             }
-                        }
+                        }.assign(to: &ahh)
                         UILabel().alias("Title").apply { label in
                             label.text = "Delete your account?"
                         }.spacingAfterSelf(8)
