@@ -9,7 +9,7 @@ public protocol Snap {
 }
 
 public extension Snap {
-    public var S: SnapObject<Self> {
+    var S: SnapObject<Self> {
         return SnapObject(self)
     }
 }
