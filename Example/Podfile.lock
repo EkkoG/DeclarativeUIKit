@@ -1,10 +1,13 @@
 PODS:
   - ApplyStyleKit (0.3.1)
+  - EGChainable (0.1.1)
   - EGDeclarativeUIKit (0.1.0):
     - EGDeclarativeUIKit/Core (= 0.1.0)
     - EGDeclarativeUIKit/Ext (= 0.1.0)
   - EGDeclarativeUIKit/ApplyStyleKit (0.1.0):
     - ApplyStyleKit
+  - EGDeclarativeUIKit/Chainable (0.1.0):
+    - EGChainable
   - EGDeclarativeUIKit/Combine (0.1.0)
   - EGDeclarativeUIKit/Core (0.1.0)
   - EGDeclarativeUIKit/Ext (0.1.0)
@@ -24,6 +27,7 @@ PODS:
 DEPENDENCIES:
   - EGDeclarativeUIKit (from `../`)
   - EGDeclarativeUIKit/ApplyStyleKit (from `../`)
+  - EGDeclarativeUIKit/Chainable (from `../`)
   - EGDeclarativeUIKit/Combine (from `../`)
   - EGDeclarativeUIKit/Ext (from `../`)
   - EGDeclarativeUIKit/Rx (from `../`)
@@ -31,6 +35,8 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - EGChainable
   trunk:
     - ApplyStyleKit
     - RxCocoa
@@ -44,12 +50,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ApplyStyleKit: 0343b87f29764f0b8f80fb49d00361642da12ee6
-  EGDeclarativeUIKit: 093d47b0d9bf0117da7d7951fff8cf0459b0d835
+  EGChainable: 5282ad19c86bcd1c8b348f268f5df4966333b46d
+  EGDeclarativeUIKit: a2fbe517ad3aeb439555783c262d47c4bbdeb4e7
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 5ee7048d5df4125ab7d8911272656ce5caa7f301
+PODFILE CHECKSUM: 7530d18677d6ed0bb44bd5fc123aafa8a71bd7ed
 
 COCOAPODS: 1.11.3

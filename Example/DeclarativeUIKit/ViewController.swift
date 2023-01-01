@@ -12,6 +12,7 @@ import ApplyStyleKit
 import SnapKit
 import RxSwift
 
+import EGChainable
 class ViewController: UIViewController {
 
     @RxUIPublished var text = "Hello"
@@ -25,6 +26,9 @@ class ViewController: UIViewController {
             self.text1 = "World"
         }
         view.body {
+            [UIView().C.backgroundColor(.red), UILabel()].asBuildItems
+            UIView().C.backgroundColor(.red)
+            UIView().C.backgroundColor(.red).asView()
             UILabel().apply { label in
                 label.R.text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) })
                 label.A.textColor(.black)
@@ -83,8 +87,7 @@ class ViewController: UIViewController {
 
                         CircleView {
                             UIButton().apply { button in
-                                button.setTitle("Continue Deleting Account", for: .normal)
-                                button.setTitleColor(.white, for: .normal)
+                                button.applyStyle.title("ahhhhhhhhhhhhhhhh", for: .normal).titleColor(.white, for: .normal)
                                 button.S.makeConstraints { make in
                                     make.edges.equalToSuperview()
                                     make.width.equalTo(250)

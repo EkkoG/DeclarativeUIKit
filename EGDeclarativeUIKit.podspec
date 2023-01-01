@@ -60,6 +60,11 @@ TODO: Add long description of the pod here.
     ss.dependency 'SnapKit'
   end
 
+  s.subspec 'Chainable' do |ss|
+    ss.source_files = 'DeclarativeUIKit/Classes/Chainable/**/*'
+    ss.dependency 'EGChainable'
+  end
+
   s.default_subspec = 'Core', 'Ext' 
 
   # s.resource_bundles = {

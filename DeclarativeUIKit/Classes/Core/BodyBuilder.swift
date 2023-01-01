@@ -19,8 +19,14 @@ public struct EmptyBodyBuilderItem: BodyBuilderItemable {
 extension UIView: BodyBuilderItemable {
     public var bodyBuilderItem: BodyBuilderItem { .single(self) }
 }
-extension Array: BodyBuilderItemable where Element: UIView {
-    public var bodyBuilderItem: BodyBuilderItem { .multiple(self) }
+extension Array: BodyBuilderItemable {
+    public var bodyBuilderItem: BodyBuilderItem {
+        if let _ = self as? [UIView] {
+            return .multiple(self as! [UIView])
+        } else {
+            return .nested(self as! [BodyBuilderItemable])
+        }
+    }
 }
 extension Optional: BodyBuilderItemable where Wrapped: UIView {
     public var bodyBuilderItem: BodyBuilderItem {
@@ -28,6 +34,12 @@ extension Optional: BodyBuilderItemable where Wrapped: UIView {
         case .none: return .none
         case .some(let value): return .single(value)
         }
+    }
+}
+
+extension Array {
+    public var asBuildItems: [BodyBuilderItemable] {
+        return self as! [BodyBuilderItemable]
     }
 }
 

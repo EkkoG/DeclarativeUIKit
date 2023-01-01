@@ -1,3 +1,5 @@
+
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 platform :ios, '10.0'
@@ -9,6 +11,7 @@ target 'DeclarativeUIKit_Example' do
   pod 'EGDeclarativeUIKit/ApplyStyleKit', :path => '../'
   pod 'EGDeclarativeUIKit/Combine', :path => '../'
   pod 'EGDeclarativeUIKit/SnapKit', :path => '../'
+  pod 'EGDeclarativeUIKit/Chainable', :path => '../'
   pod 'SnapKit'
 
   target 'DeclarativeUIKit_Tests' do

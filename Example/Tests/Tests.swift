@@ -1,5 +1,5 @@
 import XCTest
-import DeclarativeUIKit
+import EGDeclarativeUIKit
 
 class Tests: XCTestCase {
     
