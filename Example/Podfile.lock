@@ -1,6 +1,6 @@
 PODS:
   - ApplyStyleKit (0.3.1)
-  - EGChainable (0.1.1)
+  - EGChainable (0.1.4)
   - EGDeclarativeUIKit (0.1.0):
     - EGDeclarativeUIKit/Core (= 0.1.0)
     - EGDeclarativeUIKit/Ext (= 0.1.0)
@@ -50,7 +50,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ApplyStyleKit: 0343b87f29764f0b8f80fb49d00361642da12ee6
-  EGChainable: 5282ad19c86bcd1c8b348f268f5df4966333b46d
+  EGChainable: b20e15df604ee312a650b5125ad028a393932749
   EGDeclarativeUIKit: a2fbe517ad3aeb439555783c262d47c4bbdeb4e7
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd

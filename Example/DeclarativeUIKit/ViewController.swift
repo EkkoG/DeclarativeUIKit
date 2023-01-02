@@ -13,6 +13,13 @@ import SnapKit
 import RxSwift
 
 import EGChainable
+
+extension Chainable {
+    public var C: ChainableObject<Self> {
+        return chainable
+    }
+}
+
 class ViewController: UIViewController {
 
     @RxUIPublished var text = "Hello"
