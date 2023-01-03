@@ -4,7 +4,7 @@
 
 A simple library(only 200 lines of code of [Core](https://github.com/EkkoG/DeclarativeUIKit/tree/master/DeclarativeUIKit/Classes/Core)) make UIKit declaretive like SwiftUI, no custom component, all UIKit original component.
 
-Use [ApplyStyleKit](https://github.com/shindyu/ApplyStyleKit) to call API chainable.
+Use [EGChainable](https://github.com/EkkoG/EGChainable) to call API chainable.
 
 Use [RxSwift](https://github.com/ReactiveX/RxSwift) to make UI component update automatic when data update.
 
