@@ -2,7 +2,7 @@
 
 一个可以使 UIKit 具有 SwiftUI 那样声明式写法能力的简单软件库，无自定义控件，支持 UIKit 所有原生及其自定义组件.
 
-配合使用 [ApplyStyleKit](https://github.com/shindyu/ApplyStyleKit) 实现链式调用.
+配合使用 [EGChainable](https://github.com/EkkoG/EGChainable) 实现链式调用.
 
 配合使用 [RxSwift](https://github.com/ReactiveX/RxSwift) 使控件数据自动更新。
 
