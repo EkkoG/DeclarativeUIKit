@@ -14,7 +14,7 @@ When something DeclarativeUIKit can't do, you can do it imperative way, like nor
 
 ## Usage
 
-https://github.com/EkkoG/DeclarativeUIKit/blob/da690442e68bbc0b2b7f36009f3f61f833d9500b/Example/DeclarativeUIKit/ViewController.swift#L17-L135
+https://github.com/EkkoG/DeclarativeUIKit/blob/5a4a20ad1a9abc67d9897915250f4ea7e84797ad/Example/DeclarativeUIKit/ViewController.swift#L22-L144
 
 ## Example
 
