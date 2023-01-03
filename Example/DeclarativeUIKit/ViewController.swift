@@ -8,7 +8,6 @@
 
 import UIKit
 import EGDeclarativeUIKit
-import ApplyStyleKit
 import SnapKit
 import RxSwift
 
@@ -39,7 +38,7 @@ class ViewController: UIViewController {
             UIView().C.backgroundColor(.red).asView()
             UILabel().apply { label in
                 label.R.text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) })
-                label.A.textColor(.black)
+                label.C.textColor(.black)
                         .text("Hello, World!")
                 label.S.makeConstraints { make in
                     make.centerX.equalToSuperview()
@@ -53,8 +52,8 @@ class ViewController: UIViewController {
                         UIListView(with: NSLayoutConstraint.Axis.horizontal) {
                             for i in 0..<50 {
                                 UILabel().apply { label in
-                                    label.A.text("\(i)").textAlignment(.center)
-                                    label.A.backgroundColor(.random)
+                                    label.C.text("\(i)").textAlignment(.center)
+                                    label.C.backgroundColor(.random)
                                     label.S.makeConstraints { make in
                                         make.width.equalTo(30)
                                     }
@@ -68,7 +67,7 @@ class ViewController: UIViewController {
                         }
                         ["ahh", "ahhh"].map { s in
                             UILabel().apply { label in
-                                label.A.text(s).textAlignment(.center)
+                                label.C.text(s).textAlignment(.center)
                             }
                         }.assign(to: &ahh)
                         UILabel().alias("Title").apply { label in
@@ -95,7 +94,7 @@ class ViewController: UIViewController {
 
                         CircleView {
                             UIButton().apply { button in
-                                button.applyStyle.title("ahhhhhhhhhhhhhhhh", for: .normal).titleColor(.white, for: .normal)
+                                button.C.setTitle("ahhhhhhhhhhhhhhhh", for: .normal).setTitleColor(.white, for: .normal)
                                 button.S.makeConstraints { make in
                                     make.edges.equalToSuperview()
                                     make.width.equalTo(250)

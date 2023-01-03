@@ -8,7 +8,6 @@ target 'DeclarativeUIKit_Example' do
   pod 'EGDeclarativeUIKit', :path => '../'
   pod 'EGDeclarativeUIKit/Ext', :path => '../'
   pod 'EGDeclarativeUIKit/Rx', :path => '../'
-  pod 'EGDeclarativeUIKit/ApplyStyleKit', :path => '../'
   pod 'EGDeclarativeUIKit/Combine', :path => '../'
   pod 'EGDeclarativeUIKit/SnapKit', :path => '../'
   pod 'EGDeclarativeUIKit/Chainable', :path => '../'

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'EGDeclarativeUIKit'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of DeclarativeUIKit.'
+  s.summary          = 'Declarative UIKit.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,13 +18,13 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Declarative UIKit with 200 line of code.
                        DESC
 
   s.homepage         = 'https://github.com/EkkoG/DeclarativeUIKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '3138493' => 'beijiu572@gmail.com' }
+  s.author           = { 'EkkoG' => 'beijiu572@gmail.com' }
   s.source           = { :git => 'https://github.com/EkkoG/DeclarativeUIKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -37,32 +37,33 @@ TODO: Add long description of the pod here.
 
   s.subspec 'Ext' do |cs|
     cs.source_files = 'DeclarativeUIKit/Classes/Ext/**/*'
+    cs.dependency 'EGDeclarativeUIKit/Core'
   end
 
   s.subspec 'Rx' do |rs|
     rs.source_files = 'DeclarativeUIKit/Classes/Rx/**/*'
     rs.dependency 'RxSwift'
     rs.dependency 'RxCocoa'
+    rs.dependency 'EGDeclarativeUIKit/Core'
   end
 
   s.subspec 'Combine' do |cs|
     cs.source_files = 'DeclarativeUIKit/Classes/Combine/**/*'
     cs.frameworks = 'Combine'
-  end
-
-  s.subspec 'ApplyStyleKit' do |as|
-    as.source_files = 'DeclarativeUIKit/Classes/ApplyStyleKit/**/*'
-    as.dependency 'ApplyStyleKit'
+    cs.dependency 'EGDeclarativeUIKit/Core'
   end
 
   s.subspec 'SnapKit' do |ss|
     ss.source_files = 'DeclarativeUIKit/Classes/SnapKit/**/*'
     ss.dependency 'SnapKit'
+    ss.dependency 'EGDeclarativeUIKit/Core'
+    ss.dependency 'EGDeclarativeUIKit/Ext'
   end
 
   s.subspec 'Chainable' do |ss|
     ss.source_files = 'DeclarativeUIKit/Classes/Chainable/**/*'
     ss.dependency 'EGChainable'
+    ss.dependency 'EGDeclarativeUIKit/Core'
   end
 
   s.default_subspec = 'Core', 'Ext' 
