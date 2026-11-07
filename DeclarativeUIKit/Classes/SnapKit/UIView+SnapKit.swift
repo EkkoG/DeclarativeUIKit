@@ -4,11 +4,16 @@ import SnapKit
 extension SnapObject where Base: UIView {
     @discardableResult
     public func makeConstraints(_ closure: @escaping (ConstraintMaker) -> Void) -> Self {
-        base.applyAutoLayout { view in
-            view.snp.makeConstraints { (make) in
-                closure(make)
-            }
-        }
+        base.layout(closure)
         return self
+    }
+}
+
+extension UIView {
+    @discardableResult
+    public func layout(_ closure: @escaping (ConstraintMaker) -> Void) -> Self {
+        return applyAutoLayout { view in
+            view.snp.makeConstraints(closure)
+        }
     }
 }

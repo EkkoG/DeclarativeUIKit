@@ -42,12 +42,11 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - EGChainable
     - RxCocoa
     - RxRelay
     - RxSwift
-  trunk:
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -56,12 +55,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   EGChainable: 1d3d9d0cab730cf50aa10f38d7eeece21a30666e
-  EGDeclarativeUIKit: f491e5a15c6e6eb79eaf0ab3cef6d3b04370ed91
+  EGDeclarativeUIKit: 5c1c864561d10e2587c78a86d4e0780145cae184
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 26bb0bf85941d7f31408bb0514dec7bda01413cb
+PODFILE CHECKSUM: e69262c6299f166e273859812590599aedf6d8d2
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.16.2

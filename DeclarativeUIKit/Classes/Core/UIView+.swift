@@ -4,24 +4,34 @@ import UIKit
 
 extension UIView {
     private struct AssociatedKeys {
-        static var autolayoutClosure = "autolayoutClosure"
+        static var autolayoutClosures: UInt8 = 0
     }
 
     typealias AutolayoutBuilder = (UIView) -> Void
 
-    var autolayoutBuilder: AutolayoutBuilder? {
+    private var autolayoutBuilders: [AutolayoutBuilder] {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.autolayoutClosure) as? AutolayoutBuilder
+            return objc_getAssociatedObject(self, &AssociatedKeys.autolayoutClosures) as? [AutolayoutBuilder] ?? []
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.autolayoutClosure, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.autolayoutClosures, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
     @discardableResult
     public func applyAutoLayout(_ closure: @escaping (UIView) -> Void) -> Self {
-        self.autolayoutBuilder = closure
+        autolayoutBuilders.append(closure)
+        if superview != nil {
+            applyPendingAutoLayout()
+        }
         return self
+    }
+
+    func applyPendingAutoLayout() {
+        let builders = autolayoutBuilders
+        // Release pending work before callbacks can register more layout work.
+        autolayoutBuilders = []
+        builders.forEach { $0(self) }
     }
 }
 
@@ -40,7 +50,7 @@ extension UIView {
 
     private func _addSubview(_ view: UIView) {
         self.addSubview(view)
-        view.autolayoutBuilder?(view)
+        view.applyPendingAutoLayout()
     }
 
 

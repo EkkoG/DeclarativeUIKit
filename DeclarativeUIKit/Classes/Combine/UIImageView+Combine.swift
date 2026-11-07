@@ -1,17 +1,10 @@
-//
-// Created by Kevin Guo on 2022/7/5.
-//
-
 import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-extension UIImageView {
+extension Applyable where Self: UIImageView {
     @discardableResult
-    public func image(_ image: Published<UIImage?>.Publisher) -> Self {
-        image.sink() { s in
-            self.image = s
-        }
-        return self
+    public func image<P: Publisher>(_ publisher: P) -> Self where P.Output == UIImage?, P.Failure == Never {
+        return bind(publisher, to: \.image)
     }
 }

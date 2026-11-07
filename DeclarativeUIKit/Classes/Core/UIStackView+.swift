@@ -5,34 +5,42 @@
 import UIKit
 
 extension UIStackView {
-    public static func V(@BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
-        let stackView = UIStackView.init(_arrangedSubviewsBuilder: arrangedSubviewsBuilder)
-        stackView.axis = .vertical
-        return stackView
+    public static func V(spacing: CGFloat = 0, alignment: Alignment = .fill, distribution: Distribution = .fill,
+                         @BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
+        return UIStackView(axis: .vertical, spacing: spacing, alignment: alignment, distribution: distribution,
+                           _arrangedSubviewsBuilder: arrangedSubviewsBuilder)
     }
 
-    public static func H(@BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
-        let stackView = UIStackView.init(_arrangedSubviewsBuilder: arrangedSubviewsBuilder)
-        stackView.axis = .horizontal
-        return stackView
+    public static func H(spacing: CGFloat = 0, alignment: Alignment = .fill, distribution: Distribution = .fill,
+                         @BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
+        return UIStackView(axis: .horizontal, spacing: spacing, alignment: alignment, distribution: distribution,
+                           _arrangedSubviewsBuilder: arrangedSubviewsBuilder)
     }
 
-    internal convenience init(@BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
+    internal convenience init(axis: NSLayoutConstraint.Axis = .horizontal, spacing: CGFloat = 0,
+                              alignment: Alignment = .fill, distribution: Distribution = .fill,
+                              @BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
         self.init(frame: .zero)
+        self.axis = axis
+        self.spacing = spacing
+        self.alignment = alignment
+        self.distribution = distribution
         addArranged(item: _arrangedSubviewsBuilder())
     }
 
     private func _addArranged(_ view: UIView) {
         self.addArrangedSubview(view)
-        view.autolayoutBuilder?(view)
+        view.applyPendingAutoLayout()
 
         if #available(iOS 11.0, *) {
             if let customSpacing = view.customSpacing {
                 self.setCustomSpacing(customSpacing, after: view)
             }
-        } else {
-            // Fallback on earlier versions
         }
+    }
+
+    public func addArranged(item: [BodyBuilderItemable]) {
+        item.forEach { addArranged(item: $0) }
     }
 
     public func addArranged(item: BodyBuilderItemable) {

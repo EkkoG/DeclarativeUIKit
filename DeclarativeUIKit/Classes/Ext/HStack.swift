@@ -5,8 +5,9 @@
 import UIKit
 
 open class HStack: UIStackView {
-    public convenience init(@BodyBuilder arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
-        self.init(_arrangedSubviewsBuilder: arrangedSubviewsBuilder)
-        self.axis = .horizontal
+    public convenience init(spacing: CGFloat = 0, alignment: Alignment = .fill, distribution: Distribution = .fill,
+                            @BodyBuilder arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
+        self.init(axis: .horizontal, spacing: spacing, alignment: alignment, distribution: distribution,
+                  _arrangedSubviewsBuilder: arrangedSubviewsBuilder)
     }
 }

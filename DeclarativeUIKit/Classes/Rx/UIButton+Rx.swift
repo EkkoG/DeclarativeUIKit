@@ -1,57 +1,50 @@
-//
-// Created by Kevin Guo on 2022/7/5.
-//
-
 import UIKit
 import RxSwift
-import RxCocoa
 
 extension RxObject where Base: UIButton {
     @discardableResult
-    public func title(_ title: Observable<String>, for state: UIControl.State = .normal) -> Self {
-        title.subscribe { s in
-            base.setTitle(s.element ?? "", for: state)
+    public func title(_ observable: Observable<String>, for state: UIControl.State = .normal) -> Self {
+        bindRx(observable, to: base, key: "button.title.\(state.rawValue)") { button, value in
+            button.setTitle(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func titleColor(_ titleColor: Observable<UIColor>, for state: UIControl.State = .normal) -> Self {
-        titleColor.subscribe { s in
-            base.setTitleColor(s.element ?? .clear, for: state)
+    public func titleColor(_ observable: Observable<UIColor>, for state: UIControl.State = .normal) -> Self {
+        bindRx(observable, to: base, key: "button.titleColor.\(state.rawValue)") { button, value in
+            button.setTitleColor(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func image(_ image: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
-        image.subscribe { s in
-            base.setImage(s.element, for: state)
+    public func image(_ observable: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
+        bindRx(observable, to: base, key: "button.image.\(state.rawValue)") { button, value in
+            button.setImage(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func backgroundImage(_ backgroundImage: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
-        backgroundImage.subscribe { s in
-            base.setBackgroundImage(s.element, for: state)
+    public func backgroundImage(_ observable: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
+        bindRx(observable, to: base, key: "button.backgroundImage.\(state.rawValue)") { button, value in
+            button.setBackgroundImage(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func attributedTitle(_ attributedTitle: Observable<NSAttributedString>, for state: UIControl.State = .normal) -> Self {
-        attributedTitle.subscribe { s in
-            base.setAttributedTitle(s.element, for: state)
+    public func attributedTitle(_ observable: Observable<NSAttributedString>, for state: UIControl.State = .normal) -> Self {
+        bindRx(observable, to: base, key: "button.attributedTitle.\(state.rawValue)") { button, value in
+            button.setAttributedTitle(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func contentEdgeInsets(_ contentEdgeInsets: Observable<UIEdgeInsets>) -> Self {
-        contentEdgeInsets.subscribe { s in
-            base.contentEdgeInsets = s.element ?? .zero
-        }
+    public func contentEdgeInsets(_ observable: Observable<UIEdgeInsets>) -> Self {
+        base.bind(observable, to: \.contentEdgeInsets)
         return self
     }
 }

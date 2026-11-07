@@ -8,14 +8,14 @@ import UIKit
 extension UIView {
 
     private struct AssociatedKeys {
-        static var customSpacing = "customSpacing"
+        static var customSpacing: UInt8 = 0
     }
     var customSpacing: CGFloat? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.customSpacing) as? CGFloat
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.customSpacing, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &AssociatedKeys.customSpacing, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     @discardableResult

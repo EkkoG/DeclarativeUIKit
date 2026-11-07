@@ -1,41 +1,25 @@
-//
-// Created by Kevin Guo on 2022/7/5.
-//
-
 import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-extension UIView {
+extension Applyable where Self: UIView {
     @discardableResult
-    public func backgroundColor(_ color: Published<UIColor>.Publisher) -> Self {
-        color.sink() { s in
-            self.backgroundColor = s ?? .clear
-        }
-        return self
+    public func backgroundColor<P: Publisher>(_ publisher: P) -> Self where P.Output == UIColor, P.Failure == Never {
+        return bind(publisher, to: \.backgroundColor)
     }
 
     @discardableResult
-    public func alpha(_ alpha: Published<CGFloat>.Publisher) -> Self {
-        alpha.sink() { s in
-            self.alpha = s ?? 0
-        }
-        return self
+    public func alpha<P: Publisher>(_ publisher: P) -> Self where P.Output == CGFloat, P.Failure == Never {
+        return bind(publisher, to: \.alpha)
     }
 
     @discardableResult
-    public func isHidden(_ isHidden: Published<Bool>.Publisher) -> Self {
-        isHidden.sink() { s in
-            self.isHidden = s ?? true
-        }
-        return self
+    public func isHidden<P: Publisher>(_ publisher: P) -> Self where P.Output == Bool, P.Failure == Never {
+        return bind(publisher, to: \.isHidden)
     }
 
     @discardableResult
-    public func isUserInteractionEnabled(_ isUserInteractionEnabled: Published<Bool>.Publisher) -> Self {
-        isUserInteractionEnabled.sink() { s in
-            self.isUserInteractionEnabled = s ?? true
-        }
-        return self
+    public func isUserInteractionEnabled<P: Publisher>(_ publisher: P) -> Self where P.Output == Bool, P.Failure == Never {
+        return bind(publisher, to: \.isUserInteractionEnabled)
     }
 }

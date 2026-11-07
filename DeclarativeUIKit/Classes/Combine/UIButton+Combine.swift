@@ -1,57 +1,56 @@
-//
-// Created by Kevin Guo on 2022/7/5.
-//
-
 import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-extension UIButton {
+extension Applyable where Self: UIButton {
     @discardableResult
-    public func title(_ title: Published<String>.Publisher, for state: UIControl.State = .normal) -> Self {
-        title.sink() { s in
-            self.setTitle(s, for: state)
+    public func title<P: Publisher>(_ publisher: P, for state: UIControl.State = .normal) -> Self
+        where P.Output == String, P.Failure == Never {
+        bindCombine(publisher, to: self, key: "button.title.\(state.rawValue)") { button, value in
+            button.setTitle(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func titleColor(_ titleColor: Published<UIColor>.Publisher, for state: UIControl.State = .normal) -> Self {
-        titleColor.sink() { s in
-            self.setTitleColor(s, for: state)
+    public func titleColor<P: Publisher>(_ publisher: P, for state: UIControl.State = .normal) -> Self
+        where P.Output == UIColor, P.Failure == Never {
+        bindCombine(publisher, to: self, key: "button.titleColor.\(state.rawValue)") { button, value in
+            button.setTitleColor(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func image(_ image: Published<UIImage>.Publisher, for state: UIControl.State = .normal) -> Self {
-        image.sink() { s in
-            self.setImage(s, for: state)
+    public func image<P: Publisher>(_ publisher: P, for state: UIControl.State = .normal) -> Self
+        where P.Output == UIImage, P.Failure == Never {
+        bindCombine(publisher, to: self, key: "button.image.\(state.rawValue)") { button, value in
+            button.setImage(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func backgroundImage(_ backgroundImage: Published<UIImage>.Publisher, for state: UIControl.State = .normal) -> Self {
-        backgroundImage.sink() { s in
-            self.setBackgroundImage(s, for: state)
+    public func backgroundImage<P: Publisher>(_ publisher: P, for state: UIControl.State = .normal) -> Self
+        where P.Output == UIImage, P.Failure == Never {
+        bindCombine(publisher, to: self, key: "button.backgroundImage.\(state.rawValue)") { button, value in
+            button.setBackgroundImage(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func attributedTitle(_ attributedTitle: Published<NSAttributedString>.Publisher, for state: UIControl.State = .normal) -> Self {
-        attributedTitle.sink() { s in
-            self.setAttributedTitle(s, for: state)
+    public func attributedTitle<P: Publisher>(_ publisher: P, for state: UIControl.State = .normal) -> Self
+        where P.Output == NSAttributedString, P.Failure == Never {
+        bindCombine(publisher, to: self, key: "button.attributedTitle.\(state.rawValue)") { button, value in
+            button.setAttributedTitle(value, for: state)
         }
         return self
     }
 
     @discardableResult
-    public func contentEdgeInsets(_ contentEdgeInsets: Published<UIEdgeInsets>.Publisher) -> Self {
-        contentEdgeInsets.sink() { s in
-            self.contentEdgeInsets = s
-        }
-        return self
+    public func contentEdgeInsets<P: Publisher>(_ publisher: P) -> Self
+        where P.Output == UIEdgeInsets, P.Failure == Never {
+        return bind(publisher, to: \.contentEdgeInsets)
     }
 }

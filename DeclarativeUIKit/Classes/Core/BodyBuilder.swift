@@ -19,12 +19,12 @@ public struct EmptyBodyBuilderItem: BodyBuilderItemable {
 extension UIView: BodyBuilderItemable {
     public var bodyBuilderItem: BodyBuilderItem { .single(self) }
 }
-extension Array: BodyBuilderItemable {
+extension Array: BodyBuilderItemable where Element: BodyBuilderItemable {
     public var bodyBuilderItem: BodyBuilderItem {
-        if let _ = self as? [UIView] {
-            return .multiple(self as! [UIView])
+        if let views = self as? [UIView] {
+            return .multiple(views)
         } else {
-            return .nested(self as! [BodyBuilderItemable])
+            return .nested(map { $0 })
         }
     }
 }
@@ -38,8 +38,14 @@ extension Optional: BodyBuilderItemable where Wrapped: UIView {
 }
 
 extension Array {
+    @available(*, deprecated, message: "Use typed view arrays or separate builder expressions.")
     public var asBuildItems: [BodyBuilderItemable] {
-        return self as! [BodyBuilderItemable]
+        return map { element in
+            guard let item = element as? BodyBuilderItemable else {
+                preconditionFailure("Every element must conform to BodyBuilderItemable")
+            }
+            return item
+        }
     }
 }
 
@@ -56,7 +62,15 @@ public struct BodyBuilderItems: BodyBuilderItemable {
     public typealias SingleView = () -> Result
 
     /// Builds an empty view from an block containing no statements, `{ }`.
-    public static func buildBlock() -> Result { [] }
+    public static func buildBlock() -> Result { EmptyBodyBuilderItem() }
+
+    public static func buildExpression(_ item: BodyBuilderItemable) -> Result {
+        item
+    }
+
+    public static func buildExpression(_ items: [BodyBuilderItemable]) -> Result {
+        BodyBuilderItems(items: items)
+    }
 
     /// Passes a single view written as a child view (e..g, `{ Text("Hello") }`) through unmodified.
     public static func buildBlock(_ attrs: BodyBuilderItemable...) -> Result {

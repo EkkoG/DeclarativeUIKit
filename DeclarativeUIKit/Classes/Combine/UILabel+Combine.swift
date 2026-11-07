@@ -1,65 +1,40 @@
-//
-// Created by Kevin Guo on 2022/7/5.
-//
-
 import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-extension UILabel {
+extension Applyable where Self: UILabel {
     @discardableResult
-    public func text(_ text: Published<String>.Publisher) -> Self {
-        let _ = text.sink() { s in
-            self.text = s
-        }
-        return self
+    public func text<P: Publisher>(_ publisher: P) -> Self where P.Output == String, P.Failure == Never {
+        return bind(publisher, to: \.text)
     }
 
     @discardableResult
-    public func textColor(_ textColor: Published<UIColor>.Publisher) -> Self {
-        textColor.sink() { s in
-            self.textColor = s
-        }
-        return self
+    public func textColor<P: Publisher>(_ publisher: P) -> Self where P.Output == UIColor, P.Failure == Never {
+        return bind(publisher, to: \.textColor)
     }
 
     @discardableResult
-    public func font(_ font: Published<UIFont>.Publisher) -> Self {
-        font.sink() { s in
-            self.font = s
-        }
-        return self
+    public func font<P: Publisher>(_ publisher: P) -> Self where P.Output == UIFont, P.Failure == Never {
+        return bind(publisher, to: \.font)
     }
 
     @discardableResult
-    public func textAlignment(_ textAlignment: Published<NSTextAlignment>.Publisher) -> Self {
-        textAlignment.sink() { s in
-            self.textAlignment = s
-        }
-        return self
+    public func textAlignment<P: Publisher>(_ publisher: P) -> Self where P.Output == NSTextAlignment, P.Failure == Never {
+        return bind(publisher, to: \.textAlignment)
     }
 
     @discardableResult
-    public func numberOfLines(_ numberOfLines: Published<Int>.Publisher) -> Self {
-        numberOfLines.sink() { s in
-            self.numberOfLines = s
-        }
-        return self
+    public func numberOfLines<P: Publisher>(_ publisher: P) -> Self where P.Output == Int, P.Failure == Never {
+        return bind(publisher, to: \.numberOfLines)
     }
 
     @discardableResult
-    public func lineBreakMode(_ lineBreakMode: Published<NSLineBreakMode>.Publisher) -> Self {
-        lineBreakMode.sink() { s in
-            self.lineBreakMode = s
-        }
-        return self
+    public func lineBreakMode<P: Publisher>(_ publisher: P) -> Self where P.Output == NSLineBreakMode, P.Failure == Never {
+        return bind(publisher, to: \.lineBreakMode)
     }
 
     @discardableResult
-    public func adjustsFontSizeToFitWidth(_ adjustsFontSizeToFitWidth: Published<Bool>.Publisher) -> Self {
-        adjustsFontSizeToFitWidth.sink() { s in
-            self.adjustsFontSizeToFitWidth = s
-        }
-        return self
+    public func adjustsFontSizeToFitWidth<P: Publisher>(_ publisher: P) -> Self where P.Output == Bool, P.Failure == Never {
+        return bind(publisher, to: \.adjustsFontSizeToFitWidth)
     }
 }
