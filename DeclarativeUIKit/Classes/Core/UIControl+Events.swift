@@ -32,7 +32,7 @@ extension UIButton {
     }
 }
 
-extension Applyable where Self: UIControl {
+extension ViewConfigurable where Self: UIControl {
     @discardableResult
     public func onValueChanged(_ action: @escaping (Self) -> Void) -> Self {
         storeAction(for: .valueChanged) { [weak self] in

@@ -19,12 +19,13 @@ cat > "$CHECK_DIR/Valid.swift" <<'SWIFT'
 import UIKit
 import EGDeclarativeUIKit
 func buildViews() {
-    let items: [BodyBuilderItemable] = [UILabel("Title"), UIView()]
+    let items: [UIView] = [UILabel("Title"), UIView()]
     let stack = UIStackView.V { items }
-    stack.addArranged(item: items)
+    stack.addArranged(items)
     _ = UIView { [UILabel("One"), UILabel("Two")] }
     _ = HStack(spacing: 8) { UIButton("Save").onTap {} }
     _ = UISwitch().onValueChanged { control in _ = control.isOn }
+    let _: UILabel = UILabel().set(\.layer.cornerRadius, to: 8).set(\.text, to: "Title")
 }
 SWIFT
 "${SWIFT[@]}" -typecheck -I "$CHECK_DIR" "$CHECK_DIR/Valid.swift"
@@ -38,8 +39,19 @@ if "${SWIFT[@]}" -typecheck -I "$CHECK_DIR" "$CHECK_DIR/Invalid.swift" > "$CHECK
     echo "ERROR: The builder accepted an integer array."
     exit 1
 fi
-if ! grep -q 'BodyBuilderItemable' "$CHECK_DIR/invalid.log"; then
+if ! grep -Eq 'buildExpression|cannot convert.*Int.*UIView' "$CHECK_DIR/invalid.log"; then
     cat "$CHECK_DIR/invalid.log"
     exit 1
 fi
+for EXPRESSION in 'UIView().apply { _ in }' '[UIView()].asBuildItems' 'UIView().asView()'; do
+    printf 'import UIKit\nimport EGDeclarativeUIKit\nfunc removed() { _ = %s }\n' "$EXPRESSION" > "$CHECK_DIR/Removed.swift"
+    if "${SWIFT[@]}" -typecheck -I "$CHECK_DIR" "$CHECK_DIR/Removed.swift" > "$CHECK_DIR/removed.log" 2>&1; then
+        echo "ERROR: A removed API still compiles: $EXPRESSION"
+        exit 1
+    fi
+    if ! grep -q 'has no member' "$CHECK_DIR/removed.log"; then
+        cat "$CHECK_DIR/removed.log"
+        exit 1
+    fi
+done
 echo "Core and Ext compile for iOS 10. The valid client passes; the invalid array is rejected."

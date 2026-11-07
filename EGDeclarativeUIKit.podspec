@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EGDeclarativeUIKit'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Declarative UIKit.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Declarative UIKit with 200 line of code.
+Build UIKit views with typed builders and direct configuration methods.
                        DESC
 
   s.homepage         = 'https://github.com/EkkoG/DeclarativeUIKit'
@@ -62,8 +62,7 @@ Declarative UIKit with 200 line of code.
   end
 
   s.subspec 'Chainable' do |ss|
-    ss.source_files = 'DeclarativeUIKit/Classes/Chainable/**/*'
-    ss.dependency 'EGChainable'
+    ss.dependency 'EGChainable', '~> 0.3'
     ss.dependency 'EGDeclarativeUIKit/Core'
   end
 

@@ -7,11 +7,9 @@ import UIKit
 import SnapKit
 
 public class UIListView: UIScrollView {
-    public convenience init(with direction: NSLayoutConstraint.Axis, @BodyBuilder arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
+    public convenience init(with direction: NSLayoutConstraint.Axis, @BodyBuilder arrangedSubviewsBuilder: () -> [UIView]) {
         self.init {
-            UIStackView.init(_arrangedSubviewsBuilder: arrangedSubviewsBuilder).apply { view in
-                view.axis = direction
-            }.applyAutoLayout { view in
+            UIStackView(axis: direction, _arrangedSubviewsBuilder: arrangedSubviewsBuilder).onMount { view in
                 view.snp.makeConstraints { maker in
                     maker.edges.equalToSuperview()
                 }

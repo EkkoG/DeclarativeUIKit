@@ -34,7 +34,7 @@ func bindRx<Value, View: UIView>(_ observable: Observable<Value>, to view: View,
         }, onError: { _ in })
 }
 
-extension Applyable where Self: UIView {
+extension ViewConfigurable where Self: UIView {
     @discardableResult
     public func bind<Value>(_ observable: Observable<Value>, to keyPath: ReferenceWritableKeyPath<Self, Value>) -> Self {
         bindRx(observable, to: self, key: keyPath) { view, value in
@@ -46,19 +46,5 @@ extension Applyable where Self: UIView {
     @discardableResult
     public func bind<Value>(_ observable: Observable<Value>, to keyPath: ReferenceWritableKeyPath<Self, Value?>) -> Self {
         return bind(observable.map(Optional.some), to: keyPath)
-    }
-}
-
-extension RxObject where Base: UIView {
-    @discardableResult
-    public func bind<Value>(_ observable: Observable<Value>, to keyPath: ReferenceWritableKeyPath<Base, Value>) -> Self {
-        base.bind(observable, to: keyPath)
-        return self
-    }
-
-    @discardableResult
-    public func bind<Value>(_ observable: Observable<Value>, to keyPath: ReferenceWritableKeyPath<Base, Value?>) -> Self {
-        base.bind(observable, to: keyPath)
-        return self
     }
 }

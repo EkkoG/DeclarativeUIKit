@@ -3,9 +3,53 @@ import UIKit
 import Combine
 import RxSwift
 import EGChainable
-import EGDeclarativeUIKit
+@testable import EGDeclarativeUIKit
 
 final class BuilderTests: XCTestCase {
+    func testDirectModifiersKeepIdentityAndConcreteType() {
+        let label = UILabel()
+        let configured: UILabel = label.backgroundColor(.red).text("Title").numberOfLines(2)
+        XCTAssertTrue(configured === label)
+        XCTAssertEqual(label.backgroundColor, .red)
+        XCTAssertEqual(label.text, "Title")
+        XCTAssertEqual(label.numberOfLines, 2)
+        XCTAssertTrue(label.text(nil) === label)
+        XCTAssertNil(label.text)
+
+        let button = UIButton()
+        XCTAssertTrue(button.title("Save").title("Selected", for: .selected) === button)
+        button.setTitle("Native", for: .normal)
+        XCTAssertEqual(button.title(for: .normal), "Native")
+        XCTAssertEqual(button.title(for: .selected), "Selected")
+
+        let input = UIView()
+        let textView = UITextView().inputView(input)
+        XCTAssertTrue(textView.inputView === input)
+    }
+
+    func testKeyPathConfigurationSupportsCustomAndNestedProperties() {
+        final class CustomControl: UIControl { var message = "" }
+        let control = CustomControl()
+        let configured: CustomControl = control.set(\.message, to: "Ready").set(\.layer.cornerRadius, to: 8)
+        XCTAssertTrue(configured === control)
+        XCTAssertEqual(control.message, "Ready")
+        XCTAssertEqual(control.layer.cornerRadius, 8)
+        var message: String?
+        control.onValueChanged { message = $0.message }
+        control.sendActions(for: .valueChanged)
+        XCTAssertEqual(message, "Ready")
+    }
+
+    func testBuilderSupportsOptionalBindingAndAvailability() {
+        let optional: UILabel? = UILabel("Optional")
+        let parent = UIView {
+            if let label = optional { label }
+            if #available(iOS 16.0, *) { UICalendarView() }
+        }
+        XCTAssertTrue(parent.subviews.first === optional)
+        if #available(iOS 16.0, *) { XCTAssertTrue(parent.subviews.last is UICalendarView) }
+    }
+
     func testBuilderPreservesViewOrderAndIdentity() {
         let views = (0..<8).map { _ in UIView() }
         let optional: UIView? = views[1]
@@ -18,25 +62,25 @@ final class BuilderTests: XCTestCase {
             if false { UIView() }
             for index in 3..<5 { views[index] }
             [views[5], views[6]]
-            [[views[7]]]
+            [views[7]]
         }
         XCTAssertEqual(parent.subviews.map(ObjectIdentifier.init), views.map(ObjectIdentifier.init))
         XCTAssertTrue(UIView {}.subviews.isEmpty)
     }
 
-    func testExistentialArraysAndChainableKeepWorking() {
+    func testViewArraysNeedNoConversion() {
         let label = UILabel()
         let view = UIView()
-        let items: [BodyBuilderItemable] = [label, view.C.backgroundColor(.red)]
+        let items: [UIView] = [label, view.backgroundColor(.red)]
         let stack = UIStackView.V { items }
         XCTAssertEqual(stack.arrangedSubviews, [label, view])
         let otherStack = UIStackView()
-        otherStack.addArranged(item: items)
+        otherStack.addArranged(items)
         XCTAssertEqual(otherStack.arrangedSubviews, [label, view])
-        let legacy = UIView {
-            [UIView().C.backgroundColor(.blue), UILabel()].asBuildItems
+        let direct = UIView {
+            [UIView().backgroundColor(.blue), UILabel()]
         }
-        XCTAssertEqual(legacy.subviews.count, 2)
+        XCTAssertEqual(direct.subviews.count, 2)
     }
 
     func testConvenienceInitializersAndStackParameters() {
@@ -61,11 +105,11 @@ final class BuilderTests: XCTestCase {
     func testPendingLayoutsRunInOrderOnceAfterMount() {
         let child = UIView()
         var calls: [Int] = []
-        child.applyAutoLayout { view in
+        child.onMount { view in
             XCTAssertNotNil(view.superview)
             calls.append(1)
         }
-        child.applyAutoLayout { _ in calls.append(2) }
+        child.onMount { _ in calls.append(2) }
         XCTAssertTrue(calls.isEmpty)
         let parent = UIView { child }
         XCTAssertTrue(child.superview === parent)
@@ -73,14 +117,14 @@ final class BuilderTests: XCTestCase {
         let otherParent = UIView { child }
         XCTAssertTrue(child.superview === otherParent)
         XCTAssertEqual(calls, [1, 2])
-        child.applyAutoLayout { _ in calls.append(3) }
+        child.onMount { _ in calls.append(3) }
         XCTAssertEqual(calls, [1, 2, 3])
     }
 
     func testStackRunsLayoutAfterSettingAxisAndSpacing() {
         let child = UIView()
         var callCount = 0
-        child.applyAutoLayout { view in
+        child.onMount { view in
             let parent = view.superview as? UIStackView
             XCTAssertEqual(parent?.axis, .vertical)
             XCTAssertEqual(parent?.spacing, 9)
@@ -94,7 +138,7 @@ final class BuilderTests: XCTestCase {
     func testLayoutReturnsViewAndAccumulatesSnapKitConstraints() {
         let child = UIView()
         XCTAssertTrue(child.layout { $0.width.equalTo(40) } === child)
-        child.S.makeConstraints { $0.height.equalTo(50) }
+        child.layout { $0.height.equalTo(50) }
         let parent = UIView { child }
         XCTAssertTrue(child.superview === parent)
         XCTAssertEqual(Set(child.constraints.map(\.firstAttribute)), [.width, .height])
@@ -109,7 +153,7 @@ final class BuilderTests: XCTestCase {
         autoreleasepool {
             let token = Token()
             weakToken = token
-            child.applyAutoLayout { _ in _ = token }
+            child.onMount { _ in _ = token }
         }
         XCTAssertNotNil(weakToken)
         let parent = UIView { child }
@@ -119,9 +163,40 @@ final class BuilderTests: XCTestCase {
 }
 
 final class BindingTests: XCTestCase {
+    func testDirectRxAndStaticModifiersShareTheOriginalView() {
+        let source = PublishSubject<String?>()
+        let label = UILabel()
+        let configured: UILabel = label.text("Initial").text(source).numberOfLines(0)
+        XCTAssertTrue(configured === label)
+        source.onNext("Bound")
+        XCTAssertEqual(label.text, "Bound")
+        label.text("Static")
+        source.onNext(nil)
+        XCTAssertNil(label.text)
+        XCTAssertEqual(label.numberOfLines, 0)
+    }
+
+    func testDirectCombineOptionalTextAndStaticModifiers() {
+        let source = PassthroughSubject<String?, Never>()
+        let label = UILabel()
+        let configured: UILabel = label.text("Initial").text(source).numberOfLines(0)
+        XCTAssertTrue(configured === label)
+        source.send("Bound")
+        let done = expectation(description: "Optional text is cleared")
+        DispatchQueue.main.async {
+            XCTAssertEqual(label.text, "Bound")
+            source.send(nil)
+            DispatchQueue.main.async {
+                XCTAssertNil(label.text)
+                done.fulfill()
+            }
+        }
+        wait(for: [done], timeout: 2)
+    }
+
     func testRxCompletionKeepsLastValue() {
         let label = UILabel()
-        label.R.text(.just("Hello"))
+        label.text(.just("Hello"))
         XCTAssertEqual(label.text, "Hello")
     }
 
@@ -251,7 +326,7 @@ final class BindingTests: XCTestCase {
         let current = PublishSubject<String>()
         let label = UILabel()
         var disposed = false
-        label.R.text(old.do(onDispose: { disposed = true }))
+        label.text(old.do(onDispose: { disposed = true }))
         label.bind(current.asObservable(), to: \.text)
         XCTAssertTrue(disposed)
         current.onNext("current")
@@ -265,7 +340,7 @@ final class BindingTests: XCTestCase {
         var disposed = false
         autoreleasepool {
             let label = UILabel()
-            label.R.text(source.do(onDispose: { disposed = true }))
+            label.text(source.do(onDispose: { disposed = true }))
             weakLabel = label
         }
         XCTAssertNil(weakLabel)
@@ -276,7 +351,7 @@ final class BindingTests: XCTestCase {
         let source = PublishSubject<UIImage?>()
         let image = UIImage()
         let view = UIImageView()
-        view.R.image(source)
+        view.image(source)
         source.onNext(image)
         XCTAssertTrue(view.image === image)
         source.onNext(nil)
@@ -292,8 +367,8 @@ final class BindingTests: XCTestCase {
         let replacement = PublishSubject<String>()
         let colors = PublishSubject<UIColor>()
         let button = UIButton()
-        button.R.title(normal).title(selected, for: .selected).titleColor(colors)
-        button.R.title(replacement).bind(Observable.just(false), to: \.isEnabled)
+        button.title(normal).title(selected, for: .selected).titleColor(colors)
+        button.title(replacement).bind(Observable.just(false), to: \.isEnabled)
         normal.onNext("stale")
         selected.onNext("Selected")
         replacement.onNext("Normal")
@@ -364,10 +439,10 @@ final class BindingTests: XCTestCase {
         let middle = PublishSubject<String>()
         let newest = PublishSubject<String>()
         let label = UILabel()
-        label.R.text(old.do(onDispose: { [weak label] in
-            label?.R.text(newest)
+        label.text(old.do(onDispose: { [weak label] in
+            label?.text(newest)
         }))
-        label.R.text(middle)
+        label.text(middle)
         newest.onNext("newest")
         middle.onNext("stale")
         XCTAssertEqual(label.text, "newest")
@@ -377,10 +452,10 @@ final class BindingTests: XCTestCase {
         let old = PublishSubject<String>()
         let newest = BehaviorSubject(value: "newest")
         let label = UILabel()
-        label.R.text(old.do(onDispose: { [weak label] in
-            label?.R.text(newest)
+        label.text(old.do(onDispose: { [weak label] in
+            label?.text(newest)
         }))
-        label.R.text(.just("stale"))
+        label.text(.just("stale"))
         XCTAssertEqual(label.text, "newest")
         newest.onNext("next")
         XCTAssertEqual(label.text, "next")

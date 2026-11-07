@@ -19,7 +19,7 @@ extension UIView {
     }
 
     @discardableResult
-    public func applyAutoLayout(_ closure: @escaping (UIView) -> Void) -> Self {
+    func onMount(_ closure: @escaping (UIView) -> Void) -> Self {
         autolayoutBuilders.append(closure)
         if superview != nil {
             applyPendingAutoLayout()
@@ -37,15 +37,15 @@ extension UIView {
 
 extension UIView {
     @discardableResult
-    public func body(@BodyBuilder closure: () -> BodyBuilderItemable) -> Self{
-        add(item: closure())
+    public func body(@BodyBuilder closure: () -> [UIView]) -> Self {
+        add(closure())
         return self
     }
 
-    public convenience init(@BodyBuilder closure: () -> BodyBuilderItemable) {
+    public convenience init(@BodyBuilder closure: () -> [UIView]) {
         self.init(frame: .zero)
 
-        add(item: closure())
+        add(closure())
     }
 
     private func _addSubview(_ view: UIView) {
@@ -54,16 +54,7 @@ extension UIView {
     }
 
 
-    func add(item: BodyBuilderItemable) {
-        switch item.bodyBuilderItem {
-        case .single(let view):
-            _addSubview(view)
-        case .multiple(let views):
-            views.forEach { add(item: $0) }
-        case .nested(let items):
-            items.forEach { add(item: $0) }
-        case .none:
-            break
-        }
+    func add(_ views: [UIView]) {
+        views.forEach { _addSubview($0) }
     }
 }

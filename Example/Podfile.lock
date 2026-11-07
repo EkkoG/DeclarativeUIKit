@@ -1,26 +1,133 @@
 PODS:
-  - EGChainable (0.1.11):
-    - EGChainable/Common (= 0.1.11)
-    - EGChainable/Core (= 0.1.11)
-  - EGChainable/Common (0.1.11):
-    - EGChainable/Core
-  - EGChainable/Core (0.1.11)
-  - EGDeclarativeUIKit (0.1.0):
-    - EGDeclarativeUIKit/Core (= 0.1.0)
-    - EGDeclarativeUIKit/Ext (= 0.1.0)
-  - EGDeclarativeUIKit/Chainable (0.1.0):
-    - EGChainable
+  - EGChainable (0.3.0):
+    - EGChainable/AVPlayer (= 0.3.0)
+    - EGChainable/CAGradientLayer (= 0.3.0)
+    - EGChainable/CALayer (= 0.3.0)
+    - EGChainable/CAShapeLayer (= 0.3.0)
+    - EGChainable/NSAttributedString (= 0.3.0)
+    - EGChainable/UIBezierPath (= 0.3.0)
+    - EGChainable/UIButton (= 0.3.0)
+    - EGChainable/UICollectionView (= 0.3.0)
+    - EGChainable/UICollectionViewFlowLayout (= 0.3.0)
+    - EGChainable/UICollectionViewLayout (= 0.3.0)
+    - EGChainable/UIControl (= 0.3.0)
+    - EGChainable/UIDatePicker (= 0.3.0)
+    - EGChainable/UIGestureRecognizer (= 0.3.0)
+    - EGChainable/UIImageView (= 0.3.0)
+    - EGChainable/UILabel (= 0.3.0)
+    - EGChainable/UILongPressGestureRecognizer (= 0.3.0)
+    - EGChainable/UIPanGestureRecognizer (= 0.3.0)
+    - EGChainable/UIPinchGestureRecognizer (= 0.3.0)
+    - EGChainable/UIProgressView (= 0.3.0)
+    - EGChainable/UIRotationGestureRecognizer (= 0.3.0)
+    - EGChainable/UIScrollView (= 0.3.0)
+    - EGChainable/UISearchBar (= 0.3.0)
+    - EGChainable/UISegmentedControl (= 0.3.0)
+    - EGChainable/UISlider (= 0.3.0)
+    - EGChainable/UIStackView (= 0.3.0)
+    - EGChainable/UIStepper (= 0.3.0)
+    - EGChainable/UISwipeActionsConfiguration (= 0.3.0)
+    - EGChainable/UISwipeGestureRecognizer (= 0.3.0)
+    - EGChainable/UISwitch (= 0.3.0)
+    - EGChainable/UITabBar (= 0.3.0)
+    - EGChainable/UITabBarAppearance (= 0.3.0)
+    - EGChainable/UITabBarController (= 0.3.0)
+    - EGChainable/UITabBarItem (= 0.3.0)
+    - EGChainable/UITableView (= 0.3.0)
+    - EGChainable/UITapGestureRecognizer (= 0.3.0)
+    - EGChainable/UITextView (= 0.3.0)
+    - EGChainable/UIToolbar (= 0.3.0)
+    - EGChainable/UIView (= 0.3.0)
+    - EGChainable/WKWebView (= 0.3.0)
+    - EGChainable/WKWebViewConfiguration (= 0.3.0)
+  - EGChainable/AVPlayer (0.3.0)
+  - EGChainable/CAGradientLayer (0.3.0):
+    - EGChainable/CALayer
+  - EGChainable/CALayer (0.3.0)
+  - EGChainable/CAShapeLayer (0.3.0):
+    - EGChainable/CALayer
+  - EGChainable/NSAttributedString (0.3.0)
+  - EGChainable/UIBarAppearance (0.3.0)
+  - EGChainable/UIBarItem (0.3.0)
+  - EGChainable/UIBezierPath (0.3.0)
+  - EGChainable/UIButton (0.3.0):
+    - EGChainable/UIControl
+  - EGChainable/UICollectionView (0.3.0):
+    - EGChainable/UIScrollView
+  - EGChainable/UICollectionViewFlowLayout (0.3.0):
+    - EGChainable/UICollectionViewLayout
+  - EGChainable/UICollectionViewLayout (0.3.0)
+  - EGChainable/UIControl (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UIDatePicker (0.3.0):
+    - EGChainable/UIControl
+  - EGChainable/UIGestureRecognizer (0.3.0)
+  - EGChainable/UIImageView (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UILabel (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UILongPressGestureRecognizer (0.3.0):
+    - EGChainable/UIGestureRecognizer
+  - EGChainable/UIPanGestureRecognizer (0.3.0):
+    - EGChainable/UIGestureRecognizer
+  - EGChainable/UIPinchGestureRecognizer (0.3.0):
+    - EGChainable/UIGestureRecognizer
+  - EGChainable/UIProgressView (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UIRotationGestureRecognizer (0.3.0):
+    - EGChainable/UIGestureRecognizer
+  - EGChainable/UIScrollView (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UISearchBar (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UISegmentedControl (0.3.0):
+    - EGChainable/UIControl
+  - EGChainable/UISlider (0.3.0):
+    - EGChainable/UIControl
+  - EGChainable/UIStackView (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UIStepper (0.3.0):
+    - EGChainable/UIControl
+  - EGChainable/UISwipeActionsConfiguration (0.3.0)
+  - EGChainable/UISwipeGestureRecognizer (0.3.0):
+    - EGChainable/UIGestureRecognizer
+  - EGChainable/UISwitch (0.3.0):
+    - EGChainable/UIControl
+  - EGChainable/UITabBar (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UITabBarAppearance (0.3.0):
+    - EGChainable/UIBarAppearance
+  - EGChainable/UITabBarController (0.3.0)
+  - EGChainable/UITabBarItem (0.3.0):
+    - EGChainable/UIBarItem
+  - EGChainable/UITableView (0.3.0):
+    - EGChainable/UIScrollView
+  - EGChainable/UITapGestureRecognizer (0.3.0):
+    - EGChainable/UIGestureRecognizer
+  - EGChainable/UITextView (0.3.0):
+    - EGChainable/UIScrollView
+  - EGChainable/UIToolbar (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/UIView (0.3.0)
+  - EGChainable/WKWebView (0.3.0):
+    - EGChainable/UIView
+  - EGChainable/WKWebViewConfiguration (0.3.0)
+  - EGDeclarativeUIKit (0.2.0):
+    - EGDeclarativeUIKit/Core (= 0.2.0)
+    - EGDeclarativeUIKit/Ext (= 0.2.0)
+  - EGDeclarativeUIKit/Chainable (0.2.0):
+    - EGChainable (~> 0.3)
     - EGDeclarativeUIKit/Core
-  - EGDeclarativeUIKit/Combine (0.1.0):
+  - EGDeclarativeUIKit/Combine (0.2.0):
     - EGDeclarativeUIKit/Core
-  - EGDeclarativeUIKit/Core (0.1.0)
-  - EGDeclarativeUIKit/Ext (0.1.0):
+  - EGDeclarativeUIKit/Core (0.2.0)
+  - EGDeclarativeUIKit/Ext (0.2.0):
     - EGDeclarativeUIKit/Core
-  - EGDeclarativeUIKit/Rx (0.1.0):
+  - EGDeclarativeUIKit/Rx (0.2.0):
     - EGDeclarativeUIKit/Core
     - RxCocoa
     - RxSwift
-  - EGDeclarativeUIKit/SnapKit (0.1.0):
+  - EGDeclarativeUIKit/SnapKit (0.2.0):
     - EGDeclarativeUIKit/Core
     - EGDeclarativeUIKit/Ext
     - SnapKit
@@ -33,34 +140,38 @@ PODS:
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - EGChainable (from `../../EGChainable`)
   - EGDeclarativeUIKit (from `../`)
   - EGDeclarativeUIKit/Chainable (from `../`)
   - EGDeclarativeUIKit/Combine (from `../`)
   - EGDeclarativeUIKit/Ext (from `../`)
   - EGDeclarativeUIKit/Rx (from `../`)
   - EGDeclarativeUIKit/SnapKit (from `../`)
+  - RxCocoa (= 6.5.0)
+  - RxSwift (= 6.5.0)
   - SnapKit
 
 SPEC REPOS:
   trunk:
-    - EGChainable
     - RxCocoa
     - RxRelay
     - RxSwift
     - SnapKit
 
 EXTERNAL SOURCES:
+  EGChainable:
+    :path: "../../EGChainable"
   EGDeclarativeUIKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EGChainable: 1d3d9d0cab730cf50aa10f38d7eeece21a30666e
-  EGDeclarativeUIKit: 5c1c864561d10e2587c78a86d4e0780145cae184
+  EGChainable: 3002ce61bbb457a175a7d8354c0fb8be58bce3f7
+  EGDeclarativeUIKit: 51b0b25e37d3f2427c0712970121b04b04a436d9
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: e69262c6299f166e273859812590599aedf6d8d2
+PODFILE CHECKSUM: 1756f203bb142a60ab8a53919d08c56e9019cc6e
 
 COCOAPODS: 1.16.2

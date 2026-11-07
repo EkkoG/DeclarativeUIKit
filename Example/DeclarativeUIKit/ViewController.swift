@@ -1,5 +1,6 @@
 import UIKit
 import EGDeclarativeUIKit
+import EGChainable
 import RxSwift
 import SnapKit
 
@@ -15,27 +16,25 @@ final class ViewController: UIViewController {
         view.body {
             VStack(spacing: 16, alignment: .fill) {
                 UILabel("Account settings")
-                    .apply {
-                        $0.font = .preferredFont(forTextStyle: .title1)
-                        $0.adjustsFontForContentSizeCategory = true
-                    }
+                    .font(.preferredFont(forTextStyle: .title1))
+                    .adjustsFontForContentSizeCategory(true)
                     .assign(to: &titleLabel)
 
                 UILabel()
-                    .bind($status, to: \.text)
-                    .apply { $0.numberOfLines = 0 }
+                    .text($status)
+                    .numberOfLines(0)
 
                 HStack(spacing: 12, alignment: .center) {
                     UILabel("Enable saving")
                     UISwitch()
-                        .apply { $0.isOn = canSave }
+                        .isOn(canSave)
                         .onValueChanged { [weak self] control in
                             self?.canSave = control.isOn
                         }
                 }
 
                 UIButton("Save")
-                    .bind($canSave, to: \.isEnabled)
+                    .isEnabled($canSave)
                     .onTap { [weak self] in
                         self?.status = "Saved"
                     }

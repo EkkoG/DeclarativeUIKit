@@ -36,7 +36,7 @@ func bindCombine<P: Publisher, View: UIView>(_ publisher: P, to view: View, key:
 }
 
 @available(iOS 13.0, *)
-extension Applyable where Self: UIView {
+extension ViewConfigurable where Self: UIView {
     @discardableResult
     public func bind<P: Publisher>(_ publisher: P, to keyPath: ReferenceWritableKeyPath<Self, P.Output>) -> Self
         where P.Failure == Never {

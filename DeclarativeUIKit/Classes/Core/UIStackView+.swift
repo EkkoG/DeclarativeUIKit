@@ -6,26 +6,26 @@ import UIKit
 
 extension UIStackView {
     public static func V(spacing: CGFloat = 0, alignment: Alignment = .fill, distribution: Distribution = .fill,
-                         @BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
+                         @BodyBuilder _ arrangedSubviewsBuilder: () -> [UIView]) -> UIStackView {
         return UIStackView(axis: .vertical, spacing: spacing, alignment: alignment, distribution: distribution,
                            _arrangedSubviewsBuilder: arrangedSubviewsBuilder)
     }
 
     public static func H(spacing: CGFloat = 0, alignment: Alignment = .fill, distribution: Distribution = .fill,
-                         @BodyBuilder _ arrangedSubviewsBuilder: () -> BodyBuilderItemable) -> UIStackView {
+                         @BodyBuilder _ arrangedSubviewsBuilder: () -> [UIView]) -> UIStackView {
         return UIStackView(axis: .horizontal, spacing: spacing, alignment: alignment, distribution: distribution,
                            _arrangedSubviewsBuilder: arrangedSubviewsBuilder)
     }
 
     internal convenience init(axis: NSLayoutConstraint.Axis = .horizontal, spacing: CGFloat = 0,
                               alignment: Alignment = .fill, distribution: Distribution = .fill,
-                              @BodyBuilder _arrangedSubviewsBuilder: () -> BodyBuilderItemable) {
+                              @BodyBuilder _arrangedSubviewsBuilder: () -> [UIView]) {
         self.init(frame: .zero)
         self.axis = axis
         self.spacing = spacing
         self.alignment = alignment
         self.distribution = distribution
-        addArranged(item: _arrangedSubviewsBuilder())
+        addArranged(_arrangedSubviewsBuilder())
     }
 
     private func _addArranged(_ view: UIView) {
@@ -39,20 +39,7 @@ extension UIStackView {
         }
     }
 
-    public func addArranged(item: [BodyBuilderItemable]) {
-        item.forEach { addArranged(item: $0) }
-    }
-
-    public func addArranged(item: BodyBuilderItemable) {
-        switch item.bodyBuilderItem {
-        case .single(let view):
-            _addArranged(view)
-        case .multiple(let views):
-            views.forEach { addArranged(item: $0) }
-        case .nested(let items):
-            items.forEach { addArranged(item: $0) }
-        case .none:
-            break
-        }
+    public func addArranged(_ views: [UIView]) {
+        views.forEach { _addArranged($0) }
     }
 }

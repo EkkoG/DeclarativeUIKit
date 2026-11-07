@@ -8,7 +8,7 @@ The builder runs once when you call it. It does not rebuild the view tree when s
 
 ## Requirements and installation
 
-- Core and Ext: iOS 10 or later, with a Swift 5.4 or later compiler in Swift 5 language mode.
+- Core and Ext: iOS 10 or later, with Xcode 26.5 in Swift 5 language mode.
 - Custom stack spacing: iOS 11 or later.
 - Combine: iOS 13 or later.
 - Optional dependencies can have their own minimum OS versions. The example lock file fixes the versions used for tests.
@@ -21,6 +21,7 @@ pod 'EGDeclarativeUIKit/Rx', :path => '../DeclarativeUIKit'       # optional
 pod 'EGDeclarativeUIKit/Combine', :path => '../DeclarativeUIKit'  # optional
 pod 'EGDeclarativeUIKit/SnapKit', :path => '../DeclarativeUIKit'  # optional
 pod 'EGDeclarativeUIKit/Chainable', :path => '../DeclarativeUIKit' # optional
+pod 'EGChainable', :path => '../EGChainable' # required for the local Chainable revision
 ```
 
 The default subspecs are Core and Ext. They do not require RxSwift, Combine, SnapKit, or EGChainable. `UIListView` is available only when SnapKit can be imported; it uses a scroll view and a stack, with no cell reuse.
@@ -30,13 +31,14 @@ The default subspecs are Core and Ext. They do not require RxSwift, Combine, Sna
 ```swift
 import UIKit
 import EGDeclarativeUIKit
+import EGChainable // Install the Chainable subspec for named static modifiers.
 
 let subtitle: UILabel? = UILabel("Choose an option")
 let rows = ["Name", "Email"]
 
 let content = VStack(spacing: 12, alignment: .fill) {
     UILabel("Account")
-        .apply { $0.font = .preferredFont(forTextStyle: .title1) }
+        .font(.preferredFont(forTextStyle: .title1))
     subtitle
     if !rows.isEmpty {
         UILabel("Details")
@@ -51,15 +53,17 @@ let content = VStack(spacing: 12, alignment: .fill) {
 
 The builder accepts views, optional views, typed arrays, loops, and conditional branches. It preserves view order and identity. `HStack`, `VStack`, `UIStackView.H`, and `UIStackView.V` accept `spacing`, `alignment`, and `distribution`, with UIKit defaults.
 
-`UILabel("Title")` sets the text. `UIButton("Save")` creates a system button; pass `type: .custom` when needed. Use `apply` for other properties. Existing `assign(to:)` and `spacingAfterSelf` calls remain available.
+`UILabel("Title")` sets the text. `UIButton("Save")` creates a system button; pass `type: .custom` when needed. Use the generated property methods for other UIKit properties. Existing `assign(to:)` and `spacingAfterSelf` calls remain available.
 
-With the Chainable subspec, `.C` is now provided by the library:
+The Chainable subspec adds methods that return the original object. Parent methods keep the concrete subclass type:
 
 ```swift
 import EGChainable
 
-let label = UILabel("Title").C.textColor(.black).asView()
+let label = UILabel("Title").backgroundColor(.white).textColor(.black)
 ```
+
+For a custom or nested property, Core provides a typed key-path setter: `label.set(\.layer.cornerRadius, to: 8)`. This returns the same object. Without Chainable, use `set` or normal UIKit assignment.
 
 ## Bind values
 
@@ -73,7 +77,7 @@ UILabel().text(model.$title) // The short property methods also accept mapped pu
 
 // RxSwift; model.title is declared with @RxUIPublished.
 UILabel().bind(model.$title.map { $0.uppercased() }, to: \.text)
-UILabel().R.text(model.$title) // Existing R methods use the same binding storage.
+UILabel().text(model.$title) // Static values and reactive sources use the same method name.
 ```
 
 Binding rules:
@@ -83,6 +87,7 @@ Binding rules:
 - Rx accepts `Observable`. A completed or failed stream leaves the last value in place. Handle errors upstream if the UI must show them. An emitted `nil` still clears an optional property.
 - The view owns its subscriptions. The binding holds the view weakly and cancels subscriptions when the view is released. Removing a retained view from its parent does not cancel its bindings.
 - A new binding to the same key path replaces the old binding within that reactive subspec. Rx and Combine have separate storage. Do not use both to drive one property.
+- Static assignment, including `set`, does not cancel a binding. The next source value can replace it.
 - Button methods such as `title(_:for:)` use both the field and control state as the replacement key. Normal and selected titles can stay bound at the same time.
 
 Your own publisher operators and closures must also avoid strong reference cycles.
@@ -117,15 +122,35 @@ view.body {
 
 Before a view has a parent, layout closures wait in registration order. `body` and the stack builders run them after adding the view, then release them. Pending work runs once; adding the view again does not repeat it. If the view already has a parent, layout runs immediately.
 
-Native `addSubview` does not trigger pending work. For that path, add the view first, then call `layout`. The existing `applyAutoLayout` and `.S.makeConstraints` methods use the same execution rules. `layout` adds constraints; use SnapKit's own update or remake APIs when you need those operations.
+Native `addSubview` does not trigger pending work. For that path, add the view first, then call `layout`. `layout` adds constraints; use SnapKit's own update or remake APIs when you need those operations.
 
-## Migration notes
+## Migration from 0.1 to 0.2
 
-- A direct integer array in a builder now fails at compile time.
-- Typed view arrays and `[BodyBuilderItemable]` work in builders. `addArranged(item:)` still accepts `[BodyBuilderItemable]` outside a builder.
-- Arrays no longer conform to `BodyBuilderItemable` for every element type. Generic code that relied on that unrestricted conformance must use valid element types or an explicit builder item.
-- `.asBuildItems` remains as a deprecated compatibility method. It checks elements at runtime and fails for invalid input. Prefer separate builder expressions or an explicitly typed `[BodyBuilderItemable]` for mixed views and chainable objects.
-- Remove an app-local `.C` alias if it only repeats the library alias.
+This is a breaking change. No legacy wrappers or aliases remain.
+
+| Previous call | New call |
+|---|---|
+| `.C.text("Title").asView()` | `.text("Title")` |
+| `.R.text(source)` | `.text(source)` |
+| `.S.makeConstraints { ... }` | `.layout { ... }` |
+| `.apply { $0.font = font }` | `.font(font)` or `.set(\.font, to: font)` |
+| `views.asBuildItems` | `views`, typed as `[UIView]` |
+| `stack.addArranged(item: items)` | `stack.addArranged(views)` |
+
+`BodyBuilderItemable` and the builder wrapper types are removed. Use `[UIView]` for mixed view arrays. Flatten nested arrays with `flatMap` before passing them to a builder. Invalid arrays such as `[Int]` fail at compile time. `applyAutoLayout` is no longer public; use `layout` with the SnapKit subspec. Remove app-local `.C` aliases.
+
+EGChainable 0.3 removes `.chainable`, `.asBase()`, and all wrappers. It generates writable property methods and five UIButton state methods: `title`, `titleColor`, `image`, `backgroundImage`, and `attributedTitle`. Use native calls for commands such as `reloadData()` and `stopLoading()`; they do not return a chainable object.
+
+## Maintain generated APIs
+
+Keep the two repositories in sibling directories. EGChainable owns the generator and SDK selection. The selected Rx and Combine shortcuts use the same compiler types as static modifiers. Generated files are committed; library users do not run the generator.
+
+```sh
+python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD"
+python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
+```
+
+The generator uses Xcode's `swift-symbolgraph-extract`, then compiles all static output before replacement. `manifest.json` in EGChainable records the toolchain, selected classes, generated properties, and exclusions. Run this project's integration checks after changing reactive output.
 
 ## Example and checks
 
@@ -139,13 +164,15 @@ xcrun simctl list devices available
 xcodebuild test \
   -workspace Example/DeclarativeUIKit.xcworkspace \
   -scheme DeclarativeUIKit-Example \
+  -derivedDataPath DerivedData \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
   CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
+python3 scripts/check-modules.py DerivedData/Build/Products/Debug-iphonesimulator
 ```
 
 The test command overrides the deployment target for all build targets so current Xcode can build the old example and dependencies. It does not change the library's declared minimum version. The Core/Ext script separately compiles an iOS 10 target without optional dependencies and checks valid and invalid builder clients. Compilation does not prove behavior on an iOS 10 device. Swift 6 strict concurrency mode is not part of this revision's support claim.
 
-GitHub Actions runs these checks on a current simulator. The tests cover builders, layout order, binding updates and release, replacement, thread delivery, button states, and control events.
+GitHub Actions checks out both repositories and uses Xcode 26.5. Set the `EGCHAINABLE_REF` repository variable or the manual workflow input to the matching EGChainable revision; that revision must be available on GitHub before CI can use it. Local changes do not run remote CI. The tests cover builders, layout order, binding updates and release, replacement, thread delivery, button states, and control events.
 
 ## License
 

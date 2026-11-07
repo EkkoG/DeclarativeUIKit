@@ -5,6 +5,7 @@ use_frameworks!
 platform :ios, '10.0'
 
 target 'DeclarativeUIKit_Example' do
+  pod 'EGChainable', :path => '../../EGChainable'
   pod 'EGDeclarativeUIKit', :path => '../'
   pod 'EGDeclarativeUIKit/Ext', :path => '../'
   pod 'EGDeclarativeUIKit/Rx', :path => '../'
@@ -12,6 +13,8 @@ target 'DeclarativeUIKit_Example' do
   pod 'EGDeclarativeUIKit/SnapKit', :path => '../'
   pod 'EGDeclarativeUIKit/Chainable', :path => '../'
   pod 'SnapKit'
+  pod 'RxSwift', '6.5.0'
+  pod 'RxCocoa', '6.5.0'
 
   target 'DeclarativeUIKit_Tests' do
     inherit! :search_paths

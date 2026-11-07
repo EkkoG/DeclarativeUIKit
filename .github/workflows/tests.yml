@@ -1,12 +1,33 @@
 name: UIKit Tests
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      egchainable_ref:
+        description: Matching EGChainable revision
+        default: main
+        required: true
 
 jobs:
   test:
-    runs-on: macos-15
+    runs-on: macos-26
+    defaults:
+      run:
+        working-directory: DeclarativeUIKit
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: DeclarativeUIKit
+      - uses: actions/checkout@v4
+        with:
+          repository: EkkoG/EGChainable
+          ref: ${{ inputs.egchainable_ref || vars.EGCHAINABLE_REF || 'main' }}
+          path: EGChainable
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '26.5'
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
@@ -26,11 +47,16 @@ jobs:
             -workspace Example/DeclarativeUIKit.xcworkspace \
             -scheme DeclarativeUIKit-Example \
             -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
+            -derivedDataPath DerivedData \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
+      - name: Check optional module clients
+        run: python3 scripts/check-modules.py DerivedData/Build/Products/Debug-iphonesimulator
+      - name: Check generated sources
+        run: python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: UIKit-Test-Results
-          path: TestResults.xcresult
+          path: DeclarativeUIKit/TestResults.xcresult
           if-no-files-found: ignore

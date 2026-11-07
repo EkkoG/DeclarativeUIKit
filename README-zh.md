@@ -6,7 +6,7 @@ builder 在调用时执行一次。状态变化不会自动重建其中的条件
 
 ## 要求与安装
 
-- Core、Ext：iOS 10+，Swift 5.4 或更高版本编译器，使用 Swift 5 语言模式。
+- Core、Ext：iOS 10+，Xcode 26.5，使用 Swift 5 语言模式。
 - 自定义 Stack 间距：iOS 11+。
 - Combine：iOS 13+。
 - 可选依赖有各自的系统要求；示例的锁文件固定了本项目验证使用的依赖版本。
@@ -19,6 +19,7 @@ pod 'EGDeclarativeUIKit/Rx', :path => '../DeclarativeUIKit'       # 按需
 pod 'EGDeclarativeUIKit/Combine', :path => '../DeclarativeUIKit'  # 按需
 pod 'EGDeclarativeUIKit/SnapKit', :path => '../DeclarativeUIKit'  # 按需
 pod 'EGDeclarativeUIKit/Chainable', :path => '../DeclarativeUIKit' # 按需
+pod 'EGChainable', :path => '../EGChainable' # 本地 Chainable 新版所需
 ```
 
 默认安装 Core 和 Ext，不强制引入 RxSwift、Combine、SnapKit 或 EGChainable。`UIListView` 仅在可导入 SnapKit 时可用；其实现是 ScrollView 加 Stack，不具备列表单元格复用。
@@ -28,13 +29,14 @@ pod 'EGDeclarativeUIKit/Chainable', :path => '../DeclarativeUIKit' # 按需
 ```swift
 import UIKit
 import EGDeclarativeUIKit
+import EGChainable // 具名静态配置需要安装 Chainable 模块。
 
 let subtitle: UILabel? = UILabel("请选择")
 let rows = ["姓名", "邮箱"]
 
 let content = VStack(spacing: 12, alignment: .fill) {
     UILabel("账户")
-        .apply { $0.font = .preferredFont(forTextStyle: .title1) }
+        .font(.preferredFont(forTextStyle: .title1))
     subtitle
     if !rows.isEmpty {
         UILabel("详细信息")
@@ -49,15 +51,17 @@ let content = VStack(spacing: 12, alignment: .fill) {
 
 支持单个视图、可选视图、有明确元素类型的数组、循环和条件分支，保留对象身份与顺序。`HStack`、`VStack`、`UIStackView.H`、`UIStackView.V` 都可以设置 `spacing`、`alignment`、`distribution`，默认值沿用 UIKit。
 
-`UILabel("标题")` 设置文字；`UIButton("保存")` 默认创建 system 按钮，可传入 `type: .custom`。其他属性继续使用 `apply`；原有 `assign(to:)`、`spacingAfterSelf` 仍可使用。
+`UILabel("标题")` 设置文字；`UIButton("保存")` 默认创建 system 按钮，可传入 `type: .custom`。其他 UIKit 属性使用生成的具名方法；原有 `assign(to:)`、`spacingAfterSelf` 仍可使用。
 
-安装 Chainable 模块后，库直接提供 `.C`，不再需要在应用中重复定义：
+安装 Chainable 模块后，直接调用属性方法。每个方法都返回原对象，父类方法也保留子类的具体类型：
 
 ```swift
 import EGChainable
 
-let label = UILabel("标题").C.textColor(.black).asView()
+let label = UILabel("标题").backgroundColor(.white).textColor(.black)
 ```
+
+自定义或嵌套属性可使用 Core 的类型安全入口：`label.set(\.layer.cornerRadius, to: 8)`，同样返回原对象。未安装 Chainable 时，可以使用 `set` 或原生 UIKit 赋值。
 
 ## 绑定状态
 
@@ -71,7 +75,7 @@ UILabel().text(model.$title)
 
 // RxSwift：model.title 使用 @RxUIPublished 声明。
 UILabel().bind(model.$title.map { $0.uppercased() }, to: \.text)
-UILabel().R.text(model.$title)
+UILabel().text(model.$title)
 ```
 
 绑定规则：
@@ -81,6 +85,7 @@ UILabel().R.text(model.$title)
 - Rx 接受 Observable。完成或错误事件不会清空最后的值；需要显示错误时，在上游处理。源显式发送 `nil` 仍会清空可选属性。
 - 视图持有订阅，绑定回调弱引用视图，视图释放时取消订阅。仅从父视图移除、但仍被其他对象持有的视图，不会自动取消订阅。
 - 同一响应式模块内，对同一 KeyPath 再次绑定会替换旧订阅。Rx 与 Combine 的存储相互独立，避免让二者同时驱动一个属性。
+- 静态赋值和 `set` 不会取消绑定；下一次数据源发值仍可覆盖该属性。
 - 按钮 `title(_:for:)` 等方法按“字段＋控件状态”区分订阅，normal 与 selected 标题可以同时绑定。
 
 上游操作符和用户闭包如果强引用视图，仍可能造成循环引用，需要由调用方处理。
@@ -115,15 +120,35 @@ view.body {
 
 视图尚无父视图时，布局闭包按登记顺序等待。`body` 或 Stack builder 将视图加入父容器后执行它们，并释放闭包。待执行工作只执行一次，重新挂载不会重复执行；已有父视图时，新登记的布局立即执行。
 
-原生 `addSubview` 不会触发待执行布局。在这种用法中，应先添加视图，再调用 `layout`。原有 `applyAutoLayout`、`.S.makeConstraints` 共用上述规则。`layout` 添加约束；更新或重建约束请继续使用 SnapKit 的对应 API。
+原生 `addSubview` 不会触发待执行布局。在这种用法中，应先添加视图，再调用 `layout`。`layout` 添加约束；更新或重建约束请继续使用 SnapKit 的对应 API。
 
-## 迁移说明
+## 从 0.1 迁移到 0.2
 
-- 将 `[Int]` 等无效数组直接写进 builder，现在会在编译时报错。
-- builder 支持视图数组和 `[BodyBuilderItemable]`；builder 外的 `addArranged(item:)` 也继续接受 `[BodyBuilderItemable]`。
-- Array 不再对任意元素类型无条件遵循 `BodyBuilderItemable`。依赖该旧符合关系的泛型代码需要改用有效元素类型或显式 builder item。
-- `.asBuildItems` 保留为弃用兼容入口，仍在运行时检查元素，非法输入会失败。建议分开书写表达式，或为混合视图和链式对象的数组明确标注 `[BodyBuilderItemable]`。
-- 应用中若有仅用于重复定义 `.C` 的扩展，可以删除。
+这是不兼容旧 API 的更新，旧包装和别名已删除。
+
+| 旧调用 | 新调用 |
+|---|---|
+| `.C.text("标题").asView()` | `.text("标题")` |
+| `.R.text(source)` | `.text(source)` |
+| `.S.makeConstraints { ... }` | `.layout { ... }` |
+| `.apply { $0.font = font }` | `.font(font)` 或 `.set(\.font, to: font)` |
+| `views.asBuildItems` | 直接传 `[UIView]` 数组 |
+| `stack.addArranged(item: items)` | `stack.addArranged(views)` |
+
+`BodyBuilderItemable` 和 builder 包装类型已删除。混合控件数组使用 `[UIView]`；嵌套数组先用 `flatMap` 展平。`[Int]` 等非法表达式在编译时拒绝。`applyAutoLayout` 不再是公共 API，使用 SnapKit 模块的 `layout`；应用中自建的 `.C` 别名也应删除。
+
+EGChainable 0.3 同步删除 `.chainable`、`.asBase()` 及所有包装对象。它生成可写属性方法，以及 UIButton 的 `title`、`titleColor`、`image`、`backgroundImage`、`attributedTitle` 五个状态方法。`reloadData()`、`stopLoading()` 等操作继续原生调用，不提供链式返回适配。
+
+## 维护生成代码
+
+两个仓库应放在同级目录。生成器和 SDK 选择规则由 EGChainable 维护，现有 Rx/Combine 简写与静态方法共用编译器提供的类型信息。生成文件随库提交，库的使用者无需运行生成器。
+
+```sh
+python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD"
+python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
+```
+
+生成器调用 Xcode 自带的 `swift-symbolgraph-extract`，所有静态产物编译通过后才替换旧文件。EGChainable 的 `manifest.json` 记录工具链、选择的类、生成属性和排除原因。修改响应式产物后，还需运行本项目的集成检查。
 
 ## 示例与验证
 
@@ -137,13 +162,15 @@ xcrun simctl list devices available
 xcodebuild test \
   -workspace Example/DeclarativeUIKit.xcworkspace \
   -scheme DeclarativeUIKit-Example \
+  -derivedDataPath DerivedData \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
   CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
+python3 scripts/check-modules.py DerivedData/Build/Products/Debug-iphonesimulator
 ```
 
 测试命令会对所有构建目标覆盖部署版本，使当前 Xcode 能构建较早的示例和依赖，不改变库声明的最低系统版本。Core/Ext 脚本另行验证不引入可选依赖的 iOS 10 目标编译，以及合法客户端通过、非法 builder 数组被拒绝。编译检查不等于 iOS 10 设备运行验证；本次也不承诺 Swift 6 严格并发模式。
 
-GitHub Actions 使用上述流程在可用模拟器上运行测试，覆盖构建、布局顺序、绑定持续更新与释放、重绑、线程交付、按钮状态和控件事件。
+GitHub Actions 同时检出两个仓库并使用 Xcode 26.5。通过仓库变量 `EGCHAINABLE_REF` 或手动工作流参数指定配套 EGChainable 版本；该版本必须已在 GitHub 上可用，CI 才能使用。本地改动不会自动运行远端 CI。测试覆盖构建、布局顺序、绑定持续更新与释放、重绑、线程交付、按钮状态和控件事件。
 
 ## 开源协议
 
