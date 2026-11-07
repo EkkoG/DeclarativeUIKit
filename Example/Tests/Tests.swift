@@ -372,6 +372,40 @@ final class BindingTests: XCTestCase {
         middle.onNext("stale")
         XCTAssertEqual(label.text, "newest")
     }
+
+    func testRxDisposedBindingDoesNotSendItsSynchronousInitialValue() {
+        let old = PublishSubject<String>()
+        let newest = BehaviorSubject(value: "newest")
+        let label = UILabel()
+        label.R.text(old.do(onDispose: { [weak label] in
+            label?.R.text(newest)
+        }))
+        label.R.text(.just("stale"))
+        XCTAssertEqual(label.text, "newest")
+        newest.onNext("next")
+        XCTAssertEqual(label.text, "next")
+    }
+
+    func testRxSynchronousSequenceStopsUpdatingAfterRebinding() {
+        let newest = PublishSubject<String>()
+        let label = TrackingLabel()
+        var received: [String] = []
+        label.didChangeText = { [weak label] value in
+            if let value = value { received.append(value) }
+            if value == "initial" {
+                label?.bind(newest.asObservable(), to: \.text)
+            }
+        }
+        let source = Observable<String>.create { observer in
+            observer.onNext("initial")
+            observer.onNext("stale")
+            return Disposables.create()
+        }
+        label.bind(source, to: \.text)
+        XCTAssertEqual(received, ["initial"])
+        newest.onNext("newest")
+        XCTAssertEqual(label.text, "newest")
+    }
 }
 
 final class EventTests: XCTestCase {

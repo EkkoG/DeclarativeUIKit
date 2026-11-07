@@ -25,10 +25,11 @@ func bindRx<Value, View: UIView>(_ observable: Observable<Value>, to view: View,
     let subscription = SerialDisposable()
     let previous = bindings.subscriptions.updateValue(subscription, forKey: key)
     previous?.dispose()
+    guard !subscription.isDisposed else { return }
     subscription.disposable = observable
         .observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak view] value in
-            guard let view = view else { return }
+        .subscribe(onNext: { [weak view, weak subscription] value in
+            guard let view = view, let subscription = subscription, !subscription.isDisposed else { return }
             setValue(view, value)
         }, onError: { _ in })
 }
