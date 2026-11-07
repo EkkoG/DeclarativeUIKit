@@ -59,6 +59,8 @@ let content = VStack(spacing: 12, alignment: .fill) {
 import EGChainable
 
 let label = UILabel("标题").backgroundColor(.white).textColor(.black)
+let email = UITextField().placeholder("邮箱").keyboardType(.emailAddress).accessibilityLabel("邮箱")
+let controller = UIViewController().title("账户").hidesBottomBarWhenPushed(true)
 ```
 
 自定义或嵌套属性可使用 Core 的类型安全入口：`label.set(\.layer.cornerRadius, to: 8)`，同样返回原对象。未安装 Chainable 时，可以使用 `set` 或原生 UIKit 赋值。
@@ -141,18 +143,22 @@ EGChainable 0.3 同步删除 `.chainable`、`.asBase()` 及所有包装对象。
 
 ## 维护生成代码
 
-两个仓库应放在同级目录。生成器和 SDK 选择规则由 EGChainable 维护，现有 Rx/Combine 简写与静态方法共用编译器提供的类型信息。生成文件随库提交，库的使用者无需运行生成器。
+两个仓库应放在同级目录。生成器和 SDK 选择规则由 EGChainable 维护。生成文件随库提交，库的使用者无需运行生成器。
+
+生成器自动发现 UIKit 中公开的 `UIView`、`UIViewController` 后代，补齐必要祖先，并保留其他显式选择的类。当前 SDK 产物包含 166 个类型、1,283 个静态属性方法；每个响应式模块覆盖 47 个视图类型的同一套可写属性，共 657 个属性方法，另有 5 个 UIButton 状态方法。可选属性同时接受可选和非可选数据源；继承方法只计一次，输入重载不重复计为属性。
+
+覆盖包括输入框、Cell、分页、Picker 和 accessibility 属性。UIKit 为 NSObject 添加的 category 属性在静态配置中通过 UIResponder 提供，响应式通过 UIView 提供。控制器仅提供静态配置；其他框架仍按显式类型选择，包括 WKWebView。只读、不可用、已移除的属性不生成，普通操作方法继续原生调用。
 
 ```sh
 python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD"
 python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
 ```
 
-生成器调用 Xcode 自带的 `swift-symbolgraph-extract`，所有静态产物编译通过后才替换旧文件。EGChainable 的 `manifest.json` 记录工具链、选择的类、生成属性和排除原因。修改响应式产物后，还需运行本项目的集成检查。
+生成器调用 Xcode 自带的 `swift-symbolgraph-extract`，所有静态产物编译通过后才替换旧文件。EGChainable 的 `manifest.json` 记录工具链、选择规则、静态与响应式属性和排除原因。Rx、Combine 共用该属性模型，不另设属性白名单。修改响应式产物后，还需运行本项目的集成检查。
 
 ## 示例与验证
 
-[示例控制器](Example/DeclarativeUIKit/ViewController.swift) 展示了带开关、保存按钮和文字绑定的 Rx 表单。
+[示例控制器](Example/DeclarativeUIKit/ViewController.swift) 展示了带邮箱输入框、开关、保存按钮和文字绑定的 Rx 表单。
 
 ```sh
 pod install --project-directory=Example --deployment

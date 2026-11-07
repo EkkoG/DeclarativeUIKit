@@ -3,75 +3,202 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
+@available(iOS, introduced: 13.0.0)
 extension ViewConfigurable where Self: UILabel {
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func text<P: Publisher>(_ source: P) -> Self
-        where P.Output == String, P.Failure == Never {
-        return bind(source, to: \.text)
+    public func `adjustsFontForContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.adjustsFontForContentSizeCategory)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func text<P: Publisher>(_ source: P) -> Self
-        where P.Output == String?, P.Failure == Never {
-        return bind(source, to: \.text)
+    public func `adjustsFontSizeToFitWidth`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.adjustsFontSizeToFitWidth)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func textColor<P: Publisher>(_ source: P) -> Self
-        where P.Output == UIColor, P.Failure == Never {
-        return bind(source, to: \.textColor)
+    public func `allowsDefaultTighteningForTruncation`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.allowsDefaultTighteningForTruncation)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func textColor<P: Publisher>(_ source: P) -> Self
-        where P.Output == UIColor?, P.Failure == Never {
-        return bind(source, to: \.textColor)
+    public func `attributedText`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString, P.Failure == Never {
+        return bind(source, to: \.attributedText)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func font<P: Publisher>(_ source: P) -> Self
+    public func `attributedText`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString?, P.Failure == Never {
+        return bind(source, to: \.attributedText)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `baselineAdjustment`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIBaselineAdjustment, P.Failure == Never {
+        return bind(source, to: \.baselineAdjustment)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `font`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIFont, P.Failure == Never {
         return bind(source, to: \.font)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func font<P: Publisher>(_ source: P) -> Self
+    public func `font`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIFont?, P.Failure == Never {
         return bind(source, to: \.font)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func textAlignment<P: Publisher>(_ source: P) -> Self
-        where P.Output == NSTextAlignment, P.Failure == Never {
-        return bind(source, to: \.textAlignment)
+    public func `highlightedTextColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor, P.Failure == Never {
+        return bind(source, to: \.highlightedTextColor)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func numberOfLines<P: Publisher>(_ source: P) -> Self
+    public func `highlightedTextColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor?, P.Failure == Never {
+        return bind(source, to: \.highlightedTextColor)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `isEnabled`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isEnabled)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `isHighlighted`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isHighlighted)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `lineBreakMode`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSLineBreakMode, P.Failure == Never {
+        return bind(source, to: \.lineBreakMode)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `lineBreakStrategy`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSParagraphStyle.LineBreakStrategy, P.Failure == Never {
+        return bind(source, to: \.lineBreakStrategy)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `minimumScaleFactor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGFloat, P.Failure == Never {
+        return bind(source, to: \.minimumScaleFactor)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `numberOfLines`<P: Publisher>(_ source: P) -> Self
         where P.Output == Int, P.Failure == Never {
         return bind(source, to: \.numberOfLines)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func lineBreakMode<P: Publisher>(_ source: P) -> Self
-        where P.Output == NSLineBreakMode, P.Failure == Never {
-        return bind(source, to: \.lineBreakMode)
+    public func `preferredMaxLayoutWidth`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGFloat, P.Failure == Never {
+        return bind(source, to: \.preferredMaxLayoutWidth)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `preferredVibrancy`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UILabelVibrancy, P.Failure == Never {
+        return bind(source, to: \.preferredVibrancy)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func adjustsFontSizeToFitWidth<P: Publisher>(_ source: P) -> Self
+    public func `shadowColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor, P.Failure == Never {
+        return bind(source, to: \.shadowColor)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `shadowColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor?, P.Failure == Never {
+        return bind(source, to: \.shadowColor)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `shadowOffset`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGSize, P.Failure == Never {
+        return bind(source, to: \.shadowOffset)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `showsExpansionTextWhenTruncated`<P: Publisher>(_ source: P) -> Self
         where P.Output == Bool, P.Failure == Never {
-        return bind(source, to: \.adjustsFontSizeToFitWidth)
+        return bind(source, to: \.showsExpansionTextWhenTruncated)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `sizingRule`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UILetterformAwareSizingRule, P.Failure == Never {
+        return bind(source, to: \.sizingRule)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `text`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.text)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `text`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.text)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `textAlignment`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSTextAlignment, P.Failure == Never {
+        return bind(source, to: \.textAlignment)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `textColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor, P.Failure == Never {
+        return bind(source, to: \.textColor)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `textColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor?, P.Failure == Never {
+        return bind(source, to: \.textColor)
     }
 
 }

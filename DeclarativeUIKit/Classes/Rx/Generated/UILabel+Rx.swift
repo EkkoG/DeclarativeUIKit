@@ -2,65 +2,174 @@
 import UIKit
 import RxSwift
 
+@available(iOS, introduced: 2.0)
 extension ViewConfigurable where Self: UILabel {
-    @available(iOS, introduced: 2.0)
+    @available(iOS, introduced: 10.0)
     @discardableResult
-    public func text(_ source: Observable<String>) -> Self {
-        return bind(source, to: \.text)
+    public func `adjustsFontForContentSizeCategory`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.adjustsFontForContentSizeCategory)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func text(_ source: Observable<String?>) -> Self {
-        return bind(source, to: \.text)
+    public func `adjustsFontSizeToFitWidth`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.adjustsFontSizeToFitWidth)
+    }
+
+    @available(iOS, introduced: 9.0)
+    @discardableResult
+    public func `allowsDefaultTighteningForTruncation`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.allowsDefaultTighteningForTruncation)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `attributedText`(_ source: Observable<NSAttributedString>) -> Self {
+        return bind(source, to: \.attributedText)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `attributedText`(_ source: Observable<NSAttributedString?>) -> Self {
+        return bind(source, to: \.attributedText)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func textColor(_ source: Observable<UIColor>) -> Self {
-        return bind(source, to: \.textColor)
+    public func `baselineAdjustment`(_ source: Observable<UIBaselineAdjustment>) -> Self {
+        return bind(source, to: \.baselineAdjustment)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func textColor(_ source: Observable<UIColor?>) -> Self {
-        return bind(source, to: \.textColor)
-    }
-
-    @available(iOS, introduced: 2.0)
-    @discardableResult
-    public func font(_ source: Observable<UIFont>) -> Self {
+    public func `font`(_ source: Observable<UIFont>) -> Self {
         return bind(source, to: \.font)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func font(_ source: Observable<UIFont?>) -> Self {
+    public func `font`(_ source: Observable<UIFont?>) -> Self {
         return bind(source, to: \.font)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func textAlignment(_ source: Observable<NSTextAlignment>) -> Self {
+    public func `highlightedTextColor`(_ source: Observable<UIColor>) -> Self {
+        return bind(source, to: \.highlightedTextColor)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `highlightedTextColor`(_ source: Observable<UIColor?>) -> Self {
+        return bind(source, to: \.highlightedTextColor)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `isEnabled`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isEnabled)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `isHighlighted`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isHighlighted)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `lineBreakMode`(_ source: Observable<NSLineBreakMode>) -> Self {
+        return bind(source, to: \.lineBreakMode)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `lineBreakStrategy`(_ source: Observable<NSParagraphStyle.LineBreakStrategy>) -> Self {
+        return bind(source, to: \.lineBreakStrategy)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `minimumScaleFactor`(_ source: Observable<CGFloat>) -> Self {
+        return bind(source, to: \.minimumScaleFactor)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `numberOfLines`(_ source: Observable<Int>) -> Self {
+        return bind(source, to: \.numberOfLines)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `preferredMaxLayoutWidth`(_ source: Observable<CGFloat>) -> Self {
+        return bind(source, to: \.preferredMaxLayoutWidth)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `preferredVibrancy`(_ source: Observable<UILabelVibrancy>) -> Self {
+        return bind(source, to: \.preferredVibrancy)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `shadowColor`(_ source: Observable<UIColor>) -> Self {
+        return bind(source, to: \.shadowColor)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `shadowColor`(_ source: Observable<UIColor?>) -> Self {
+        return bind(source, to: \.shadowColor)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `shadowOffset`(_ source: Observable<CGSize>) -> Self {
+        return bind(source, to: \.shadowOffset)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `showsExpansionTextWhenTruncated`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.showsExpansionTextWhenTruncated)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `sizingRule`(_ source: Observable<UILetterformAwareSizingRule>) -> Self {
+        return bind(source, to: \.sizingRule)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `text`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.text)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `text`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.text)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `textAlignment`(_ source: Observable<NSTextAlignment>) -> Self {
         return bind(source, to: \.textAlignment)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func numberOfLines(_ source: Observable<Int>) -> Self {
-        return bind(source, to: \.numberOfLines)
+    public func `textColor`(_ source: Observable<UIColor>) -> Self {
+        return bind(source, to: \.textColor)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func lineBreakMode(_ source: Observable<NSLineBreakMode>) -> Self {
-        return bind(source, to: \.lineBreakMode)
-    }
-
-    @available(iOS, introduced: 2.0)
-    @discardableResult
-    public func adjustsFontSizeToFitWidth(_ source: Observable<Bool>) -> Self {
-        return bind(source, to: \.adjustsFontSizeToFitWidth)
+    public func `textColor`(_ source: Observable<UIColor?>) -> Self {
+        return bind(source, to: \.textColor)
     }
 
 }

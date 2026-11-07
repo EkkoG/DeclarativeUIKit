@@ -2,17 +2,96 @@
 import UIKit
 import RxSwift
 
+@available(iOS, introduced: 2.0)
 extension ViewConfigurable where Self: UIImageView {
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `adjustsImageSizeForAccessibilityContentSizeCategory`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.adjustsImageSizeForAccessibilityContentSizeCategory)
+    }
+
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func image(_ source: Observable<UIImage>) -> Self {
+    public func `animationDuration`(_ source: Observable<TimeInterval>) -> Self {
+        return bind(source, to: \.animationDuration)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `animationImages`(_ source: Observable<[UIImage]>) -> Self {
+        return bind(source, to: \.animationImages)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `animationImages`(_ source: Observable<[UIImage]?>) -> Self {
+        return bind(source, to: \.animationImages)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `animationRepeatCount`(_ source: Observable<Int>) -> Self {
+        return bind(source, to: \.animationRepeatCount)
+    }
+
+    @available(iOS, introduced: 3.0)
+    @discardableResult
+    public func `highlightedAnimationImages`(_ source: Observable<[UIImage]>) -> Self {
+        return bind(source, to: \.highlightedAnimationImages)
+    }
+
+    @available(iOS, introduced: 3.0)
+    @discardableResult
+    public func `highlightedAnimationImages`(_ source: Observable<[UIImage]?>) -> Self {
+        return bind(source, to: \.highlightedAnimationImages)
+    }
+
+    @available(iOS, introduced: 3.0)
+    @discardableResult
+    public func `highlightedImage`(_ source: Observable<UIImage>) -> Self {
+        return bind(source, to: \.highlightedImage)
+    }
+
+    @available(iOS, introduced: 3.0)
+    @discardableResult
+    public func `highlightedImage`(_ source: Observable<UIImage?>) -> Self {
+        return bind(source, to: \.highlightedImage)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `image`(_ source: Observable<UIImage>) -> Self {
         return bind(source, to: \.image)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func image(_ source: Observable<UIImage?>) -> Self {
+    public func `image`(_ source: Observable<UIImage?>) -> Self {
         return bind(source, to: \.image)
+    }
+
+    @available(iOS, introduced: 3.0)
+    @discardableResult
+    public func `isHighlighted`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isHighlighted)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `preferredImageDynamicRange`(_ source: Observable<UIImage.DynamicRange>) -> Self {
+        return bind(source, to: \.preferredImageDynamicRange)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `preferredSymbolConfiguration`(_ source: Observable<UIImage.SymbolConfiguration>) -> Self {
+        return bind(source, to: \.preferredSymbolConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `preferredSymbolConfiguration`(_ source: Observable<UIImage.SymbolConfiguration?>) -> Self {
+        return bind(source, to: \.preferredSymbolConfiguration)
     }
 
 }

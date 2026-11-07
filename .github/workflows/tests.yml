@@ -37,6 +37,8 @@ jobs:
         run: pod install --project-directory=Example --deployment
       - name: Check Core and Ext without optional dependencies
         run: bash scripts/check-core.sh
+      - name: Check SDK selection and binding generation
+        run: python3 -B ../EGChainable/scripts/test_generate.py
       - name: Select an available iPhone simulator
         run: |
           SIMULATOR_ID=$(xcrun simctl list devices available -j | python3 -c 'import json, sys; devices = json.load(sys.stdin)["devices"]; print(next(d["udid"] for group in devices.values() for d in group if d["name"].startswith("iPhone")))')

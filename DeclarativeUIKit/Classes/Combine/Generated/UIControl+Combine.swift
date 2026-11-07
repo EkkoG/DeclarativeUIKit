@@ -3,26 +3,76 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
+@available(iOS, introduced: 13.0.0)
 extension ViewConfigurable where Self: UIControl {
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func isEnabled<P: Publisher>(_ source: P) -> Self
+    public func `contentHorizontalAlignment`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIControl.ContentHorizontalAlignment, P.Failure == Never {
+        return bind(source, to: \.contentHorizontalAlignment)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `contentVerticalAlignment`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIControl.ContentVerticalAlignment, P.Failure == Never {
+        return bind(source, to: \.contentVerticalAlignment)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `isContextMenuInteractionEnabled`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isContextMenuInteractionEnabled)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `isEnabled`<P: Publisher>(_ source: P) -> Self
         where P.Output == Bool, P.Failure == Never {
         return bind(source, to: \.isEnabled)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func isSelected<P: Publisher>(_ source: P) -> Self
+    public func `isHighlighted`<P: Publisher>(_ source: P) -> Self
         where P.Output == Bool, P.Failure == Never {
-        return bind(source, to: \.isSelected)
+        return bind(source, to: \.isHighlighted)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func isHighlighted<P: Publisher>(_ source: P) -> Self
+    public func `isSelected`<P: Publisher>(_ source: P) -> Self
         where P.Output == Bool, P.Failure == Never {
-        return bind(source, to: \.isHighlighted)
+        return bind(source, to: \.isSelected)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `isSymbolAnimationEnabled`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isSymbolAnimationEnabled)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `showsMenuAsPrimaryAction`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.showsMenuAsPrimaryAction)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `toolTip`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.toolTip)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `toolTip`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.toolTip)
     }
 
 }

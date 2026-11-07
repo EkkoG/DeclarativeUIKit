@@ -3,36 +3,1329 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
+@available(iOS, introduced: 13.0.0)
 extension ViewConfigurable where Self: UIView {
+    @available(iOS, introduced: 17.0)
     @discardableResult
-    public func backgroundColor<P: Publisher>(_ source: P) -> Self
+    public func `accessibilityActivateBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityActivateBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityActivateBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityActivateBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityActivationPoint`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGPoint, P.Failure == Never {
+        return bind(source, to: \.accessibilityActivationPoint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityActivationPointBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXPointReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityActivationPointBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityActivationPointBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXPointReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityActivationPointBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityAttributedHint`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedHint)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityAttributedHint`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedHint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedHintBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedHintBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedHintBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedHintBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityAttributedLabel`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedLabel)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityAttributedLabel`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedLabel)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedLabelBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedLabelBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedLabelBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedLabelBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabels`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [NSAttributedString], P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedUserInputLabels)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabels`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [NSAttributedString]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedUserInputLabels)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabelsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringArrayReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedUserInputLabelsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabelsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringArrayReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedUserInputLabelsBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityAttributedValue`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedValue)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityAttributedValue`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSAttributedString?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedValue)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedValueBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedValueBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedValueBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXAttributedStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityAttributedValueBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityContainerType`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibilityContainerType, P.Failure == Never {
+        return bind(source, to: \.accessibilityContainerType)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityContainerTypeBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXContainerTypeReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityContainerTypeBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityContainerTypeBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXContainerTypeReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityContainerTypeBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityCustomActions`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityCustomAction], P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomActions)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityCustomActions`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityCustomAction]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomActions)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomActionsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXCustomActionsReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomActionsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomActionsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXCustomActionsReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomActionsBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityCustomRotors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityCustomRotor], P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomRotors)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityCustomRotors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityCustomRotor]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomRotors)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomRotorsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXCustomRotorsReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomRotorsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomRotorsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXCustomRotorsReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityCustomRotorsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityDecrementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXVoidReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityDecrementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityDecrementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXVoidReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityDecrementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityDirectTouchOptions`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibility.DirectTouchOptions, P.Failure == Never {
+        return bind(source, to: \.accessibilityDirectTouchOptions)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityDragSourceDescriptors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityLocationDescriptor], P.Failure == Never {
+        return bind(source, to: \.accessibilityDragSourceDescriptors)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityDragSourceDescriptors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityLocationDescriptor]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityDragSourceDescriptors)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityDropPointDescriptors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityLocationDescriptor], P.Failure == Never {
+        return bind(source, to: \.accessibilityDropPointDescriptors)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityDropPointDescriptors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIAccessibilityLocationDescriptor]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityDropPointDescriptors)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityElements`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [Any], P.Failure == Never {
+        return bind(source, to: \.accessibilityElements)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityElements`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [Any]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityElements)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXArrayReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityElementsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXArrayReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityElementsBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityElementsHidden`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.accessibilityElementsHidden)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsHiddenBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityElementsHiddenBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsHiddenBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityElementsHiddenBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityExpandedStatus`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibility.ExpandedStatus, P.Failure == Never {
+        return bind(source, to: \.accessibilityExpandedStatus)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityExpandedStatusBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == (@MainActor @Sendable () -> UIAccessibility.ExpandedStatus), P.Failure == Never {
+        bindCombine(source, to: self, key: \Self.accessibilityExpandedStatusBlock) { view, value in
+            view.accessibilityExpandedStatusBlock = value
+        }
+        return self
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityExpandedStatusBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == (@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)?, P.Failure == Never {
+        bindCombine(source, to: self, key: \Self.accessibilityExpandedStatusBlock) { view, value in
+            view.accessibilityExpandedStatusBlock = value
+        }
+        return self
+    }
+
+    @discardableResult
+    public func `accessibilityFrame`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGRect, P.Failure == Never {
+        return bind(source, to: \.accessibilityFrame)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityFrameBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXRectReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityFrameBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityFrameBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXRectReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityFrameBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHeaderElementsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXArrayReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityHeaderElementsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHeaderElementsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXArrayReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityHeaderElementsBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityHint`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.accessibilityHint)
+    }
+
+    @discardableResult
+    public func `accessibilityHint`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.accessibilityHint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHintBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityHintBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHintBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityHintBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityIdentifier`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.accessibilityIdentifier)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityIdentifier`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.accessibilityIdentifier)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIdentifierBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityIdentifierBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIdentifierBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityIdentifierBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityIgnoresInvertColors`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.accessibilityIgnoresInvertColors)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIncrementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXVoidReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityIncrementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIncrementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXVoidReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityIncrementBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityLabel`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.accessibilityLabel)
+    }
+
+    @discardableResult
+    public func `accessibilityLabel`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.accessibilityLabel)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLabelBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityLabelBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLabelBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityLabelBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityLanguage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.accessibilityLanguage)
+    }
+
+    @discardableResult
+    public func `accessibilityLanguage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.accessibilityLanguage)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLanguageBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityLanguageBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLanguageBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityLanguageBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityMagicTapBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityMagicTapBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityMagicTapBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityMagicTapBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityNavigationStyle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibilityNavigationStyle, P.Failure == Never {
+        return bind(source, to: \.accessibilityNavigationStyle)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityNavigationStyleBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXNavigationStyleReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityNavigationStyleBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityNavigationStyleBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXNavigationStyleReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityNavigationStyleBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElement`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Any, P.Failure == Never {
+        return bind(source, to: \.accessibilityNextTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElement`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Any?, P.Failure == Never {
+        return bind(source, to: \.accessibilityNextTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXObjectReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityNextTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXObjectReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityNextTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityPath`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIBezierPath, P.Failure == Never {
+        return bind(source, to: \.accessibilityPath)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityPath`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIBezierPath?, P.Failure == Never {
+        return bind(source, to: \.accessibilityPath)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPathBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXPathReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityPathBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPathBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXPathReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityPathBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPerformEscapeBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityPerformEscapeBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPerformEscapeBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityPerformEscapeBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElement`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Any, P.Failure == Never {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElement`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Any?, P.Failure == Never {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXObjectReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXObjectReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityRespondsToUserInteraction`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.accessibilityRespondsToUserInteraction)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityRespondsToUserInteractionBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityRespondsToUserInteractionBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityRespondsToUserInteractionBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityRespondsToUserInteractionBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityShouldGroupAccessibilityChildrenBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityShouldGroupAccessibilityChildrenBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityShouldGroupAccessibilityChildrenBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityShouldGroupAccessibilityChildrenBlock)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponder`<P: Publisher>(_ source: P) -> Self
+        where P.Output == (any UITextInput), P.Failure == Never {
+        return bind(source, to: \.accessibilityTextInputResponder)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponder`<P: Publisher>(_ source: P) -> Self
+        where P.Output == (any UITextInput)?, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextInputResponder)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponderBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXUITextInputReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextInputResponderBlock)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponderBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXUITextInputReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextInputResponderBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityTextualContext`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibilityTextualContext, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextualContext)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityTextualContext`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibilityTextualContext?, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextualContext)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTextualContextBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXTextualContextReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextualContextBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTextualContextBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXTextualContextReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityTextualContextBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityTraits`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIAccessibilityTraits, P.Failure == Never {
+        return bind(source, to: \.accessibilityTraits)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTraitsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXTraitsReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityTraitsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTraitsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXTraitsReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityTraitsBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityUserInputLabels`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [String], P.Failure == Never {
+        return bind(source, to: \.accessibilityUserInputLabels)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityUserInputLabels`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [String]?, P.Failure == Never {
+        return bind(source, to: \.accessibilityUserInputLabels)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityUserInputLabelsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringArrayReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityUserInputLabelsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityUserInputLabelsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringArrayReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityUserInputLabelsBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityValue`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.accessibilityValue)
+    }
+
+    @discardableResult
+    public func `accessibilityValue`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.accessibilityValue)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityValueBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityValueBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityValueBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXStringReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityValueBlock)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `accessibilityViewIsModal`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.accessibilityViewIsModal)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityViewIsModalBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.accessibilityViewIsModalBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityViewIsModalBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.accessibilityViewIsModalBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `activityItemsConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == (any UIActivityItemsConfigurationReading), P.Failure == Never {
+        return bind(source, to: \.activityItemsConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `activityItemsConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == (any UIActivityItemsConfigurationReading)?, P.Failure == Never {
+        return bind(source, to: \.activityItemsConfiguration)
+    }
+
+    @discardableResult
+    public func `alpha`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGFloat, P.Failure == Never {
+        return bind(source, to: \.alpha)
+    }
+
+    @available(iOS, introduced: 16.0)
+    @discardableResult
+    public func `anchorPoint`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGPoint, P.Failure == Never {
+        return bind(source, to: \.anchorPoint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElements`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [Any], P.Failure == Never {
+        return bind(source, to: \.automationElements)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElements`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [Any]?, P.Failure == Never {
+        return bind(source, to: \.automationElements)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElementsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXArrayReturnBlock, P.Failure == Never {
+        return bind(source, to: \.automationElementsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElementsBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXArrayReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.automationElementsBlock)
+    }
+
+    @discardableResult
+    public func `autoresizesSubviews`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.autoresizesSubviews)
+    }
+
+    @discardableResult
+    public func `autoresizingMask`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIView.AutoresizingMask, P.Failure == Never {
+        return bind(source, to: \.autoresizingMask)
+    }
+
+    @discardableResult
+    public func `backgroundColor`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIColor, P.Failure == Never {
         return bind(source, to: \.backgroundColor)
     }
 
     @discardableResult
-    public func backgroundColor<P: Publisher>(_ source: P) -> Self
+    public func `backgroundColor`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIColor?, P.Failure == Never {
         return bind(source, to: \.backgroundColor)
     }
 
     @discardableResult
-    public func alpha<P: Publisher>(_ source: P) -> Self
-        where P.Output == CGFloat, P.Failure == Never {
-        return bind(source, to: \.alpha)
+    public func `bounds`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGRect, P.Failure == Never {
+        return bind(source, to: \.bounds)
     }
 
     @discardableResult
-    public func isHidden<P: Publisher>(_ source: P) -> Self
+    public func `center`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGPoint, P.Failure == Never {
+        return bind(source, to: \.center)
+    }
+
+    @discardableResult
+    public func `clearsContextBeforeDrawing`<P: Publisher>(_ source: P) -> Self
         where P.Output == Bool, P.Failure == Never {
-        return bind(source, to: \.isHidden)
+        return bind(source, to: \.clearsContextBeforeDrawing)
+    }
+
+    @discardableResult
+    public func `clipsToBounds`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.clipsToBounds)
+    }
+
+    @discardableResult
+    public func `contentMode`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIView.ContentMode, P.Failure == Never {
+        return bind(source, to: \.contentMode)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func isUserInteractionEnabled<P: Publisher>(_ source: P) -> Self
+    public func `contentScaleFactor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGFloat, P.Failure == Never {
+        return bind(source, to: \.contentScaleFactor)
+    }
+
+    @available(iOS, introduced: 26.0)
+    @discardableResult
+    public func `cornerConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UICornerConfiguration, P.Failure == Never {
+        return bind(source, to: \.cornerConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `directionalLayoutMargins`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSDirectionalEdgeInsets, P.Failure == Never {
+        return bind(source, to: \.directionalLayoutMargins)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `focusEffect`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIFocusEffect, P.Failure == Never {
+        return bind(source, to: \.focusEffect)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `focusEffect`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIFocusEffect?, P.Failure == Never {
+        return bind(source, to: \.focusEffect)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `focusGroupIdentifier`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.focusGroupIdentifier)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `focusGroupIdentifier`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.focusGroupIdentifier)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `focusGroupPriority`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIFocusGroupPriority, P.Failure == Never {
+        return bind(source, to: \.focusGroupPriority)
+    }
+
+    @discardableResult
+    public func `frame`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGRect, P.Failure == Never {
+        return bind(source, to: \.frame)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `gestureRecognizers`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIGestureRecognizer], P.Failure == Never {
+        return bind(source, to: \.gestureRecognizers)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `gestureRecognizers`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIGestureRecognizer]?, P.Failure == Never {
+        return bind(source, to: \.gestureRecognizers)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `hoverStyle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIHoverStyle, P.Failure == Never {
+        return bind(source, to: \.hoverStyle)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `hoverStyle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIHoverStyle?, P.Failure == Never {
+        return bind(source, to: \.hoverStyle)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `insetsLayoutMarginsFromSafeArea`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.insetsLayoutMarginsFromSafeArea)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `interactions`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [any UIInteraction], P.Failure == Never {
+        return bind(source, to: \.interactions)
+    }
+
+    @discardableResult
+    public func `isAccessibilityElement`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isAccessibilityElement)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `isAccessibilityElementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock, P.Failure == Never {
+        return bind(source, to: \.isAccessibilityElementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `isAccessibilityElementBlock`<P: Publisher>(_ source: P) -> Self
+        where P.Output == AXBoolReturnBlock?, P.Failure == Never {
+        return bind(source, to: \.isAccessibilityElementBlock)
+    }
+
+    @discardableResult
+    public func `isExclusiveTouch`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isExclusiveTouch)
+    }
+
+    @discardableResult
+    public func `isHidden`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isHidden)
+    }
+
+    @discardableResult
+    public func `isMultipleTouchEnabled`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isMultipleTouchEnabled)
+    }
+
+    @discardableResult
+    public func `isOpaque`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isOpaque)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `isUserInteractionEnabled`<P: Publisher>(_ source: P) -> Self
         where P.Output == Bool, P.Failure == Never {
         return bind(source, to: \.isUserInteractionEnabled)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentImage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage, P.Failure == Never {
+        return bind(source, to: \.largeContentImage)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentImage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage?, P.Failure == Never {
+        return bind(source, to: \.largeContentImage)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentImageInsets`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIEdgeInsets, P.Failure == Never {
+        return bind(source, to: \.largeContentImageInsets)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentTitle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.largeContentTitle)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentTitle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.largeContentTitle)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `layoutMargins`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIEdgeInsets, P.Failure == Never {
+        return bind(source, to: \.layoutMargins)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `mask`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIView, P.Failure == Never {
+        return bind(source, to: \.mask)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `mask`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIView?, P.Failure == Never {
+        return bind(source, to: \.mask)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `maximumContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIContentSizeCategory, P.Failure == Never {
+        return bind(source, to: \.maximumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `maximumContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIContentSizeCategory?, P.Failure == Never {
+        return bind(source, to: \.maximumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `minimumContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIContentSizeCategory, P.Failure == Never {
+        return bind(source, to: \.minimumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `minimumContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIContentSizeCategory?, P.Failure == Never {
+        return bind(source, to: \.minimumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `motionEffects`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIMotionEffect], P.Failure == Never {
+        return bind(source, to: \.motionEffects)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `overrideUserInterfaceStyle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIUserInterfaceStyle, P.Failure == Never {
+        return bind(source, to: \.overrideUserInterfaceStyle)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `pasteConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIPasteConfiguration, P.Failure == Never {
+        return bind(source, to: \.pasteConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `pasteConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIPasteConfiguration?, P.Failure == Never {
+        return bind(source, to: \.pasteConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `preservesSuperviewLayoutMargins`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.preservesSuperviewLayoutMargins)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `restorationIdentifier`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String, P.Failure == Never {
+        return bind(source, to: \.restorationIdentifier)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `restorationIdentifier`<P: Publisher>(_ source: P) -> Self
+        where P.Output == String?, P.Failure == Never {
+        return bind(source, to: \.restorationIdentifier)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `scalesLargeContentImage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.scalesLargeContentImage)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `semanticContentAttribute`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UISemanticContentAttribute, P.Failure == Never {
+        return bind(source, to: \.semanticContentAttribute)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `shouldGroupAccessibilityChildren`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.shouldGroupAccessibilityChildren)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `showsLargeContentViewer`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.showsLargeContentViewer)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `tag`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Int, P.Failure == Never {
+        return bind(source, to: \.tag)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `tintAdjustmentMode`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIView.TintAdjustmentMode, P.Failure == Never {
+        return bind(source, to: \.tintAdjustmentMode)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `tintColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor, P.Failure == Never {
+        return bind(source, to: \.tintColor)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `tintColor`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIColor?, P.Failure == Never {
+        return bind(source, to: \.tintColor)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `traitOverrides`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UITraitOverrides, P.Failure == Never {
+        return bind(source, to: \.traitOverrides)
+    }
+
+    @discardableResult
+    public func `transform`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CGAffineTransform, P.Failure == Never {
+        return bind(source, to: \.transform)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `transform3D`<P: Publisher>(_ source: P) -> Self
+        where P.Output == CATransform3D, P.Failure == Never {
+        return bind(source, to: \.transform3D)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `translatesAutoresizingMaskIntoConstraints`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.translatesAutoresizingMaskIntoConstraints)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `userActivity`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSUserActivity, P.Failure == Never {
+        return bind(source, to: \.userActivity)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `userActivity`<P: Publisher>(_ source: P) -> Self
+        where P.Output == NSUserActivity?, P.Failure == Never {
+        return bind(source, to: \.userActivity)
     }
 
 }

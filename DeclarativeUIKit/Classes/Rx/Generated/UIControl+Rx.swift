@@ -2,23 +2,66 @@
 import UIKit
 import RxSwift
 
+@available(iOS, introduced: 2.0)
 extension ViewConfigurable where Self: UIControl {
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func isEnabled(_ source: Observable<Bool>) -> Self {
+    public func `contentHorizontalAlignment`(_ source: Observable<UIControl.ContentHorizontalAlignment>) -> Self {
+        return bind(source, to: \.contentHorizontalAlignment)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `contentVerticalAlignment`(_ source: Observable<UIControl.ContentVerticalAlignment>) -> Self {
+        return bind(source, to: \.contentVerticalAlignment)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `isContextMenuInteractionEnabled`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isContextMenuInteractionEnabled)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `isEnabled`(_ source: Observable<Bool>) -> Self {
         return bind(source, to: \.isEnabled)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func isSelected(_ source: Observable<Bool>) -> Self {
-        return bind(source, to: \.isSelected)
+    public func `isHighlighted`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isHighlighted)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func isHighlighted(_ source: Observable<Bool>) -> Self {
-        return bind(source, to: \.isHighlighted)
+    public func `isSelected`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isSelected)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `isSymbolAnimationEnabled`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isSymbolAnimationEnabled)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `showsMenuAsPrimaryAction`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.showsMenuAsPrimaryAction)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `toolTip`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.toolTip)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `toolTip`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.toolTip)
     }
 
 }

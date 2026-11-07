@@ -6,6 +6,26 @@ import EGChainable
 @testable import EGDeclarativeUIKit
 
 final class BuilderTests: XCTestCase {
+    func testNewUIKitFamiliesAndAccessibilityKeepConcreteTypes() {
+        let field = UITextField()
+        let configured: UITextField = field.text("Email").keyboardType(.emailAddress)
+            .accessibilityLabel("Email address").isAccessibilityElement(true)
+        XCTAssertTrue(configured === field)
+        XCTAssertEqual(field.text, "Email")
+        XCTAssertEqual(field.keyboardType, .emailAddress)
+        XCTAssertEqual(field.accessibilityLabel, "Email address")
+
+        let controller: UIViewController = UIViewController().title("Profile").hidesBottomBarWhenPushed(true)
+        XCTAssertEqual(controller.title, "Profile")
+        XCTAssertTrue(controller.hidesBottomBarWhenPushed)
+        let cell: UITableViewCell = UITableViewCell().selectionStyle(.none).accessibilityIdentifier("row")
+        XCTAssertEqual(cell.selectionStyle, .none)
+        XCTAssertEqual(cell.accessibilityIdentifier, "row")
+        let pages: UIPageControl = UIPageControl().numberOfPages(3).currentPage(1)
+        XCTAssertEqual(pages.numberOfPages, 3)
+        XCTAssertEqual(pages.currentPage, 1)
+    }
+
     func testGeneratedInputTraitsAndWritableProtocolProperty() {
         let search = UISearchBar().keyboardType(.emailAddress).autocapitalizationType(.none)
         XCTAssertEqual(search.keyboardType, .emailAddress)
@@ -177,6 +197,87 @@ final class BuilderTests: XCTestCase {
 }
 
 final class BindingTests: XCTestCase {
+    func testRxNewPropertiesShareInheritedBindingIdentity() {
+        let old = PublishSubject<String>()
+        let current = PublishSubject<String?>()
+        let field = UITextField().text(Observable.just("Email"))
+            .keyboardType(Observable.just(UIKeyboardType.emailAddress))
+            .accessibilityLabel(old)
+        XCTAssertTrue(old.hasObservers)
+        XCTAssertTrue(field.bind(current.asObservable(), to: \.accessibilityLabel) === field)
+        XCTAssertFalse(old.hasObservers)
+        current.onNext("Address")
+        XCTAssertEqual(field.accessibilityLabel, "Address")
+        current.onNext(nil)
+        XCTAssertNil(field.accessibilityLabel)
+        XCTAssertEqual(field.text, "Email")
+        XCTAssertEqual(field.keyboardType, .emailAddress)
+        let pages = UIPageControl().numberOfPages(Observable.just(3)).currentPage(Observable.just(2))
+        XCTAssertEqual(pages.currentPage, 2)
+    }
+
+    func testCombineNewPropertiesShareInheritedBindingIdentity() {
+        let old = PassthroughSubject<String, Never>()
+        let current = PassthroughSubject<String?, Never>()
+        var cancelled = false
+        let field = UITextField().text(Just("Email")).keyboardType(Just(UIKeyboardType.emailAddress))
+            .accessibilityLabel(old.handleEvents(receiveCancel: { cancelled = true }))
+        field.bind(current, to: \.accessibilityLabel)
+        XCTAssertTrue(cancelled)
+        current.send("Address")
+        let cell = UITableViewCell().selectionStyle(Just(UITableViewCell.SelectionStyle.none))
+        let pages = UIPageControl().numberOfPages(Just(3)).currentPage(Just(2))
+        let done = expectation(description: "New properties receive values")
+        DispatchQueue.main.async {
+            XCTAssertEqual(field.text, "Email")
+            XCTAssertEqual(field.keyboardType, .emailAddress)
+            XCTAssertEqual(field.accessibilityLabel, "Address")
+            XCTAssertEqual(cell.selectionStyle, .none)
+            XCTAssertEqual(pages.currentPage, 2)
+            current.send(nil)
+            DispatchQueue.main.async {
+                XCTAssertNil(field.accessibilityLabel)
+                done.fulfill()
+            }
+        }
+        wait(for: [done], timeout: 2)
+    }
+
+    @MainActor
+    func testGeneratedClosureBindingsUseTheSameKeyPathForReplacement() {
+        if #available(iOS 18.0, *) {
+            let expanded: @MainActor @Sendable () -> UIAccessibility.ExpandedStatus = { .expanded }
+            let keyPath: ReferenceWritableKeyPath<UIView, (@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)?> = \.accessibilityExpandedStatusBlock
+            let rx = PublishSubject<(@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)>()
+            let replacement = PublishSubject<(@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)?>()
+            let rxView = UIView().accessibilityExpandedStatusBlock(rx)
+            rx.onNext(expanded)
+            XCTAssertEqual(rxView.accessibilityExpandedStatusBlock?(), .expanded)
+            rxView.bind(replacement.asObservable(), to: keyPath)
+            XCTAssertFalse(rx.hasObservers)
+            replacement.onNext(nil)
+            XCTAssertNil(rxView.accessibilityExpandedStatusBlock)
+
+            let source = PassthroughSubject<(@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)?, Never>()
+            let current = PassthroughSubject<(@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)?, Never>()
+            var cancelled = false
+            let combineView = UIView().accessibilityExpandedStatusBlock(source.handleEvents(receiveCancel: { cancelled = true }))
+            source.send(expanded)
+            let done = expectation(description: "Closure property binding")
+            DispatchQueue.main.async {
+                XCTAssertEqual(combineView.accessibilityExpandedStatusBlock?(), .expanded)
+                combineView.bind(current, to: keyPath)
+                XCTAssertTrue(cancelled)
+                current.send(nil)
+                DispatchQueue.main.async {
+                    XCTAssertNil(combineView.accessibilityExpandedStatusBlock)
+                    done.fulfill()
+                }
+            }
+            wait(for: [done], timeout: 2)
+        }
+    }
+
     func testDirectRxAndStaticModifiersShareTheOriginalView() {
         let source = PublishSubject<String?>()
         let label = UILabel()

@@ -31,13 +31,37 @@ def main():
         run(compiler + ["-emit-module", "-parse-as-library", "-module-name", "EGChainable",
                         "-emit-module-path", str(static)] + [str(p) for p in sorted(generated.glob("*.swift"))])
         cases = {
-            "chainable": ([], [], 'let _: UILabel = UILabel("Title").backgroundColor(.red).text(nil)'),
-            "rx": (["Rx"], ["RxSwift", "RxCocoa", "RxRelay"], 'let _: UILabel = UILabel().text(Observable.just("Rx"))'),
-            "combine": (["Combine"], [], 'let _: UILabel = UILabel().text(Just<String?>(nil))'),
+            "chainable": ([], [], '''
+                let _: UITextField = UITextField().text("Email").keyboardType(.emailAddress).accessibilityLabel(nil)
+                let _: UIViewController = UIViewController().title("Profile")
+                let _: UITableViewCell = UITableViewCell().selectionStyle(.none)
+            '''),
+            "rx": (["Rx"], ["RxSwift", "RxCocoa", "RxRelay"], '''
+                let _: UITextField = UITextField().text(Observable.just("Rx")).keyboardType(.just(.emailAddress))
+                    .accessibilityLabel(Observable<String?>.just(nil))
+                let _: UIPageControl = UIPageControl().numberOfPages(.just(3))
+                let _: WKWebView = WKWebView().customUserAgent(Observable.just("Example"))
+                if #available(iOS 17.4, *) { _ = UIStandardTextCursorView().isBlinking(.just(true)) }
+            '''),
+            "combine": (["Combine"], [], '''
+                let _: UITextField = UITextField().text(Just<String?>(nil)).keyboardType(Just(UIKeyboardType.emailAddress))
+                    .accessibilityLabel(Just("Email"))
+                let _: UIPageControl = UIPageControl().numberOfPages(Just(3))
+                let _: WKWebView = WKWebView().customUserAgent(Just("Example"))
+                if #available(iOS 17.4, *) { _ = UIStandardTextCursorView().isBlinking(Just(true)) }
+            '''),
             "snapkit": (["SnapKit"], ["SnapKit"], 'let _ = UIView { UILabel("Title").layout { $0.height.equalTo(44) } }'),
             "ext-with-external-snapkit": ([], ["SnapKit"], 'let _ = UIListView(with: .vertical) { UILabel("Title") }'),
             "all": (["Rx", "Combine", "SnapKit"], ["RxSwift", "RxCocoa", "RxRelay", "SnapKit"],
-                    'let _: UILabel = UILabel().text("Static").text(Observable.just("Rx")).text(Just<String?>(nil)).numberOfLines(0)'),
+                    '''
+                        let _: UITextField = UITextField().text("Static").text(Observable.just("Rx"))
+                            .text(Just<String?>(nil)).accessibilityLabel("Email").keyboardType(.emailAddress)
+                        if #available(iOS 18.0, *) {
+                            let value: @MainActor @Sendable () -> UIAccessibility.ExpandedStatus = { .expanded }
+                            let _ = UIView().accessibilityExpandedStatusBlock(Observable.just(value))
+                                .accessibilityExpandedStatusBlock(Just(Optional(value)))
+                        }
+                    '''),
         }
         for name, (folders, frameworks, expression) in cases.items():
             directory = work / name
@@ -47,7 +71,7 @@ def main():
             run(compiler + flags + ["-emit-module", "-parse-as-library", "-module-name", "EGDeclarativeUIKit",
                                     "-import-objc-header", str(header), "-emit-module-path",
                                     str(directory / "EGDeclarativeUIKit.swiftmodule")] + [str(p) for p in files])
-            imports = ["UIKit", "EGDeclarativeUIKit"]
+            imports = ["UIKit", "WebKit", "EGDeclarativeUIKit"]
             if name in ("chainable", "all"):
                 imports.append("EGChainable")
             imports += ["Combine"] if "Combine" in folders else []
@@ -58,7 +82,9 @@ def main():
             run(compiler + flags + ["-typecheck", "-I", str(directory), "-I", str(work), str(client)])
             if name == "all":
                 for old in ("UIView().R", "UIView().C", "UIView().S", "UILabel().chainable", "UILabel().asBase()",
-                            "UIView().safeAreaLayoutGuide(UILayoutGuide())"):
+                            "UIView().safeAreaLayoutGuide(UILayoutGuide())",
+                            "UIViewController().bind(Just<String?>(nil), to: \\.title)",
+                            "NSObject().bind(Just<String?>(nil), to: \\.accessibilityLabel)"):
                     client.write_text(prefix + "\nfunc removed() { _ = " + old + " }\n")
                     failed = subprocess.run(compiler + flags + ["-typecheck", "-I", str(directory), "-I", str(work), str(client)],
                                             capture_output=True, text=True)

@@ -61,6 +61,8 @@ The Chainable subspec adds methods that return the original object. Parent metho
 import EGChainable
 
 let label = UILabel("Title").backgroundColor(.white).textColor(.black)
+let email = UITextField().placeholder("Email").keyboardType(.emailAddress).accessibilityLabel("Email")
+let controller = UIViewController().title("Profile").hidesBottomBarWhenPushed(true)
 ```
 
 For a custom or nested property, Core provides a typed key-path setter: `label.set(\.layer.cornerRadius, to: 8)`. This returns the same object. Without Chainable, use `set` or normal UIKit assignment.
@@ -143,18 +145,22 @@ EGChainable 0.3 removes `.chainable`, `.asBase()`, and all wrappers. It generate
 
 ## Maintain generated APIs
 
-Keep the two repositories in sibling directories. EGChainable owns the generator and SDK selection. The selected Rx and Combine shortcuts use the same compiler types as static modifiers. Generated files are committed; library users do not run the generator.
+Keep the two repositories in sibling directories. EGChainable owns the generator and SDK selection. Generated files are committed; library users do not run the generator.
+
+The generator discovers public UIKit subclasses of `UIView` and `UIViewController`, adds their required parents, and keeps the other explicit classes. The current SDK output has 166 classes and 1,283 static property methods. Each reactive module covers the same writable property set for 47 view classes: 657 property methods plus five UIButton state methods. Optional properties accept both optional and nonoptional sources. Inherited methods are counted once; input overloads are not extra properties.
+
+This includes text fields, cells, page controls, pickers, and accessibility properties. UIKit's NSObject category properties are exposed through UIResponder for static calls and UIView for bindings. Controllers have static configuration only. Other frameworks keep their explicit selection, including WKWebView. Read-only, unavailable, and obsoleted properties are excluded. General operation methods keep their native calls.
 
 ```sh
 python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD"
 python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
 ```
 
-The generator uses Xcode's `swift-symbolgraph-extract`, then compiles all static output before replacement. `manifest.json` in EGChainable records the toolchain, selected classes, generated properties, and exclusions. Run this project's integration checks after changing reactive output.
+The generator uses Xcode's `swift-symbolgraph-extract`, then compiles all static output before replacement. `manifest.json` in EGChainable records the toolchain, selection rules, static and reactive properties, and exclusions. Rx and Combine use this shared property model; they do not have separate property lists. Run this project's integration checks after changing reactive output.
 
 ## Example and checks
 
-See [the example controller](Example/DeclarativeUIKit/ViewController.swift) for a working Rx form with a switch, a save button, and text bindings.
+See [the example controller](Example/DeclarativeUIKit/ViewController.swift) for a working Rx form with an email field, a switch, a save button, and text bindings.
 
 ```sh
 pod install --project-directory=Example --deployment

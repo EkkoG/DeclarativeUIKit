@@ -2,31 +2,1137 @@
 import UIKit
 import RxSwift
 
+@available(iOS, introduced: 2.0)
 extension ViewConfigurable where Self: UIView {
+    @available(iOS, introduced: 17.0)
     @discardableResult
-    public func backgroundColor(_ source: Observable<UIColor>) -> Self {
-        return bind(source, to: \.backgroundColor)
+    public func `accessibilityActivateBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityActivateBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityActivateBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityActivateBlock)
+    }
+
+    @available(iOS, introduced: 5.0)
+    @discardableResult
+    public func `accessibilityActivationPoint`(_ source: Observable<CGPoint>) -> Self {
+        return bind(source, to: \.accessibilityActivationPoint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityActivationPointBlock`(_ source: Observable<AXPointReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityActivationPointBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityActivationPointBlock`(_ source: Observable<AXPointReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityActivationPointBlock)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityAttributedHint`(_ source: Observable<NSAttributedString>) -> Self {
+        return bind(source, to: \.accessibilityAttributedHint)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityAttributedHint`(_ source: Observable<NSAttributedString?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedHint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedHintBlock`(_ source: Observable<AXAttributedStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityAttributedHintBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedHintBlock`(_ source: Observable<AXAttributedStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedHintBlock)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityAttributedLabel`(_ source: Observable<NSAttributedString>) -> Self {
+        return bind(source, to: \.accessibilityAttributedLabel)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityAttributedLabel`(_ source: Observable<NSAttributedString?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedLabel)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedLabelBlock`(_ source: Observable<AXAttributedStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityAttributedLabelBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedLabelBlock`(_ source: Observable<AXAttributedStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedLabelBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabels`(_ source: Observable<[NSAttributedString]>) -> Self {
+        return bind(source, to: \.accessibilityAttributedUserInputLabels)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabels`(_ source: Observable<[NSAttributedString]?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedUserInputLabels)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabelsBlock`(_ source: Observable<AXAttributedStringArrayReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityAttributedUserInputLabelsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedUserInputLabelsBlock`(_ source: Observable<AXAttributedStringArrayReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedUserInputLabelsBlock)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityAttributedValue`(_ source: Observable<NSAttributedString>) -> Self {
+        return bind(source, to: \.accessibilityAttributedValue)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityAttributedValue`(_ source: Observable<NSAttributedString?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedValue)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedValueBlock`(_ source: Observable<AXAttributedStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityAttributedValueBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityAttributedValueBlock`(_ source: Observable<AXAttributedStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityAttributedValueBlock)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityContainerType`(_ source: Observable<UIAccessibilityContainerType>) -> Self {
+        return bind(source, to: \.accessibilityContainerType)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityContainerTypeBlock`(_ source: Observable<AXContainerTypeReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityContainerTypeBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityContainerTypeBlock`(_ source: Observable<AXContainerTypeReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityContainerTypeBlock)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `accessibilityCustomActions`(_ source: Observable<[UIAccessibilityCustomAction]>) -> Self {
+        return bind(source, to: \.accessibilityCustomActions)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `accessibilityCustomActions`(_ source: Observable<[UIAccessibilityCustomAction]?>) -> Self {
+        return bind(source, to: \.accessibilityCustomActions)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomActionsBlock`(_ source: Observable<AXCustomActionsReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityCustomActionsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomActionsBlock`(_ source: Observable<AXCustomActionsReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityCustomActionsBlock)
+    }
+
+    @available(iOS, introduced: 10.0)
+    @discardableResult
+    public func `accessibilityCustomRotors`(_ source: Observable<[UIAccessibilityCustomRotor]>) -> Self {
+        return bind(source, to: \.accessibilityCustomRotors)
+    }
+
+    @available(iOS, introduced: 10.0)
+    @discardableResult
+    public func `accessibilityCustomRotors`(_ source: Observable<[UIAccessibilityCustomRotor]?>) -> Self {
+        return bind(source, to: \.accessibilityCustomRotors)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomRotorsBlock`(_ source: Observable<AXCustomRotorsReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityCustomRotorsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityCustomRotorsBlock`(_ source: Observable<AXCustomRotorsReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityCustomRotorsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityDecrementBlock`(_ source: Observable<AXVoidReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityDecrementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityDecrementBlock`(_ source: Observable<AXVoidReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityDecrementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityDirectTouchOptions`(_ source: Observable<UIAccessibility.DirectTouchOptions>) -> Self {
+        return bind(source, to: \.accessibilityDirectTouchOptions)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityDragSourceDescriptors`(_ source: Observable<[UIAccessibilityLocationDescriptor]>) -> Self {
+        return bind(source, to: \.accessibilityDragSourceDescriptors)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityDragSourceDescriptors`(_ source: Observable<[UIAccessibilityLocationDescriptor]?>) -> Self {
+        return bind(source, to: \.accessibilityDragSourceDescriptors)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityDropPointDescriptors`(_ source: Observable<[UIAccessibilityLocationDescriptor]>) -> Self {
+        return bind(source, to: \.accessibilityDropPointDescriptors)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityDropPointDescriptors`(_ source: Observable<[UIAccessibilityLocationDescriptor]?>) -> Self {
+        return bind(source, to: \.accessibilityDropPointDescriptors)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `accessibilityElements`(_ source: Observable<[Any]>) -> Self {
+        return bind(source, to: \.accessibilityElements)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `accessibilityElements`(_ source: Observable<[Any]?>) -> Self {
+        return bind(source, to: \.accessibilityElements)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsBlock`(_ source: Observable<AXArrayReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityElementsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsBlock`(_ source: Observable<AXArrayReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityElementsBlock)
+    }
+
+    @available(iOS, introduced: 5.0)
+    @discardableResult
+    public func `accessibilityElementsHidden`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.accessibilityElementsHidden)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsHiddenBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityElementsHiddenBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityElementsHiddenBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityElementsHiddenBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityExpandedStatus`(_ source: Observable<UIAccessibility.ExpandedStatus>) -> Self {
+        return bind(source, to: \.accessibilityExpandedStatus)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityExpandedStatusBlock`(_ source: Observable<(@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)>) -> Self {
+        bindRx(source, to: self, key: \Self.accessibilityExpandedStatusBlock) { view, value in
+            view.accessibilityExpandedStatusBlock = value
+        }
+        return self
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityExpandedStatusBlock`(_ source: Observable<(@MainActor @Sendable () -> UIAccessibility.ExpandedStatus)?>) -> Self {
+        bindRx(source, to: self, key: \Self.accessibilityExpandedStatusBlock) { view, value in
+            view.accessibilityExpandedStatusBlock = value
+        }
+        return self
     }
 
     @discardableResult
-    public func backgroundColor(_ source: Observable<UIColor?>) -> Self {
-        return bind(source, to: \.backgroundColor)
+    public func `accessibilityFrame`(_ source: Observable<CGRect>) -> Self {
+        return bind(source, to: \.accessibilityFrame)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityFrameBlock`(_ source: Observable<AXRectReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityFrameBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityFrameBlock`(_ source: Observable<AXRectReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityFrameBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHeaderElementsBlock`(_ source: Observable<AXArrayReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityHeaderElementsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHeaderElementsBlock`(_ source: Observable<AXArrayReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityHeaderElementsBlock)
     }
 
     @discardableResult
-    public func alpha(_ source: Observable<CGFloat>) -> Self {
+    public func `accessibilityHint`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.accessibilityHint)
+    }
+
+    @discardableResult
+    public func `accessibilityHint`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.accessibilityHint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHintBlock`(_ source: Observable<AXStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityHintBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityHintBlock`(_ source: Observable<AXStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityHintBlock)
+    }
+
+    @available(iOS, introduced: 5.0)
+    @discardableResult
+    public func `accessibilityIdentifier`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.accessibilityIdentifier)
+    }
+
+    @available(iOS, introduced: 5.0)
+    @discardableResult
+    public func `accessibilityIdentifier`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.accessibilityIdentifier)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIdentifierBlock`(_ source: Observable<AXStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityIdentifierBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIdentifierBlock`(_ source: Observable<AXStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityIdentifierBlock)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `accessibilityIgnoresInvertColors`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.accessibilityIgnoresInvertColors)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIncrementBlock`(_ source: Observable<AXVoidReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityIncrementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityIncrementBlock`(_ source: Observable<AXVoidReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityIncrementBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityLabel`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.accessibilityLabel)
+    }
+
+    @discardableResult
+    public func `accessibilityLabel`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.accessibilityLabel)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLabelBlock`(_ source: Observable<AXStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityLabelBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLabelBlock`(_ source: Observable<AXStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityLabelBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityLanguage`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.accessibilityLanguage)
+    }
+
+    @discardableResult
+    public func `accessibilityLanguage`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.accessibilityLanguage)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLanguageBlock`(_ source: Observable<AXStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityLanguageBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityLanguageBlock`(_ source: Observable<AXStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityLanguageBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityMagicTapBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityMagicTapBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityMagicTapBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityMagicTapBlock)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `accessibilityNavigationStyle`(_ source: Observable<UIAccessibilityNavigationStyle>) -> Self {
+        return bind(source, to: \.accessibilityNavigationStyle)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityNavigationStyleBlock`(_ source: Observable<AXNavigationStyleReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityNavigationStyleBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityNavigationStyleBlock`(_ source: Observable<AXNavigationStyleReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityNavigationStyleBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElement`(_ source: Observable<Any>) -> Self {
+        return bind(source, to: \.accessibilityNextTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElement`(_ source: Observable<Any?>) -> Self {
+        return bind(source, to: \.accessibilityNextTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElementBlock`(_ source: Observable<AXObjectReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityNextTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityNextTextNavigationElementBlock`(_ source: Observable<AXObjectReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityNextTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 7.0)
+    @discardableResult
+    public func `accessibilityPath`(_ source: Observable<UIBezierPath>) -> Self {
+        return bind(source, to: \.accessibilityPath)
+    }
+
+    @available(iOS, introduced: 7.0)
+    @discardableResult
+    public func `accessibilityPath`(_ source: Observable<UIBezierPath?>) -> Self {
+        return bind(source, to: \.accessibilityPath)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPathBlock`(_ source: Observable<AXPathReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityPathBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPathBlock`(_ source: Observable<AXPathReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityPathBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPerformEscapeBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityPerformEscapeBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityPerformEscapeBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityPerformEscapeBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElement`(_ source: Observable<Any>) -> Self {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElement`(_ source: Observable<Any?>) -> Self {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElement)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElementBlock`(_ source: Observable<AXObjectReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 18.0)
+    @discardableResult
+    public func `accessibilityPreviousTextNavigationElementBlock`(_ source: Observable<AXObjectReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityPreviousTextNavigationElementBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityRespondsToUserInteraction`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.accessibilityRespondsToUserInteraction)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityRespondsToUserInteractionBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityRespondsToUserInteractionBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityRespondsToUserInteractionBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityRespondsToUserInteractionBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityShouldGroupAccessibilityChildrenBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityShouldGroupAccessibilityChildrenBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityShouldGroupAccessibilityChildrenBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityShouldGroupAccessibilityChildrenBlock)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponder`(_ source: Observable<(any UITextInput)>) -> Self {
+        return bind(source, to: \.accessibilityTextInputResponder)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponder`(_ source: Observable<(any UITextInput)?>) -> Self {
+        return bind(source, to: \.accessibilityTextInputResponder)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponderBlock`(_ source: Observable<AXUITextInputReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityTextInputResponderBlock)
+    }
+
+    @available(iOS, introduced: 18.1)
+    @discardableResult
+    public func `accessibilityTextInputResponderBlock`(_ source: Observable<AXUITextInputReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityTextInputResponderBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityTextualContext`(_ source: Observable<UIAccessibilityTextualContext>) -> Self {
+        return bind(source, to: \.accessibilityTextualContext)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityTextualContext`(_ source: Observable<UIAccessibilityTextualContext?>) -> Self {
+        return bind(source, to: \.accessibilityTextualContext)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTextualContextBlock`(_ source: Observable<AXTextualContextReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityTextualContextBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTextualContextBlock`(_ source: Observable<AXTextualContextReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityTextualContextBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityTraits`(_ source: Observable<UIAccessibilityTraits>) -> Self {
+        return bind(source, to: \.accessibilityTraits)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTraitsBlock`(_ source: Observable<AXTraitsReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityTraitsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityTraitsBlock`(_ source: Observable<AXTraitsReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityTraitsBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityUserInputLabels`(_ source: Observable<[String]>) -> Self {
+        return bind(source, to: \.accessibilityUserInputLabels)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `accessibilityUserInputLabels`(_ source: Observable<[String]?>) -> Self {
+        return bind(source, to: \.accessibilityUserInputLabels)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityUserInputLabelsBlock`(_ source: Observable<AXStringArrayReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityUserInputLabelsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityUserInputLabelsBlock`(_ source: Observable<AXStringArrayReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityUserInputLabelsBlock)
+    }
+
+    @discardableResult
+    public func `accessibilityValue`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.accessibilityValue)
+    }
+
+    @discardableResult
+    public func `accessibilityValue`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.accessibilityValue)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityValueBlock`(_ source: Observable<AXStringReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityValueBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityValueBlock`(_ source: Observable<AXStringReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityValueBlock)
+    }
+
+    @available(iOS, introduced: 5.0)
+    @discardableResult
+    public func `accessibilityViewIsModal`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.accessibilityViewIsModal)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityViewIsModalBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.accessibilityViewIsModalBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `accessibilityViewIsModalBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.accessibilityViewIsModalBlock)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `activityItemsConfiguration`(_ source: Observable<(any UIActivityItemsConfigurationReading)>) -> Self {
+        return bind(source, to: \.activityItemsConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `activityItemsConfiguration`(_ source: Observable<(any UIActivityItemsConfigurationReading)?>) -> Self {
+        return bind(source, to: \.activityItemsConfiguration)
+    }
+
+    @discardableResult
+    public func `alpha`(_ source: Observable<CGFloat>) -> Self {
         return bind(source, to: \.alpha)
     }
 
+    @available(iOS, introduced: 16.0)
     @discardableResult
-    public func isHidden(_ source: Observable<Bool>) -> Self {
+    public func `anchorPoint`(_ source: Observable<CGPoint>) -> Self {
+        return bind(source, to: \.anchorPoint)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElements`(_ source: Observable<[Any]>) -> Self {
+        return bind(source, to: \.automationElements)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElements`(_ source: Observable<[Any]?>) -> Self {
+        return bind(source, to: \.automationElements)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElementsBlock`(_ source: Observable<AXArrayReturnBlock>) -> Self {
+        return bind(source, to: \.automationElementsBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `automationElementsBlock`(_ source: Observable<AXArrayReturnBlock?>) -> Self {
+        return bind(source, to: \.automationElementsBlock)
+    }
+
+    @discardableResult
+    public func `autoresizesSubviews`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.autoresizesSubviews)
+    }
+
+    @discardableResult
+    public func `autoresizingMask`(_ source: Observable<UIView.AutoresizingMask>) -> Self {
+        return bind(source, to: \.autoresizingMask)
+    }
+
+    @discardableResult
+    public func `backgroundColor`(_ source: Observable<UIColor>) -> Self {
+        return bind(source, to: \.backgroundColor)
+    }
+
+    @discardableResult
+    public func `backgroundColor`(_ source: Observable<UIColor?>) -> Self {
+        return bind(source, to: \.backgroundColor)
+    }
+
+    @discardableResult
+    public func `bounds`(_ source: Observable<CGRect>) -> Self {
+        return bind(source, to: \.bounds)
+    }
+
+    @discardableResult
+    public func `center`(_ source: Observable<CGPoint>) -> Self {
+        return bind(source, to: \.center)
+    }
+
+    @discardableResult
+    public func `clearsContextBeforeDrawing`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.clearsContextBeforeDrawing)
+    }
+
+    @discardableResult
+    public func `clipsToBounds`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.clipsToBounds)
+    }
+
+    @discardableResult
+    public func `contentMode`(_ source: Observable<UIView.ContentMode>) -> Self {
+        return bind(source, to: \.contentMode)
+    }
+
+    @available(iOS, introduced: 4.0)
+    @discardableResult
+    public func `contentScaleFactor`(_ source: Observable<CGFloat>) -> Self {
+        return bind(source, to: \.contentScaleFactor)
+    }
+
+    @available(iOS, introduced: 26.0)
+    @discardableResult
+    public func `cornerConfiguration`(_ source: Observable<UICornerConfiguration>) -> Self {
+        return bind(source, to: \.cornerConfiguration)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `directionalLayoutMargins`(_ source: Observable<NSDirectionalEdgeInsets>) -> Self {
+        return bind(source, to: \.directionalLayoutMargins)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `focusEffect`(_ source: Observable<UIFocusEffect>) -> Self {
+        return bind(source, to: \.focusEffect)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `focusEffect`(_ source: Observable<UIFocusEffect?>) -> Self {
+        return bind(source, to: \.focusEffect)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `focusGroupIdentifier`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.focusGroupIdentifier)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `focusGroupIdentifier`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.focusGroupIdentifier)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `focusGroupPriority`(_ source: Observable<UIFocusGroupPriority>) -> Self {
+        return bind(source, to: \.focusGroupPriority)
+    }
+
+    @discardableResult
+    public func `frame`(_ source: Observable<CGRect>) -> Self {
+        return bind(source, to: \.frame)
+    }
+
+    @available(iOS, introduced: 3.2)
+    @discardableResult
+    public func `gestureRecognizers`(_ source: Observable<[UIGestureRecognizer]>) -> Self {
+        return bind(source, to: \.gestureRecognizers)
+    }
+
+    @available(iOS, introduced: 3.2)
+    @discardableResult
+    public func `gestureRecognizers`(_ source: Observable<[UIGestureRecognizer]?>) -> Self {
+        return bind(source, to: \.gestureRecognizers)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `hoverStyle`(_ source: Observable<UIHoverStyle>) -> Self {
+        return bind(source, to: \.hoverStyle)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `hoverStyle`(_ source: Observable<UIHoverStyle?>) -> Self {
+        return bind(source, to: \.hoverStyle)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `insetsLayoutMarginsFromSafeArea`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.insetsLayoutMarginsFromSafeArea)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `interactions`(_ source: Observable<[any UIInteraction]>) -> Self {
+        return bind(source, to: \.interactions)
+    }
+
+    @discardableResult
+    public func `isAccessibilityElement`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isAccessibilityElement)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `isAccessibilityElementBlock`(_ source: Observable<AXBoolReturnBlock>) -> Self {
+        return bind(source, to: \.isAccessibilityElementBlock)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `isAccessibilityElementBlock`(_ source: Observable<AXBoolReturnBlock?>) -> Self {
+        return bind(source, to: \.isAccessibilityElementBlock)
+    }
+
+    @discardableResult
+    public func `isExclusiveTouch`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isExclusiveTouch)
+    }
+
+    @discardableResult
+    public func `isHidden`(_ source: Observable<Bool>) -> Self {
         return bind(source, to: \.isHidden)
+    }
+
+    @discardableResult
+    public func `isMultipleTouchEnabled`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isMultipleTouchEnabled)
+    }
+
+    @discardableResult
+    public func `isOpaque`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isOpaque)
     }
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func isUserInteractionEnabled(_ source: Observable<Bool>) -> Self {
+    public func `isUserInteractionEnabled`(_ source: Observable<Bool>) -> Self {
         return bind(source, to: \.isUserInteractionEnabled)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentImage`(_ source: Observable<UIImage>) -> Self {
+        return bind(source, to: \.largeContentImage)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentImage`(_ source: Observable<UIImage?>) -> Self {
+        return bind(source, to: \.largeContentImage)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentImageInsets`(_ source: Observable<UIEdgeInsets>) -> Self {
+        return bind(source, to: \.largeContentImageInsets)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentTitle`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.largeContentTitle)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `largeContentTitle`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.largeContentTitle)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `layoutMargins`(_ source: Observable<UIEdgeInsets>) -> Self {
+        return bind(source, to: \.layoutMargins)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `mask`(_ source: Observable<UIView>) -> Self {
+        return bind(source, to: \.mask)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `mask`(_ source: Observable<UIView?>) -> Self {
+        return bind(source, to: \.mask)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `maximumContentSizeCategory`(_ source: Observable<UIContentSizeCategory>) -> Self {
+        return bind(source, to: \.maximumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `maximumContentSizeCategory`(_ source: Observable<UIContentSizeCategory?>) -> Self {
+        return bind(source, to: \.maximumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `minimumContentSizeCategory`(_ source: Observable<UIContentSizeCategory>) -> Self {
+        return bind(source, to: \.minimumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `minimumContentSizeCategory`(_ source: Observable<UIContentSizeCategory?>) -> Self {
+        return bind(source, to: \.minimumContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 7.0)
+    @discardableResult
+    public func `motionEffects`(_ source: Observable<[UIMotionEffect]>) -> Self {
+        return bind(source, to: \.motionEffects)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `overrideUserInterfaceStyle`(_ source: Observable<UIUserInterfaceStyle>) -> Self {
+        return bind(source, to: \.overrideUserInterfaceStyle)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `pasteConfiguration`(_ source: Observable<UIPasteConfiguration>) -> Self {
+        return bind(source, to: \.pasteConfiguration)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `pasteConfiguration`(_ source: Observable<UIPasteConfiguration?>) -> Self {
+        return bind(source, to: \.pasteConfiguration)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `preservesSuperviewLayoutMargins`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.preservesSuperviewLayoutMargins)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `restorationIdentifier`(_ source: Observable<String>) -> Self {
+        return bind(source, to: \.restorationIdentifier)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `restorationIdentifier`(_ source: Observable<String?>) -> Self {
+        return bind(source, to: \.restorationIdentifier)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `scalesLargeContentImage`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.scalesLargeContentImage)
+    }
+
+    @available(iOS, introduced: 9.0)
+    @discardableResult
+    public func `semanticContentAttribute`(_ source: Observable<UISemanticContentAttribute>) -> Self {
+        return bind(source, to: \.semanticContentAttribute)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `shouldGroupAccessibilityChildren`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.shouldGroupAccessibilityChildren)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `showsLargeContentViewer`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.showsLargeContentViewer)
+    }
+
+    @available(iOS, introduced: 2.0)
+    @discardableResult
+    public func `tag`(_ source: Observable<Int>) -> Self {
+        return bind(source, to: \.tag)
+    }
+
+    @available(iOS, introduced: 7.0)
+    @discardableResult
+    public func `tintAdjustmentMode`(_ source: Observable<UIView.TintAdjustmentMode>) -> Self {
+        return bind(source, to: \.tintAdjustmentMode)
+    }
+
+    @available(iOS, introduced: 7.0)
+    @discardableResult
+    public func `tintColor`(_ source: Observable<UIColor>) -> Self {
+        return bind(source, to: \.tintColor)
+    }
+
+    @available(iOS, introduced: 7.0)
+    @discardableResult
+    public func `tintColor`(_ source: Observable<UIColor?>) -> Self {
+        return bind(source, to: \.tintColor)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `traitOverrides`(_ source: Observable<UITraitOverrides>) -> Self {
+        return bind(source, to: \.traitOverrides)
+    }
+
+    @discardableResult
+    public func `transform`(_ source: Observable<CGAffineTransform>) -> Self {
+        return bind(source, to: \.transform)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `transform3D`(_ source: Observable<CATransform3D>) -> Self {
+        return bind(source, to: \.transform3D)
+    }
+
+    @available(iOS, introduced: 6.0)
+    @discardableResult
+    public func `translatesAutoresizingMaskIntoConstraints`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.translatesAutoresizingMaskIntoConstraints)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `userActivity`(_ source: Observable<NSUserActivity>) -> Self {
+        return bind(source, to: \.userActivity)
+    }
+
+    @available(iOS, introduced: 8.0)
+    @discardableResult
+    public func `userActivity`(_ source: Observable<NSUserActivity?>) -> Self {
+        return bind(source, to: \.userActivity)
     }
 
 }

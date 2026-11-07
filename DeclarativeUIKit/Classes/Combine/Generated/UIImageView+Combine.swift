@@ -3,19 +3,111 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
+@available(iOS, introduced: 13.0.0)
 extension ViewConfigurable where Self: UIImageView {
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func image<P: Publisher>(_ source: P) -> Self
+    public func `adjustsImageSizeForAccessibilityContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.adjustsImageSizeForAccessibilityContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `animationDuration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == TimeInterval, P.Failure == Never {
+        return bind(source, to: \.animationDuration)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `animationImages`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIImage], P.Failure == Never {
+        return bind(source, to: \.animationImages)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `animationImages`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIImage]?, P.Failure == Never {
+        return bind(source, to: \.animationImages)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `animationRepeatCount`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Int, P.Failure == Never {
+        return bind(source, to: \.animationRepeatCount)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `highlightedAnimationImages`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIImage], P.Failure == Never {
+        return bind(source, to: \.highlightedAnimationImages)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `highlightedAnimationImages`<P: Publisher>(_ source: P) -> Self
+        where P.Output == [UIImage]?, P.Failure == Never {
+        return bind(source, to: \.highlightedAnimationImages)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `highlightedImage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage, P.Failure == Never {
+        return bind(source, to: \.highlightedImage)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `highlightedImage`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage?, P.Failure == Never {
+        return bind(source, to: \.highlightedImage)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `image`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIImage, P.Failure == Never {
         return bind(source, to: \.image)
     }
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func image<P: Publisher>(_ source: P) -> Self
+    public func `image`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIImage?, P.Failure == Never {
         return bind(source, to: \.image)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `isHighlighted`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isHighlighted)
+    }
+
+    @available(iOS, introduced: 17.0)
+    @discardableResult
+    public func `preferredImageDynamicRange`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage.DynamicRange, P.Failure == Never {
+        return bind(source, to: \.preferredImageDynamicRange)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `preferredSymbolConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage.SymbolConfiguration, P.Failure == Never {
+        return bind(source, to: \.preferredSymbolConfiguration)
+    }
+
+    @available(iOS, introduced: 13.0)
+    @discardableResult
+    public func `preferredSymbolConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIImage.SymbolConfiguration?, P.Failure == Never {
+        return bind(source, to: \.preferredSymbolConfiguration)
     }
 
 }

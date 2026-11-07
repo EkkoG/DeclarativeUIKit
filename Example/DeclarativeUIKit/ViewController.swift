@@ -24,6 +24,14 @@ final class ViewController: UIViewController {
                     .text($status)
                     .numberOfLines(0)
 
+                UITextField()
+                    .placeholder("Email address")
+                    .keyboardType(.emailAddress)
+                    .autocapitalizationType(.none)
+                    .borderStyle(.roundedRect)
+                    .accessibilityLabel("Email address")
+                    .isEnabled($canSave)
+
                 HStack(spacing: 12, alignment: .center) {
                     UILabel("Enable saving")
                     UISwitch()

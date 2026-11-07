@@ -2,16 +2,149 @@
 import UIKit
 import RxSwift
 
+@available(iOS, introduced: 2.0)
 extension ViewConfigurable where Self: UIButton {
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `adjustsImageSizeForAccessibilityContentSizeCategory`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.adjustsImageSizeForAccessibilityContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler")
+    @discardableResult
+    public func `adjustsImageWhenDisabled`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.adjustsImageWhenDisabled)
+    }
+
+    @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler")
+    @discardableResult
+    public func `adjustsImageWhenHighlighted`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.adjustsImageWhenHighlighted)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `automaticallyUpdatesConfiguration`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.automaticallyUpdatesConfiguration)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `changesSelectionAsPrimaryAction`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.changesSelectionAsPrimaryAction)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configuration`(_ source: Observable<UIButton.Configuration>) -> Self {
+        return bind(source, to: \.configuration)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configuration`(_ source: Observable<UIButton.Configuration?>) -> Self {
+        return bind(source, to: \.configuration)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configurationUpdateHandler`(_ source: Observable<UIButton.ConfigurationUpdateHandler>) -> Self {
+        return bind(source, to: \.configurationUpdateHandler)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configurationUpdateHandler`(_ source: Observable<UIButton.ConfigurationUpdateHandler?>) -> Self {
+        return bind(source, to: \.configurationUpdateHandler)
+    }
+
     @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
     @discardableResult
-    public func contentEdgeInsets(_ source: Observable<UIEdgeInsets>) -> Self {
+    public func `contentEdgeInsets`(_ source: Observable<UIEdgeInsets>) -> Self {
         return bind(source, to: \.contentEdgeInsets)
     }
 
+    @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+    @discardableResult
+    public func `imageEdgeInsets`(_ source: Observable<UIEdgeInsets>) -> Self {
+        return bind(source, to: \.imageEdgeInsets)
+    }
+
+    @available(iOS, introduced: 13.4)
+    @discardableResult
+    public func `isPointerInteractionEnabled`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isPointerInteractionEnabled)
+    }
+
+    @available(iOS, introduced: 11.0)
+    @discardableResult
+    public func `isSpringLoaded`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.isSpringLoaded)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `menu`(_ source: Observable<UIMenu>) -> Self {
+        return bind(source, to: \.menu)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `menu`(_ source: Observable<UIMenu?>) -> Self {
+        return bind(source, to: \.menu)
+    }
+
+    @available(iOS, introduced: 13.4)
+    @discardableResult
+    public func `pointerStyleProvider`(_ source: Observable<UIButton.PointerStyleProvider>) -> Self {
+        return bind(source, to: \.pointerStyleProvider)
+    }
+
+    @available(iOS, introduced: 13.4)
+    @discardableResult
+    public func `pointerStyleProvider`(_ source: Observable<UIButton.PointerStyleProvider?>) -> Self {
+        return bind(source, to: \.pointerStyleProvider)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `preferredBehavioralStyle`(_ source: Observable<UIBehavioralStyle>) -> Self {
+        return bind(source, to: \.preferredBehavioralStyle)
+    }
+
+    @available(iOS, introduced: 16.0)
+    @discardableResult
+    public func `preferredMenuElementOrder`(_ source: Observable<UIContextMenuConfiguration.ElementOrder>) -> Self {
+        return bind(source, to: \.preferredMenuElementOrder)
+    }
+
+    @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler")
+    @discardableResult
+    public func `reversesTitleShadowWhenHighlighted`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.reversesTitleShadowWhenHighlighted)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `role`(_ source: Observable<UIButton.Role>) -> Self {
+        return bind(source, to: \.role)
+    }
+
+    @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+    @discardableResult
+    public func `showsTouchWhenHighlighted`(_ source: Observable<Bool>) -> Self {
+        return bind(source, to: \.showsTouchWhenHighlighted)
+    }
+
+    @available(iOS, introduced: 2.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+    @discardableResult
+    public func `titleEdgeInsets`(_ source: Observable<UIEdgeInsets>) -> Self {
+        return bind(source, to: \.titleEdgeInsets)
+    }
+
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func title(_ source: Observable<String>, for state: UIControl.State = .normal) -> Self {
+    public func `title`(_ source: Observable<String>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.title.\(state.rawValue)") { view, value in
             view.setTitle(value, for: state)
         }
@@ -20,7 +153,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func title(_ source: Observable<String?>, for state: UIControl.State = .normal) -> Self {
+    public func `title`(_ source: Observable<String?>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.title.\(state.rawValue)") { view, value in
             view.setTitle(value, for: state)
         }
@@ -29,7 +162,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func titleColor(_ source: Observable<UIColor>, for state: UIControl.State = .normal) -> Self {
+    public func `titleColor`(_ source: Observable<UIColor>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.titleColor.\(state.rawValue)") { view, value in
             view.setTitleColor(value, for: state)
         }
@@ -38,7 +171,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func titleColor(_ source: Observable<UIColor?>, for state: UIControl.State = .normal) -> Self {
+    public func `titleColor`(_ source: Observable<UIColor?>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.titleColor.\(state.rawValue)") { view, value in
             view.setTitleColor(value, for: state)
         }
@@ -47,7 +180,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func image(_ source: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
+    public func `image`(_ source: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.image.\(state.rawValue)") { view, value in
             view.setImage(value, for: state)
         }
@@ -56,7 +189,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func image(_ source: Observable<UIImage?>, for state: UIControl.State = .normal) -> Self {
+    public func `image`(_ source: Observable<UIImage?>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.image.\(state.rawValue)") { view, value in
             view.setImage(value, for: state)
         }
@@ -65,7 +198,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func backgroundImage(_ source: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
+    public func `backgroundImage`(_ source: Observable<UIImage>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.backgroundImage.\(state.rawValue)") { view, value in
             view.setBackgroundImage(value, for: state)
         }
@@ -74,7 +207,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 2.0)
     @discardableResult
-    public func backgroundImage(_ source: Observable<UIImage?>, for state: UIControl.State = .normal) -> Self {
+    public func `backgroundImage`(_ source: Observable<UIImage?>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.backgroundImage.\(state.rawValue)") { view, value in
             view.setBackgroundImage(value, for: state)
         }
@@ -83,7 +216,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 6.0)
     @discardableResult
-    public func attributedTitle(_ source: Observable<NSAttributedString>, for state: UIControl.State = .normal) -> Self {
+    public func `attributedTitle`(_ source: Observable<NSAttributedString>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.attributedTitle.\(state.rawValue)") { view, value in
             view.setAttributedTitle(value, for: state)
         }
@@ -92,7 +225,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 6.0)
     @discardableResult
-    public func attributedTitle(_ source: Observable<NSAttributedString?>, for state: UIControl.State = .normal) -> Self {
+    public func `attributedTitle`(_ source: Observable<NSAttributedString?>, for state: UIControl.State = .normal) -> Self {
         bindRx(source, to: self, key: "button.attributedTitle.\(state.rawValue)") { view, value in
             view.setAttributedTitle(value, for: state)
         }

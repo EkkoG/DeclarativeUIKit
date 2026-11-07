@@ -3,17 +3,172 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
+@available(iOS, introduced: 13.0.0)
 extension ViewConfigurable where Self: UIButton {
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `adjustsImageSizeForAccessibilityContentSizeCategory`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.adjustsImageSizeForAccessibilityContentSizeCategory)
+    }
+
+    @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler")
+    @discardableResult
+    public func `adjustsImageWhenDisabled`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.adjustsImageWhenDisabled)
+    }
+
+    @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler")
+    @discardableResult
+    public func `adjustsImageWhenHighlighted`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.adjustsImageWhenHighlighted)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `automaticallyUpdatesConfiguration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.automaticallyUpdatesConfiguration)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `changesSelectionAsPrimaryAction`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.changesSelectionAsPrimaryAction)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configuration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.Configuration, P.Failure == Never {
+        return bind(source, to: \.configuration)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configuration`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.Configuration?, P.Failure == Never {
+        return bind(source, to: \.configuration)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configurationUpdateHandler`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.ConfigurationUpdateHandler, P.Failure == Never {
+        return bind(source, to: \.configurationUpdateHandler)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `configurationUpdateHandler`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.ConfigurationUpdateHandler?, P.Failure == Never {
+        return bind(source, to: \.configurationUpdateHandler)
+    }
+
     @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
     @discardableResult
-    public func contentEdgeInsets<P: Publisher>(_ source: P) -> Self
+    public func `contentEdgeInsets`<P: Publisher>(_ source: P) -> Self
         where P.Output == UIEdgeInsets, P.Failure == Never {
         return bind(source, to: \.contentEdgeInsets)
     }
 
+    @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+    @discardableResult
+    public func `imageEdgeInsets`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIEdgeInsets, P.Failure == Never {
+        return bind(source, to: \.imageEdgeInsets)
+    }
+
+    @available(iOS, introduced: 13.4)
+    @discardableResult
+    public func `isPointerInteractionEnabled`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isPointerInteractionEnabled)
+    }
+
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func title<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `isSpringLoaded`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.isSpringLoaded)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `menu`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIMenu, P.Failure == Never {
+        return bind(source, to: \.menu)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `menu`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIMenu?, P.Failure == Never {
+        return bind(source, to: \.menu)
+    }
+
+    @available(iOS, introduced: 13.4)
+    @discardableResult
+    public func `pointerStyleProvider`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.PointerStyleProvider, P.Failure == Never {
+        return bind(source, to: \.pointerStyleProvider)
+    }
+
+    @available(iOS, introduced: 13.4)
+    @discardableResult
+    public func `pointerStyleProvider`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.PointerStyleProvider?, P.Failure == Never {
+        return bind(source, to: \.pointerStyleProvider)
+    }
+
+    @available(iOS, introduced: 15.0)
+    @discardableResult
+    public func `preferredBehavioralStyle`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIBehavioralStyle, P.Failure == Never {
+        return bind(source, to: \.preferredBehavioralStyle)
+    }
+
+    @available(iOS, introduced: 16.0)
+    @discardableResult
+    public func `preferredMenuElementOrder`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIContextMenuConfiguration.ElementOrder, P.Failure == Never {
+        return bind(source, to: \.preferredMenuElementOrder)
+    }
+
+    @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration, you may customize to replicate this behavior via a configurationUpdateHandler")
+    @discardableResult
+    public func `reversesTitleShadowWhenHighlighted`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.reversesTitleShadowWhenHighlighted)
+    }
+
+    @available(iOS, introduced: 14.0)
+    @discardableResult
+    public func `role`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIButton.Role, P.Failure == Never {
+        return bind(source, to: \.role)
+    }
+
+    @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+    @discardableResult
+    public func `showsTouchWhenHighlighted`<P: Publisher>(_ source: P) -> Self
+        where P.Output == Bool, P.Failure == Never {
+        return bind(source, to: \.showsTouchWhenHighlighted)
+    }
+
+    @available(iOS, introduced: 13.0.0, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+    @discardableResult
+    public func `titleEdgeInsets`<P: Publisher>(_ source: P) -> Self
+        where P.Output == UIEdgeInsets, P.Failure == Never {
+        return bind(source, to: \.titleEdgeInsets)
+    }
+
+    @available(iOS, introduced: 13.0.0)
+    @discardableResult
+    public func `title`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == String, P.Failure == Never {
         bindCombine(source, to: self, key: "button.title.\(state.rawValue)") { view, value in
             view.setTitle(value, for: state)
@@ -23,7 +178,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func title<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `title`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == String?, P.Failure == Never {
         bindCombine(source, to: self, key: "button.title.\(state.rawValue)") { view, value in
             view.setTitle(value, for: state)
@@ -33,7 +188,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func titleColor<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `titleColor`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == UIColor, P.Failure == Never {
         bindCombine(source, to: self, key: "button.titleColor.\(state.rawValue)") { view, value in
             view.setTitleColor(value, for: state)
@@ -43,7 +198,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func titleColor<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `titleColor`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == UIColor?, P.Failure == Never {
         bindCombine(source, to: self, key: "button.titleColor.\(state.rawValue)") { view, value in
             view.setTitleColor(value, for: state)
@@ -53,7 +208,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func image<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `image`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == UIImage, P.Failure == Never {
         bindCombine(source, to: self, key: "button.image.\(state.rawValue)") { view, value in
             view.setImage(value, for: state)
@@ -63,7 +218,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func image<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `image`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == UIImage?, P.Failure == Never {
         bindCombine(source, to: self, key: "button.image.\(state.rawValue)") { view, value in
             view.setImage(value, for: state)
@@ -73,7 +228,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func backgroundImage<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `backgroundImage`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == UIImage, P.Failure == Never {
         bindCombine(source, to: self, key: "button.backgroundImage.\(state.rawValue)") { view, value in
             view.setBackgroundImage(value, for: state)
@@ -83,7 +238,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func backgroundImage<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `backgroundImage`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == UIImage?, P.Failure == Never {
         bindCombine(source, to: self, key: "button.backgroundImage.\(state.rawValue)") { view, value in
             view.setBackgroundImage(value, for: state)
@@ -93,7 +248,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func attributedTitle<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `attributedTitle`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == NSAttributedString, P.Failure == Never {
         bindCombine(source, to: self, key: "button.attributedTitle.\(state.rawValue)") { view, value in
             view.setAttributedTitle(value, for: state)
@@ -103,7 +258,7 @@ extension ViewConfigurable where Self: UIButton {
 
     @available(iOS, introduced: 13.0.0)
     @discardableResult
-    public func attributedTitle<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
+    public func `attributedTitle`<P: Publisher>(_ source: P, for state: UIControl.State = .normal) -> Self
         where P.Output == NSAttributedString?, P.Failure == Never {
         bindCombine(source, to: self, key: "button.attributedTitle.\(state.rawValue)") { view, value in
             view.setAttributedTitle(value, for: state)
