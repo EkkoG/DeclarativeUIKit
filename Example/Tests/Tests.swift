@@ -6,6 +6,20 @@ import EGChainable
 @testable import EGDeclarativeUIKit
 
 final class BuilderTests: XCTestCase {
+    func testGeneratedInputTraitsAndWritableProtocolProperty() {
+        let search = UISearchBar().keyboardType(.emailAddress).autocapitalizationType(.none)
+        XCTAssertEqual(search.keyboardType, .emailAddress)
+        XCTAssertEqual(search.autocapitalizationType, .none)
+
+        let text = UITextView().text("Hello").returnKeyType(.done).textContentType(.emailAddress)
+        XCTAssertEqual(text.returnKeyType, .done)
+        XCTAssertEqual(text.textContentType, .emailAddress)
+        let start = text.beginningOfDocument
+        let end = text.position(from: start, offset: 2)!
+        XCTAssertTrue(text.selectedTextRange(text.textRange(from: start, to: end)) === text)
+        XCTAssertEqual(text.selectedRange, NSRange(location: 0, length: 2))
+    }
+
     func testDirectModifiersKeepIdentityAndConcreteType() {
         let label = UILabel()
         let configured: UILabel = label.backgroundColor(.red).text("Title").numberOfLines(2)
