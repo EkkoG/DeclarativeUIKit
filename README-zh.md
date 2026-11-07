@@ -1,165 +1,150 @@
 # DeclarativeUIKit
 
-一个可以使 UIKit 具有 SwiftUI 那样声明式写法能力的简单软件库，无自定义控件，支持 UIKit 所有原生及其自定义组件.
+用 Swift result builder 构建 UIKit 视图树，保留原生控件和命令式 UIKit 用法，按需接入状态绑定、SnapKit 和链式属性配置。
 
-配合使用 [EGChainable](https://github.com/EkkoG/EGChainable) 实现链式调用.
+builder 在调用时执行一次。状态变化不会自动重建其中的条件分支或视图树；绑定只更新指定属性。再次调用 `body` 会继续添加子视图。
 
-配合使用 [RxSwift](https://github.com/ReactiveX/RxSwift) 使控件数据自动更新。
+## 要求与安装
 
-同时可以完全配合 AutoLayout 相关 API 使用，即使在 resultBuilder 里。
+- Core、Ext：iOS 10+，Swift 5.4 或更高版本编译器，使用 Swift 5 语言模式。
+- 自定义 Stack 间距：iOS 11+。
+- Combine：iOS 13+。
+- 可选依赖有各自的系统要求；示例的锁文件固定了本项目验证使用的依赖版本。
 
-当有 DeclarativeUIKit 做不到的事时，可以回落到命令式 UIKit 的写法，就像之前那样，完全没有问题。
-
-## 使用方法
-
-```swift
-class ViewController: UIViewController {
-
-    @RxUIPublished var text = "Hello"
-    @RxUIPublished var text1 = "Hello"
-    var stack: UIStackView?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.text1 = "World"
-        }
-        view.body {
-            UILabel().apply { label in
-                label.R.text(Observable.combineLatest($text, $text1).flatMap { PublishSubject.just([$0, $1].joined(separator: " ")) })
-                label.A.textColor(.black)
-                        .text("Hello, World!")
-                label.S.makeConstraints { make in
-                    make.centerX.equalToSuperview()
-                    make.top.equalToSuperview().offset(70)
-                }
-            }
-            UIView {
-
-                UIView().alias("Round cornder backgound").body {
-                    UIStackView.V {
-                        UIStackView.H {
-                            for i in 0..<5 {
-                                UILabel().apply { label in
-                                    label.A.text("\(i)").textAlignment(.center)
-                                }
-                            }
-                        }.apply { view in
-                            view.distribution = .fillEqually
-                            view.S.makeConstraints { maker in
-                                maker.height.equalTo(30)
-                                maker.leading.trailing.equalToSuperview()
-                            }
-                        }
-                        ["ahh", "ahhh"].map { s in
-                            UILabel().apply { label in
-                                label.A.text(s).textAlignment(.center)
-                            }
-                        }
-                        UILabel().alias("Title").apply { label in
-                            label.text = "Delete your account?"
-                        }.spacingAfterSelf(8)
-                        UIStackView.H {
-                            UILabel().apply { label in
-                                label.text = "ahh"
-                            }
-                            UILabel().alias("Red Alert").apply { label in
-                                label.text = "Deleting account is permanent"
-                                label.textColor = .red.withAlphaComponent(0.4)
-                            }
-                        }
-                        UILabel().alias("Long text, desc of alert.").apply { label in
-                            label.text = "Your Favourite Meditation and Music、your progress of mediation journey will be permanently deleted."
-                            label.numberOfLines = 0
-                            label.textAlignment = .center
-                            label.S.makeConstraints { make in
-                                make.leading.equalToSuperview().offset(16)
-                                make.trailing.equalToSuperview().offset(-16)
-                            }
-                        }.spacingAfterSelf(20)
-
-                        CircleView {
-                            UIButton().apply { button in
-                                button.setTitle("Continue Deleting Account", for: .normal)
-                                button.setTitleColor(.white, for: .normal)
-                                button.S.makeConstraints { make in
-                                    make.edges.equalToSuperview()
-                                    make.width.equalTo(250)
-                                    make.height.equalTo(40)
-                                }
-                            }
-                        }.apply { view in
-                            view.backgroundColor = .red.withAlphaComponent(0.6)
-                        }.spacingAfterSelf(10)
-                        CircleView {
-                            UIButton().apply { button in
-                                button.setTitle("Cancel", for: .normal)
-                                button.setTitleColor(.white, for: .normal)
-                                button.S.makeConstraints { make in
-                                    make.edges.equalToSuperview()
-                                    make.width.equalTo(250)
-                                    make.height.equalTo(40)
-                                }
-                            }
-                        }.apply { view in
-                            view.backgroundColor = .gray.withAlphaComponent(0.6)
-                        }
-                        UISpace()
-                    }.apply { stack in
-                        stack.alignment = .center
-                        stack.S.makeConstraints { make in
-                            make.edges.equalToSuperview()
-                        }
-                    }.assign(to: &stack)
-                }.apply { view in
-                    view.backgroundColor = .white
-                    view.layer.cornerRadius = 8
-                    view.clipsToBounds = true
-                    view.S.makeConstraints { make in
-                        make.width.equalTo(300)
-                        make.height.equalTo(400)
-                        make.center.equalToSuperview()
-                    }
-                }
-            }.apply { view in
-                view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-                view.S.makeConstraints { make in
-                    make.edges.equalToSuperview()
-                }
-            }
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-}
-
-```
-## 示例
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## 要求
-
-iOS 10+
-
-## 安装
-
-DeclarativeUIKit is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+使用当前源码版本时，指向本地 checkout；根据应用目录调整路径：
 
 ```ruby
-pod 'EGDeclarativeUIKit', :git => 'https://github.com/EkkoG/DeclarativeUIKit.git'
+pod 'EGDeclarativeUIKit', :path => '../DeclarativeUIKit'
+pod 'EGDeclarativeUIKit/Rx', :path => '../DeclarativeUIKit'       # 按需
+pod 'EGDeclarativeUIKit/Combine', :path => '../DeclarativeUIKit'  # 按需
+pod 'EGDeclarativeUIKit/SnapKit', :path => '../DeclarativeUIKit'  # 按需
+pod 'EGDeclarativeUIKit/Chainable', :path => '../DeclarativeUIKit' # 按需
 ```
 
-## 作者
+默认安装 Core 和 Ext，不强制引入 RxSwift、Combine、SnapKit 或 EGChainable。`UIListView` 仅在可导入 SnapKit 时可用；其实现是 ScrollView 加 Stack，不具备列表单元格复用。
 
-EkkoG, beijiu572@gmail.com
+## 创建与配置视图
+
+```swift
+import UIKit
+import EGDeclarativeUIKit
+
+let subtitle: UILabel? = UILabel("请选择")
+let rows = ["姓名", "邮箱"]
+
+let content = VStack(spacing: 12, alignment: .fill) {
+    UILabel("账户")
+        .apply { $0.font = .preferredFont(forTextStyle: .title1) }
+    subtitle
+    if !rows.isEmpty {
+        UILabel("详细信息")
+    }
+    for title in rows {
+        UILabel(title)
+    }
+    rows.map { UILabel($0) }
+    UIButton("保存").onTap { print("Save") }
+}
+```
+
+支持单个视图、可选视图、有明确元素类型的数组、循环和条件分支，保留对象身份与顺序。`HStack`、`VStack`、`UIStackView.H`、`UIStackView.V` 都可以设置 `spacing`、`alignment`、`distribution`，默认值沿用 UIKit。
+
+`UILabel("标题")` 设置文字；`UIButton("保存")` 默认创建 system 按钮，可传入 `type: .custom`。其他属性继续使用 `apply`；原有 `assign(to:)`、`spacingAfterSelf` 仍可使用。
+
+安装 Chainable 模块后，库直接提供 `.C`，不再需要在应用中重复定义：
+
+```swift
+import EGChainable
+
+let label = UILabel("标题").C.textColor(.black).asView()
+```
+
+## 绑定状态
+
+Rx 和 Combine 模块都提供接受可写 KeyPath 的 `bind(_:to:)`。支持非可选值绑定到对应的可选属性，例如 `String` 可以直接绑定到 `UILabel.text`。
+
+```swift
+// Combine：model.title 使用 @Published 声明。
+UILabel().bind(model.$title.map { $0.uppercased() }, to: \.text)
+UIButton("保存").bind(model.$canSave, to: \.isEnabled)
+UILabel().text(model.$title)
+
+// RxSwift：model.title 使用 @RxUIPublished 声明。
+UILabel().bind(model.$title.map { $0.uppercased() }, to: \.text)
+UILabel().R.text(model.$title)
+```
+
+绑定规则：
+
+- 必须在主线程创建绑定。数据源可以从后台发值，UI 更新会交付到主线程。
+- Combine 接受 `Failure == Never` 的任意 Publisher，支持 `map` 等操作符的结果。包括初始值在内，更新均异步交付到主队列。需要显示错误时，在上游处理错误。
+- Rx 接受 Observable。完成或错误事件不会清空最后的值；需要显示错误时，在上游处理。源显式发送 `nil` 仍会清空可选属性。
+- 视图持有订阅，绑定回调弱引用视图，视图释放时取消订阅。仅从父视图移除、但仍被其他对象持有的视图，不会自动取消订阅。
+- 同一响应式模块内，对同一 KeyPath 再次绑定会替换旧订阅。Rx 与 Combine 的存储相互独立，避免让二者同时驱动一个属性。
+- 按钮 `title(_:for:)` 等方法按“字段＋控件状态”区分订阅，normal 与 selected 标题可以同时绑定。
+
+上游操作符和用户闭包如果强引用视图，仍可能造成循环引用，需要由调用方处理。
+
+## 处理事件
+
+```swift
+UIButton("保存").onTap { [weak self] in
+    self?.save()
+}
+
+UISwitch().onValueChanged { control in
+    print(control.isOn) // 保留 UISwitch 类型，无需转换。
+}
+```
+
+底层使用 target-action，支持 iOS 10。每次调用添加一个处理器，控件释放时一起释放。如果拥有者也持有控件，闭包应使用适当的弱引用。
+
+## 配置布局
+
+安装 SnapKit 模块后，`layout` 返回原视图，可以继续链式调用：
+
+```swift
+import SnapKit
+
+view.body {
+    UILabel("标题")
+        .layout { $0.leading.trailing.equalToSuperview().inset(16) }
+        .layout { $0.top.equalToSuperview().offset(24) }
+}
+```
+
+视图尚无父视图时，布局闭包按登记顺序等待。`body` 或 Stack builder 将视图加入父容器后执行它们，并释放闭包。待执行工作只执行一次，重新挂载不会重复执行；已有父视图时，新登记的布局立即执行。
+
+原生 `addSubview` 不会触发待执行布局。在这种用法中，应先添加视图，再调用 `layout`。原有 `applyAutoLayout`、`.S.makeConstraints` 共用上述规则。`layout` 添加约束；更新或重建约束请继续使用 SnapKit 的对应 API。
+
+## 迁移说明
+
+- 将 `[Int]` 等无效数组直接写进 builder，现在会在编译时报错。
+- builder 支持视图数组和 `[BodyBuilderItemable]`；builder 外的 `addArranged(item:)` 也继续接受 `[BodyBuilderItemable]`。
+- Array 不再对任意元素类型无条件遵循 `BodyBuilderItemable`。依赖该旧符合关系的泛型代码需要改用有效元素类型或显式 builder item。
+- `.asBuildItems` 保留为弃用兼容入口，仍在运行时检查元素，非法输入会失败。建议分开书写表达式，或为混合视图和链式对象的数组明确标注 `[BodyBuilderItemable]`。
+- 应用中若有仅用于重复定义 `.C` 的扩展，可以删除。
+
+## 示例与验证
+
+[示例控制器](Example/DeclarativeUIKit/ViewController.swift) 展示了带开关、保存按钮和文字绑定的 Rx 表单。
+
+```sh
+pod install --project-directory=Example --deployment
+bash scripts/check-core.sh
+xcrun simctl list devices available
+# 将 SIMULATOR_ID 设为可用 iPhone 模拟器的 UUID。
+xcodebuild test \
+  -workspace Example/DeclarativeUIKit.xcworkspace \
+  -scheme DeclarativeUIKit-Example \
+  -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
+  CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
+```
+
+测试命令会对所有构建目标覆盖部署版本，使当前 Xcode 能构建较早的示例和依赖，不改变库声明的最低系统版本。Core/Ext 脚本另行验证不引入可选依赖的 iOS 10 目标编译，以及合法客户端通过、非法 builder 数组被拒绝。编译检查不等于 iOS 10 设备运行验证；本次也不承诺 Swift 6 严格并发模式。
+
+GitHub Actions 使用上述流程在可用模拟器上运行测试，覆盖构建、布局顺序、绑定持续更新与释放、重绑、线程交付、按钮状态和控件事件。
 
 ## 开源协议
 
-DeclarativeUIKit is available under the MIT license. See the LICENSE file for more info.
+MIT，详见 [LICENSE](LICENSE)。

@@ -1,0 +1,36 @@
+name: UIKit Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - name: Install CocoaPods
+        run: gem install cocoapods -v 1.16.2 --no-document
+      - name: Install locked dependencies
+        run: pod install --project-directory=Example --deployment
+      - name: Check Core and Ext without optional dependencies
+        run: bash scripts/check-core.sh
+      - name: Select an available iPhone simulator
+        run: |
+          SIMULATOR_ID=$(xcrun simctl list devices available -j | python3 -c 'import json, sys; devices = json.load(sys.stdin)["devices"]; print(next(d["udid"] for group in devices.values() for d in group if d["name"].startswith("iPhone")))')
+          echo "SIMULATOR_ID=$SIMULATOR_ID" >> "$GITHUB_ENV"
+      - name: Run UIKit tests
+        run: |
+          xcodebuild test \
+            -workspace Example/DeclarativeUIKit.xcworkspace \
+            -scheme DeclarativeUIKit-Example \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: UIKit-Test-Results
+          path: TestResults.xcresult
+          if-no-files-found: ignore
