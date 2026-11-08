@@ -11,6 +11,18 @@ builder 在调用时执行一次。状态变化不会自动重建其中的条件
 - Combine：iOS 13+。
 - 可选依赖有各自的系统要求；示例的锁文件固定了本项目验证使用的依赖版本。
 
+### Swift Package Manager
+
+在 Xcode 中添加 `https://github.com/EkkoG/DeclarativeUIKit.git`，选择 `EGDeclarativeUIKit` 产品。这个单一产品包含 Core、Ext、Rx、Combine、SnapKit 和 EGChainable 的全部生成类型；SPM 不拆分可选功能，也不需要按类选择。
+
+builder、绑定和布局使用 `import EGDeclarativeUIKit`，具名静态配置使用 `import EGChainable`；使用 RxSwift 或 Combine 的源类型时，正常导入对应模块。这些功能不需要额外选择产品。
+
+SPM 保留 iOS 10 库基线，Combine 调用要求 iOS 13。SnapKit 限定在 5.6.x，因为 5.7 起最低要求 iOS 12；RxSwift 使用从 6.5.0 开始的兼容 6.x 范围。
+
+当前 SPM 支持尚未发布。需要使用包含 `Package.swift` 的 DeclarativeUIKit 版本，且其 EGChainable 依赖需要发布包含 `Package.swift` 的 0.3.x 版本；旧 tag 不包含这套配置。检查脚本中的本地覆盖仅用于仓库开发联调。
+
+### CocoaPods
+
 通过 CocoaPods 安装：
 
 ```ruby
@@ -30,7 +42,7 @@ EGChainable 保留原默认类清单，清单外的生成类型按类添加 subs
 ```swift
 import UIKit
 import EGDeclarativeUIKit
-import EGChainable // 具名静态配置需要安装 Chainable 模块。
+import EGChainable // SPM 已包含；CocoaPods 需安装 Chainable subspec。
 
 let subtitle: UILabel? = UILabel("请选择")
 let rows = ["姓名", "邮箱"]
@@ -54,13 +66,13 @@ let content = VStack(spacing: 12, alignment: .fill) {
 
 `UILabel("标题")` 设置文字；`UIButton("保存")` 默认创建 system 按钮，可传入 `type: .custom`。其他 UIKit 属性使用生成的具名方法；原有 `assign(to:)`、`spacingAfterSelf` 仍可使用。
 
-安装 Chainable 模块后，直接调用属性方法。每个方法都返回原对象，父类方法也保留子类的具体类型：
+通过 EGChainable 直接调用属性方法。每个方法都返回原对象，父类方法也保留子类的具体类型：
 
 ```swift
 import EGChainable
 
 let label = UILabel("标题").backgroundColor(.white).textColor(.black)
-// 此示例需添加 EGChainable/UITextField subspec。
+// CocoaPods 需添加 EGChainable/UITextField；SPM 已包含全部类型。
 let email = UITextField().placeholder("邮箱").keyboardType(.emailAddress).accessibilityLabel("邮箱")
 let controller = UIViewController().title("账户").hidesBottomBarWhenPushed(true)
 ```
@@ -161,6 +173,18 @@ python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
 ## 示例与验证
 
 [示例控制器](Example/DeclarativeUIKit/ViewController.swift) 展示了带邮箱输入框、开关、保存按钮和文字绑定的 Rx 表单。
+
+验证 SPM 时，将配套 EGChainable checkout 放在本仓库旁边，并选择可用的 iPhone 模拟器：
+
+```sh
+python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
+```
+
+脚本通过 iPhoneOS SDK 和显式 iOS 10 编译器目标构建 EGChainable 与真实外部消费包，并核对产物中的最低系统版本。当前 SwiftPM 会自动提升较旧的部署目标，因此该检查需要显式编译参数；编译通过不等于 iOS 10 设备运行验证。
+
+随后通过 Xcode 在模拟器上运行共用的 XCTest 源码和消费者冒烟测试，测试目标使用 iOS 13。由于 UIKit 控件事件需要 `UIApplicationMain`，而标准 SPM 测试运行器没有 App 宿主，脚本会创建最小临时宿主，不跳过或改写测试。消费包只选择 EGDeclarativeUIKit 产品；RxSwift、SnapKit 从公开 URL 解析，尚未发布的 EGChainable 使用配套本地源码覆盖。日志和测试结果保留在输出的临时目录；也可通过 `--output` 指定一个新目录。
+
+原有 CocoaPods 验证入口：
 
 ```sh
 pod install --project-directory=Example --deployment

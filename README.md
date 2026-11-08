@@ -13,6 +13,18 @@ The builder runs once when you call it. It does not rebuild the view tree when s
 - Combine: iOS 13 or later.
 - Optional dependencies can have their own minimum OS versions. The example lock file fixes the versions used for tests.
 
+### Swift Package Manager
+
+In Xcode, add `https://github.com/EkkoG/DeclarativeUIKit.git` and select the `EGDeclarativeUIKit` product. This single product includes Core, Ext, Rx, Combine, SnapKit, and all generated EGChainable types. SPM has no optional feature products or class selection.
+
+Use `import EGDeclarativeUIKit` for builders, bindings, and layout, and `import EGChainable` for named static modifiers. Import `RxSwift` or `Combine` where you use their source types. You do not need to select another product for these features.
+
+SPM keeps the iOS 10 library baseline; Combine calls require iOS 13. SnapKit is limited to 5.6.x because 5.7 raises its minimum to iOS 12. RxSwift uses the compatible 6.x range from 6.5.0.
+
+This support has not been published yet. Use a DeclarativeUIKit revision that contains `Package.swift`; its EGChainable dependency also needs a published 0.3.x version with `Package.swift`. Older tags do not provide this SPM setup. The local override in the check script is for repository development only.
+
+### CocoaPods
+
 Install with CocoaPods:
 
 ```ruby
@@ -32,7 +44,7 @@ EGChainable retains its existing default class selection. Add a class subspec, s
 ```swift
 import UIKit
 import EGDeclarativeUIKit
-import EGChainable // Install the Chainable subspec for named static modifiers.
+import EGChainable // Included in SPM; CocoaPods uses the Chainable subspec.
 
 let subtitle: UILabel? = UILabel("Choose an option")
 let rows = ["Name", "Email"]
@@ -56,13 +68,13 @@ The builder accepts views, optional views, typed arrays, loops, and conditional 
 
 `UILabel("Title")` sets the text. `UIButton("Save")` creates a system button; pass `type: .custom` when needed. Use the generated property methods for other UIKit properties. Existing `assign(to:)` and `spacingAfterSelf` calls remain available.
 
-The Chainable subspec adds methods that return the original object. Parent methods keep the concrete subclass type:
+EGChainable adds methods that return the original object. Parent methods keep the concrete subclass type:
 
 ```swift
 import EGChainable
 
 let label = UILabel("Title").backgroundColor(.white).textColor(.black)
-// Add the EGChainable/UITextField subspec for this example.
+// CocoaPods: add EGChainable/UITextField. SPM includes all classes.
 let email = UITextField().placeholder("Email").keyboardType(.emailAddress).accessibilityLabel("Email")
 let controller = UIViewController().title("Profile").hidesBottomBarWhenPushed(true)
 ```
@@ -71,7 +83,7 @@ For a custom or nested property, Core provides a typed key-path setter: `label.s
 
 ## Bind values
 
-The Rx and Combine subspecs each provide `bind(_:to:)` with a writable key path. Values can bind to matching optional properties, so a `String` source can set `UILabel.text` without a manual conversion.
+The Rx and Combine integrations each provide `bind(_:to:)` with a writable key path. Values can bind to matching optional properties, so a `String` source can set `UILabel.text` without a manual conversion.
 
 ```swift
 // Combine; model.title is declared with @Published.
@@ -90,7 +102,7 @@ Binding rules:
 - Combine accepts any `Publisher` with `Failure == Never`. It delivers values asynchronously on the main queue, including the initial value. Handle upstream errors before binding.
 - Rx accepts `Observable`. A completed or failed stream leaves the last value in place. Handle errors upstream if the UI must show them. An emitted `nil` still clears an optional property.
 - The view owns its subscriptions. The binding holds the view weakly and cancels subscriptions when the view is released. Removing a retained view from its parent does not cancel its bindings.
-- A new binding to the same key path replaces the old binding within that reactive subspec. Rx and Combine have separate storage. Do not use both to drive one property.
+- A new binding to the same key path replaces the old binding within that reactive integration. Rx and Combine have separate storage. Do not use both to drive one property.
 - Static assignment, including `set`, does not cancel a binding. The next source value can replace it.
 - Button methods such as `title(_:for:)` use both the field and control state as the replacement key. Normal and selected titles can stay bound at the same time.
 
@@ -112,7 +124,7 @@ These methods use target-action and support iOS 10. Each call adds a handler. Th
 
 ## Apply layout
 
-With the SnapKit subspec, `layout` returns the same view:
+With the SnapKit integration, `layout` returns the same view:
 
 ```swift
 import SnapKit
@@ -163,6 +175,18 @@ The generator uses Xcode's `swift-symbolgraph-extract`, then compiles all static
 ## Example and checks
 
 See [the example controller](Example/DeclarativeUIKit/ViewController.swift) for a working Rx form with an email field, a switch, a save button, and text bindings.
+
+To check SPM, keep the matching EGChainable checkout beside this repository and select an available iPhone simulator:
+
+```sh
+python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
+```
+
+The script builds EGChainable and an external consumer with the iPhoneOS SDK and an explicit iOS 10 compiler target, then checks the output's deployment version. Current SwiftPM raises older targets automatically, so the explicit compiler target is needed for this check. This proves compilation, not execution on an iOS 10 device.
+
+It then runs the shared XCTest source and a consumer smoke test through Xcode on the simulator with an iOS 13 test target. The script creates a small temporary app host because UIKit control events need `UIApplicationMain`; the standard SPM test runner has no app host. No tests are skipped or changed. The consumer selects only the EGDeclarativeUIKit product. RxSwift and SnapKit resolve from their public URLs; the matching local EGChainable overrides its unpublished dependency. Logs and test results remain in the printed temporary directory. Pass `--output` to use a new directory of your choice.
+
+For the existing CocoaPods checks:
 
 ```sh
 pod install --project-directory=Example --deployment

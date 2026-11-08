@@ -54,11 +54,17 @@ jobs:
             CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
       - name: Check optional module clients
         run: python3 scripts/check-modules.py DerivedData/Build/Products/Debug-iphonesimulator
+      - name: Check Swift Package Manager products and tests
+        run: python3 scripts/check-spm.py --simulator "$SIMULATOR_ID" --output "$RUNNER_TEMP/SPMCheck"
       - name: Check generated sources
         run: python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: UIKit-Test-Results
-          path: DeclarativeUIKit/TestResults.xcresult
+          path: |
+            DeclarativeUIKit/TestResults.xcresult
+            ${{ runner.temp }}/SPMCheck/Tests.xcresult
+            ${{ runner.temp }}/SPMCheck/*.log
+            ${{ runner.temp }}/SPMCheck/Consumer/Package.resolved
           if-no-files-found: ignore
