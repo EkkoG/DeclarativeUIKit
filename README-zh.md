@@ -6,43 +6,23 @@ builder 在调用时执行一次。状态变化不会自动重建其中的条件
 
 ## 要求与安装
 
-- Core、Ext：iOS 10+，Xcode 26.5，使用 Swift 5 语言模式。
-- 自定义 Stack 间距：iOS 11+。
-- Combine：iOS 13+。
-- 可选依赖有各自的系统要求；示例的锁文件固定了本项目验证使用的依赖版本。
+- iOS 15+，Xcode 26.5，使用 Swift 5 语言模式。
+- 新版本仅支持 Swift Package Manager；需要 CocoaPods 的项目应继续使用旧版本。
 
-### Swift Package Manager
+在 Xcode 中添加 `https://github.com/EkkoG/DeclarativeUIKit.git`，选择 `EGDeclarativeUIKit` 产品。这个单一产品包含 Core、Ext、Rx、Combine、SnapKit 和 EGChainable 的全部生成类型，无需选择可选产品或按类安装。
 
-在 Xcode 中添加 `https://github.com/EkkoG/DeclarativeUIKit.git`，选择 `EGDeclarativeUIKit` 产品。这个单一产品包含 Core、Ext、Rx、Combine、SnapKit 和 EGChainable 的全部生成类型；SPM 不拆分可选功能，也不需要按类选择。
+builder、绑定和布局使用 `import EGDeclarativeUIKit`，具名静态配置使用 `import EGChainable`；使用 RxSwift、Combine 或 SnapKit 的类型时，正常导入对应模块，不需要额外选择产品。
 
-builder、绑定和布局使用 `import EGDeclarativeUIKit`，具名静态配置使用 `import EGChainable`；使用 RxSwift 或 Combine 的源类型时，正常导入对应模块。这些功能不需要额外选择产品。
+依赖使用从 6.10.2 开始的 RxSwift/RxCocoa 6.x 和从 6.0.0 开始的 SnapKit 6.x，其有效包清单均兼容 iOS 15。Combine 和自定义 Stack 间距在整个支持范围内可用。`UIListView` 使用 ScrollView 加 Stack，不具备列表单元格复用。
 
-SPM 保留 iOS 10 库基线，Combine 调用要求 iOS 13。SnapKit 限定在 5.6.x，因为 5.7 起最低要求 iOS 12；RxSwift 使用从 6.5.0 开始的兼容 6.x 范围。
-
-当前 SPM 支持尚未发布。需要使用包含 `Package.swift` 的 DeclarativeUIKit 版本，且其 EGChainable 依赖需要发布包含 `Package.swift` 的 0.3.x 版本；旧 tag 不包含这套配置。检查脚本中的本地覆盖仅用于仓库开发联调。
-
-### CocoaPods
-
-通过 CocoaPods 安装：
-
-```ruby
-pod 'EGDeclarativeUIKit'
-pod 'EGDeclarativeUIKit/Rx'        # 按需
-pod 'EGDeclarativeUIKit/Combine'   # 按需
-pod 'EGDeclarativeUIKit/SnapKit'   # 按需
-pod 'EGDeclarativeUIKit/Chainable' # 按需，自动依赖 EGChainable
-```
-
-默认安装 Core 和 Ext，不强制引入 RxSwift、Combine、SnapKit 或 EGChainable。`UIListView` 仅在可导入 SnapKit 时可用；其实现是 ScrollView 加 Stack，不具备列表单元格复用。
-
-EGChainable 保留原默认类清单，清单外的生成类型按类添加 subspec，例如 `pod 'EGChainable/UITextField'`。当前源码改动尚未发布到 CocoaPods；仓库示例中的本地路径用于开发联调，不是正常安装的前置要求。
+当前支持尚未发布。需要使用包含这份 `Package.swift` 的 DeclarativeUIKit 版本，且 EGChainable 需要发布包含包清单的配套 0.3.x 版本；旧 tag 不包含这套配置。示例工程中的相对本地包路径仅用于开发联调。
 
 ## 创建与配置视图
 
 ```swift
 import UIKit
 import EGDeclarativeUIKit
-import EGChainable // SPM 已包含；CocoaPods 需安装 Chainable subspec。
+import EGChainable
 
 let subtitle: UILabel? = UILabel("请选择")
 let rows = ["姓名", "邮箱"]
@@ -72,12 +52,11 @@ let content = VStack(spacing: 12, alignment: .fill) {
 import EGChainable
 
 let label = UILabel("标题").backgroundColor(.white).textColor(.black)
-// CocoaPods 需添加 EGChainable/UITextField；SPM 已包含全部类型。
 let email = UITextField().placeholder("邮箱").keyboardType(.emailAddress).accessibilityLabel("邮箱")
 let controller = UIViewController().title("账户").hidesBottomBarWhenPushed(true)
 ```
 
-自定义或嵌套属性可使用 Core 的类型安全入口：`label.set(\.layer.cornerRadius, to: 8)`，同样返回原对象。未安装 Chainable 时，可以使用 `set` 或原生 UIKit 赋值。
+自定义或嵌套属性可使用 Core 的类型安全入口：`label.set(\.layer.cornerRadius, to: 8)`，同样返回原对象。
 
 ## 绑定状态
 
@@ -118,11 +97,11 @@ UISwitch().onValueChanged { control in
 }
 ```
 
-底层使用 target-action，支持 iOS 10。每次调用添加一个处理器，控件释放时一起释放。如果拥有者也持有控件，闭包应使用适当的弱引用。
+底层使用 target-action。每次调用添加一个处理器，控件释放时一起释放。如果拥有者也持有控件，闭包应使用适当的弱引用。
 
 ## 配置布局
 
-安装 SnapKit 模块后，`layout` 返回原视图，可以继续链式调用：
+`layout` 使用已包含的 SnapKit，并返回原视图，可以继续链式调用：
 
 ```swift
 import SnapKit
@@ -172,37 +151,28 @@ python3 ../EGChainable/scripts/generate.py --declarative-root "$PWD" --check
 
 ## 示例与验证
 
-[示例控制器](Example/DeclarativeUIKit/ViewController.swift) 展示了带邮箱输入框、开关、保存按钮和文字绑定的 Rx 表单。
-
-验证 SPM 时，将配套 EGChainable checkout 放在本仓库旁边，并选择可用的 iPhone 模拟器：
+将配套 EGChainable checkout 放在本仓库旁边，在 Xcode 中直接打开 `Example/DeclarativeUIKit.xcodeproj`。工程使用本地 Swift package，无需运行 `pod install`。[示例控制器](Example/DeclarativeUIKit/ViewController.swift) 展示带邮箱输入框、开关、保存按钮和文字绑定的 Rx 表单。
 
 ```sh
-python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
-```
-
-脚本通过 iPhoneOS SDK 和显式 iOS 10 编译器目标构建 EGChainable 与真实外部消费包，并核对产物中的最低系统版本。当前 SwiftPM 会自动提升较旧的部署目标，因此该检查需要显式编译参数；编译通过不等于 iOS 10 设备运行验证。
-
-随后通过 Xcode 在模拟器上运行共用的 XCTest 源码和消费者冒烟测试，测试目标使用 iOS 13。由于 UIKit 控件事件需要 `UIApplicationMain`，而标准 SPM 测试运行器没有 App 宿主，脚本会创建最小临时宿主，不跳过或改写测试。消费包只选择 EGDeclarativeUIKit 产品；RxSwift、SnapKit 从公开 URL 解析，尚未发布的 EGChainable 使用配套本地源码覆盖。日志和测试结果保留在输出的临时目录；也可通过 `--output` 指定一个新目录。
-
-原有 CocoaPods 验证入口：
-
-```sh
-pod install --project-directory=Example --deployment
-bash scripts/check-core.sh
 xcrun simctl list devices available
-# 将 SIMULATOR_ID 设为可用 iPhone 模拟器的 UUID。
+# 将 SIMULATOR_ID 设为可用的 iPhone 模拟器 UUID。
+bash scripts/check-core.sh
+python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
 xcodebuild test \
-  -workspace Example/DeclarativeUIKit.xcworkspace \
+  -project Example/DeclarativeUIKit.xcodeproj \
   -scheme DeclarativeUIKit-Example \
   -derivedDataPath DerivedData \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
-  CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
-python3 scripts/check-modules.py DerivedData/Build/Products/Debug-iphonesimulator
+  CODE_SIGNING_ALLOWED=NO SWIFT_VERSION=5.0
 ```
 
-测试命令会对所有构建目标覆盖部署版本，使当前 Xcode 能构建较早的示例和依赖，不改变库声明的最低系统版本。Core/Ext 脚本另行验证不引入可选依赖的 iOS 10 目标编译，以及合法客户端通过、非法 builder 数组被拒绝。编译检查不等于 iOS 10 设备运行验证；本次也不承诺 Swift 6 严格并发模式。
+SPM 脚本以正常 iOS 15 目标构建 EGChainable 和真实外部消费包，检查实际解析依赖的有效清单，并运行 1 项消费者测试。消费者只选择 EGDeclarativeUIKit 产品，使用静态方法、绑定和布局。RxSwift、SnapKit 从公开 URL 解析，尚未发布的 EGChainable 使用配套本地源码覆盖。日志和结果保留在输出的临时目录，也可用 `--output` 指定新目录。
 
-GitHub Actions 同时检出两个仓库并使用 Xcode 26.5。通过仓库变量 `EGCHAINABLE_REF` 或手动工作流参数指定配套 EGChainable 版本；该版本必须已在 GitHub 上可用，CI 才能使用。本地改动不会自动运行远端 CI。测试覆盖构建、布局顺序、绑定持续更新与释放、重绑、线程交付、按钮状态和控件事件。
+正式示例 App 承载原有 37 项行为测试，包括需要 `UIApplicationMain` 的 UIKit 控件事件；所有库依赖均通过 SPM 提供。Core/Ext 脚本检查 iOS 15 目标下的合法与非法 builder 客户端。测试运行在选定模拟器上，编译通过不等于 iOS 15 设备运行验证；本次不承诺 Swift 6 严格并发模式。
+
+Debug App 将包符号保留在主可执行文件中，测试 bundle 通过宿主复用已链接的库。测试目标只导入生成的 RxCocoaRuntime module map，不再链接第二份包，避免重复加载类。
+
+GitHub Actions 同时检出两个仓库并使用 Xcode 26.5。通过 `EGCHAINABLE_REF` 或手动工作流参数指定配套 EGChainable 版本，该版本必须已在 GitHub 上可用。CI 还会构建 EGChainable 示例并检查生成一致性；本地改动不会自动运行远端 CI。
 
 ## 开源协议
 

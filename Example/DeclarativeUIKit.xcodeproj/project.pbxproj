@@ -13,8 +13,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		A7E6DEE2A373114AA7C84075 /* Pods_DeclarativeUIKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D3BA1F2C47ACCD082DF785 /* Pods_DeclarativeUIKit_Example.framework */; };
-		AE981F5FC178D372BB7BA674 /* Pods_DeclarativeUIKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B16ED24D169A25410ECBED /* Pods_DeclarativeUIKit_Tests.framework */; };
+		AFB58A706FE59408250AC61A /* EGDeclarativeUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = DF2CDA680349A3D6D1492400 /* EGDeclarativeUIKit */; };
+		C347CF8CB87FAE8210991F15 /* EGChainable in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8D6AC142E1921AD9917467 /* EGChainable */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		0279B015F986363DFA3FE4FA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		1AE0B1D683A6FEBCAAE799D2 /* Pods-DeclarativeUIKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeUIKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-DeclarativeUIKit_Tests/Pods-DeclarativeUIKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		306A84E79355B3C2A8396A18 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* DeclarativeUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeclarativeUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -41,12 +40,6 @@
 		607FACE51AFB9204008FA782 /* DeclarativeUIKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeclarativeUIKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		92D3BA1F2C47ACCD082DF785 /* Pods_DeclarativeUIKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeclarativeUIKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9664CDFADB63687489977975 /* Pods-DeclarativeUIKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeUIKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-DeclarativeUIKit_Example/Pods-DeclarativeUIKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		9E1D449EEAD51111F2D03096 /* Pods-DeclarativeUIKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeUIKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-DeclarativeUIKit_Tests/Pods-DeclarativeUIKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		B4B16ED24D169A25410ECBED /* Pods_DeclarativeUIKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeclarativeUIKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F075CE24855C57E409F39104 /* Pods-DeclarativeUIKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeclarativeUIKit_Example.release.xcconfig"; path = "Target Support Files/Pods-DeclarativeUIKit_Example/Pods-DeclarativeUIKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		FBFD78A9C4B85BB574D4BB58 /* DeclarativeUIKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DeclarativeUIKit.podspec; path = ../DeclarativeUIKit.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7E6DEE2A373114AA7C84075 /* Pods_DeclarativeUIKit_Example.framework in Frameworks */,
+				AFB58A706FE59408250AC61A /* EGDeclarativeUIKit in Frameworks */,
+				C347CF8CB87FAE8210991F15 /* EGChainable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,32 +56,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE981F5FC178D372BB7BA674 /* Pods_DeclarativeUIKit_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		26466B1A0D9EACD2D4509226 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9664CDFADB63687489977975 /* Pods-DeclarativeUIKit_Example.debug.xcconfig */,
-				F075CE24855C57E409F39104 /* Pods-DeclarativeUIKit_Example.release.xcconfig */,
-				1AE0B1D683A6FEBCAAE799D2 /* Pods-DeclarativeUIKit_Tests.debug.xcconfig */,
-				9E1D449EEAD51111F2D03096 /* Pods-DeclarativeUIKit_Tests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				607FACF51AFB993E008FA782 /* Podspec Metadata */,
+				607FACF51AFB993E008FA782 /* Package Metadata */,
 				607FACD21AFB9204008FA782 /* Example for DeclarativeUIKit */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				26466B1A0D9EACD2D4509226 /* Pods */,
 				617A4EE2F4FDD248275C5D14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -140,21 +121,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
+		607FACF51AFB993E008FA782 /* Package Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				FBFD78A9C4B85BB574D4BB58 /* DeclarativeUIKit.podspec */,
 				0279B015F986363DFA3FE4FA /* README.md */,
 				306A84E79355B3C2A8396A18 /* LICENSE */,
 			);
-			name = "Podspec Metadata";
+			name = "Package Metadata";
 			sourceTree = "<group>";
 		};
 		617A4EE2F4FDD248275C5D14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				92D3BA1F2C47ACCD082DF785 /* Pods_DeclarativeUIKit_Example.framework */,
-				B4B16ED24D169A25410ECBED /* Pods_DeclarativeUIKit_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,17 +144,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "DeclarativeUIKit_Example" */;
 			buildPhases = (
-				D94EB3E595D5D66C7C8F66E1 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				AFD5C993022BAB0913898253 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = DeclarativeUIKit_Example;
+			packageProductDependencies = (
+				DF2CDA680349A3D6D1492400 /* EGDeclarativeUIKit */,
+				4B8D6AC142E1921AD9917467 /* EGChainable */,
+			);
 			productName = DeclarativeUIKit;
 			productReference = 607FACD01AFB9204008FA782 /* DeclarativeUIKit_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -185,7 +165,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "DeclarativeUIKit_Tests" */;
 			buildPhases = (
-				32FBDE68AB2EB989A86070F2 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -231,6 +210,10 @@
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
+			packageReferences = (
+				678CACE5B10C0978A526AA72 /* XCLocalSwiftPackageReference ".." */,
+				955BBF6792A09C54B2F5F470 /* XCLocalSwiftPackageReference "EGChainable" */,
+			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,81 +243,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		32FBDE68AB2EB989A86070F2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DeclarativeUIKit_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AFD5C993022BAB0913898253 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DeclarativeUIKit_Example/Pods-DeclarativeUIKit_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/EGChainable/EGChainable.framework",
-				"${BUILT_PRODUCTS_DIR}/EGDeclarativeUIKit/EGDeclarativeUIKit.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EGChainable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EGDeclarativeUIKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeclarativeUIKit_Example/Pods-DeclarativeUIKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D94EB3E595D5D66C7C8F66E1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DeclarativeUIKit_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		607FACCC1AFB9204008FA782 /* Sources */ = {
@@ -429,11 +337,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -475,21 +384,23 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9664CDFADB63687489977975 /* Pods-DeclarativeUIKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEAD_CODE_STRIPPING = NO;
+				ENABLE_DEBUG_DYLIB = NO;
 				INFOPLIST_FILE = DeclarativeUIKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -501,11 +412,11 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F075CE24855C57E409F39104 /* Pods-DeclarativeUIKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_DEBUG_DYLIB = NO;
 				INFOPLIST_FILE = DeclarativeUIKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -517,8 +428,8 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AE0B1D683A6FEBCAAE799D2 /* Pods-DeclarativeUIKit_Tests.debug.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -528,8 +439,9 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(OBJROOT)/GeneratedModuleMaps-$(PLATFORM_NAME)/RxCocoaRuntime.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -540,15 +452,16 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E1D449EEAD51111F2D03096 /* Pods-DeclarativeUIKit_Tests.release.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(OBJROOT)/GeneratedModuleMaps-$(PLATFORM_NAME)/RxCocoaRuntime.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -588,6 +501,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		678CACE5B10C0978A526AA72 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+		955BBF6792A09C54B2F5F470 /* XCLocalSwiftPackageReference "EGChainable" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../EGChainable;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4B8D6AC142E1921AD9917467 /* EGChainable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 955BBF6792A09C54B2F5F470 /* XCLocalSwiftPackageReference "EGChainable" */;
+			productName = EGChainable;
+		};
+		DF2CDA680349A3D6D1492400 /* EGDeclarativeUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 678CACE5B10C0978A526AA72 /* XCLocalSwiftPackageReference ".." */;
+			productName = EGDeclarativeUIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
 }

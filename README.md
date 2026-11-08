@@ -8,43 +8,23 @@ The builder runs once when you call it. It does not rebuild the view tree when s
 
 ## Requirements and installation
 
-- Core and Ext: iOS 10 or later, with Xcode 26.5 in Swift 5 language mode.
-- Custom stack spacing: iOS 11 or later.
-- Combine: iOS 13 or later.
-- Optional dependencies can have their own minimum OS versions. The example lock file fixes the versions used for tests.
+- iOS 15 or later, with Xcode 26.5 in Swift 5 language mode.
+- New versions use Swift Package Manager only. CocoaPods support remains in older releases.
 
-### Swift Package Manager
+In Xcode, add `https://github.com/EkkoG/DeclarativeUIKit.git` and select the `EGDeclarativeUIKit` product. This single product includes Core, Ext, Rx, Combine, SnapKit, and all generated EGChainable types. There are no optional products or class selections.
 
-In Xcode, add `https://github.com/EkkoG/DeclarativeUIKit.git` and select the `EGDeclarativeUIKit` product. This single product includes Core, Ext, Rx, Combine, SnapKit, and all generated EGChainable types. SPM has no optional feature products or class selection.
+Use `import EGDeclarativeUIKit` for builders, bindings, and layout, and `import EGChainable` for named static modifiers. Import `RxSwift`, `Combine`, or `SnapKit` where you use their types. You do not need to select another product for these features.
 
-Use `import EGDeclarativeUIKit` for builders, bindings, and layout, and `import EGChainable` for named static modifiers. Import `RxSwift` or `Combine` where you use their source types. You do not need to select another product for these features.
+The package uses RxSwift/RxCocoa 6.x from 6.10.2 and SnapKit 6.x from 6.0.0. Their effective package manifests support the iOS 15 baseline. Combine and custom stack spacing are available throughout this baseline. `UIListView` uses a scroll view and a stack, with no cell reuse.
 
-SPM keeps the iOS 10 library baseline; Combine calls require iOS 13. SnapKit is limited to 5.6.x because 5.7 raises its minimum to iOS 12. RxSwift uses the compatible 6.x range from 6.5.0.
-
-This support has not been published yet. Use a DeclarativeUIKit revision that contains `Package.swift`; its EGChainable dependency also needs a published 0.3.x version with `Package.swift`. Older tags do not provide this SPM setup. The local override in the check script is for repository development only.
-
-### CocoaPods
-
-Install with CocoaPods:
-
-```ruby
-pod 'EGDeclarativeUIKit'
-pod 'EGDeclarativeUIKit/Rx'        # optional
-pod 'EGDeclarativeUIKit/Combine'   # optional
-pod 'EGDeclarativeUIKit/SnapKit'   # optional
-pod 'EGDeclarativeUIKit/Chainable' # optional; includes EGChainable as a dependency
-```
-
-The default subspecs are Core and Ext. They do not require RxSwift, Combine, SnapKit, or EGChainable. `UIListView` is available only when SnapKit can be imported; it uses a scroll view and a stack, with no cell reuse.
-
-EGChainable retains its existing default class selection. Add a class subspec, such as `pod 'EGChainable/UITextField'`, for generated classes outside that selection. These source changes have not been published to CocoaPods yet. The repository example uses local paths for development; they are not required for normal installation.
+This support has not been published yet. Use a DeclarativeUIKit revision that contains this `Package.swift`; its EGChainable dependency also needs a published 0.3.x version with its package manifest. Older tags do not provide this setup. The example projects use relative local package paths for development only.
 
 ## Build and configure views
 
 ```swift
 import UIKit
 import EGDeclarativeUIKit
-import EGChainable // Included in SPM; CocoaPods uses the Chainable subspec.
+import EGChainable
 
 let subtitle: UILabel? = UILabel("Choose an option")
 let rows = ["Name", "Email"]
@@ -74,12 +54,11 @@ EGChainable adds methods that return the original object. Parent methods keep th
 import EGChainable
 
 let label = UILabel("Title").backgroundColor(.white).textColor(.black)
-// CocoaPods: add EGChainable/UITextField. SPM includes all classes.
 let email = UITextField().placeholder("Email").keyboardType(.emailAddress).accessibilityLabel("Email")
 let controller = UIViewController().title("Profile").hidesBottomBarWhenPushed(true)
 ```
 
-For a custom or nested property, Core provides a typed key-path setter: `label.set(\.layer.cornerRadius, to: 8)`. This returns the same object. Without Chainable, use `set` or normal UIKit assignment.
+For a custom or nested property, Core provides a typed key-path setter: `label.set(\.layer.cornerRadius, to: 8)`. This returns the same object.
 
 ## Bind values
 
@@ -120,7 +99,7 @@ UISwitch().onValueChanged { control in
 }
 ```
 
-These methods use target-action and support iOS 10. Each call adds a handler. The control keeps its handlers until it is released. Use weak captures for an owner that also retains the control.
+These methods use target-action. Each call adds a handler. The control keeps its handlers until it is released. Use weak captures for an owner that also retains the control.
 
 ## Apply layout
 
@@ -153,7 +132,7 @@ This is a breaking change. No legacy wrappers or aliases remain.
 | `views.asBuildItems` | `views`, typed as `[UIView]` |
 | `stack.addArranged(item: items)` | `stack.addArranged(views)` |
 
-`BodyBuilderItemable` and the builder wrapper types are removed. Use `[UIView]` for mixed view arrays. Flatten nested arrays with `flatMap` before passing them to a builder. Invalid arrays such as `[Int]` fail at compile time. `applyAutoLayout` is no longer public; use `layout` with the SnapKit subspec. Remove app-local `.C` aliases.
+`BodyBuilderItemable` and the builder wrapper types are removed. Use `[UIView]` for mixed view arrays. Flatten nested arrays with `flatMap` before passing them to a builder. Invalid arrays such as `[Int]` fail at compile time. `applyAutoLayout` is no longer public; use `layout`. Remove app-local `.C` aliases.
 
 EGChainable 0.3 removes `.chainable`, `.asBase()`, and all wrappers. It generates writable property methods and five UIButton state methods: `title`, `titleColor`, `image`, `backgroundImage`, and `attributedTitle`. Use native calls for commands such as `reloadData()` and `stopLoading()`; they do not return a chainable object.
 
@@ -174,37 +153,28 @@ The generator uses Xcode's `swift-symbolgraph-extract`, then compiles all static
 
 ## Example and checks
 
-See [the example controller](Example/DeclarativeUIKit/ViewController.swift) for a working Rx form with an email field, a switch, a save button, and text bindings.
-
-To check SPM, keep the matching EGChainable checkout beside this repository and select an available iPhone simulator:
+Keep the matching EGChainable checkout beside this repository. Open `Example/DeclarativeUIKit.xcodeproj` directly in Xcode. The project uses local Swift packages and does not need `pod install`. [The example controller](Example/DeclarativeUIKit/ViewController.swift) shows an Rx form with an email field, a switch, a save button, and text bindings.
 
 ```sh
-python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
-```
-
-The script builds EGChainable and an external consumer with the iPhoneOS SDK and an explicit iOS 10 compiler target, then checks the output's deployment version. Current SwiftPM raises older targets automatically, so the explicit compiler target is needed for this check. This proves compilation, not execution on an iOS 10 device.
-
-It then runs the shared XCTest source and a consumer smoke test through Xcode on the simulator with an iOS 13 test target. The script creates a small temporary app host because UIKit control events need `UIApplicationMain`; the standard SPM test runner has no app host. No tests are skipped or changed. The consumer selects only the EGDeclarativeUIKit product. RxSwift and SnapKit resolve from their public URLs; the matching local EGChainable overrides its unpublished dependency. Logs and test results remain in the printed temporary directory. Pass `--output` to use a new directory of your choice.
-
-For the existing CocoaPods checks:
-
-```sh
-pod install --project-directory=Example --deployment
-bash scripts/check-core.sh
 xcrun simctl list devices available
 # Set SIMULATOR_ID to an available iPhone simulator UUID.
+bash scripts/check-core.sh
+python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
 xcodebuild test \
-  -workspace Example/DeclarativeUIKit.xcworkspace \
+  -project Example/DeclarativeUIKit.xcodeproj \
   -scheme DeclarativeUIKit-Example \
   -derivedDataPath DerivedData \
   -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
-  CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=13.0 SWIFT_VERSION=5.0
-python3 scripts/check-modules.py DerivedData/Build/Products/Debug-iphonesimulator
+  CODE_SIGNING_ALLOWED=NO SWIFT_VERSION=5.0
 ```
 
-The test command overrides the deployment target for all build targets so current Xcode can build the old example and dependencies. It does not change the library's declared minimum version. The Core/Ext script separately compiles an iOS 10 target without optional dependencies and checks valid and invalid builder clients. Compilation does not prove behavior on an iOS 10 device. Swift 6 strict concurrency mode is not part of this revision's support claim.
+The SPM script builds EGChainable and an external consumer for iOS 15, reads the effective manifests of the resolved dependencies, and runs one consumer test. The consumer selects only EGDeclarativeUIKit and uses static methods, bindings, and layout. RxSwift and SnapKit resolve from their public URLs; the matching local EGChainable overrides its unpublished dependency. Logs and results remain in the printed temporary directory. Use `--output` to select a new directory.
 
-GitHub Actions checks out both repositories and uses Xcode 26.5. Set the `EGCHAINABLE_REF` repository variable or the manual workflow input to the matching EGChainable revision; that revision must be available on GitHub before CI can use it. Local changes do not run remote CI. The tests cover builders, layout order, binding updates and release, replacement, thread delivery, button states, and control events.
+The example App hosts the original 37 behavior tests, including UIKit control events that require `UIApplicationMain`. It uses SPM for all library dependencies. The Core/Ext script checks an iOS 15 target and valid and invalid builder clients. Tests run on the selected simulator; compilation does not prove execution on an iOS 15 device. Swift 6 strict concurrency mode is not part of this revision's support claim.
+
+The Debug App keeps package symbols in its main executable so the test bundle can use its linked libraries. The test target imports the generated RxCocoaRuntime module map without linking a second copy of the packages.
+
+GitHub Actions checks out both repositories and uses Xcode 26.5. Set `EGCHAINABLE_REF` or the manual workflow input to the matching EGChainable revision; that revision must be available on GitHub. CI also builds the EGChainable example and checks generated sources. Local changes do not run remote CI.
 
 ## License
 

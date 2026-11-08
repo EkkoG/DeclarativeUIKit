@@ -6,7 +6,7 @@ CHECK_DIR="$(mktemp -d "${TMPDIR:-/tmp}/declarativeuikit-core.XXXXXX")"
 trap 'rm -rf "$CHECK_DIR"' EXIT
 SDK_PATH="$(xcrun --sdk iphonesimulator --show-sdk-path)"
 SWIFT=(xcrun swiftc -swift-version 5 -sdk "$SDK_PATH"
-    -target "$(uname -m)-apple-ios10.0-simulator" -module-cache-path "$CHECK_DIR/modules")
+    -target "$(uname -m)-apple-ios15.0-simulator" -module-cache-path "$CHECK_DIR/modules")
 
 printf '#import <UIKit/UIKit.h>\n' > "$CHECK_DIR/UIKitImport.h"
 "${SWIFT[@]}" -emit-module -parse-as-library -module-name EGDeclarativeUIKit \
@@ -54,4 +54,4 @@ for EXPRESSION in 'UIView().apply { _ in }' '[UIView()].asBuildItems' 'UIView().
         exit 1
     fi
 done
-echo "Core and Ext compile for iOS 10. The valid client passes; the invalid array is rejected."
+echo "Core and Ext compile for iOS 15. The valid client passes; the invalid array is rejected."
