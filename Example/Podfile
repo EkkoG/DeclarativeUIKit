@@ -6,6 +6,9 @@ platform :ios, '10.0'
 
 target 'DeclarativeUIKit_Example' do
   pod 'EGChainable', :path => '../../EGChainable'
+  pod 'EGChainable/UITextField', :path => '../../EGChainable'
+  pod 'EGChainable/UITableViewCell', :path => '../../EGChainable'
+  pod 'EGChainable/UIPageControl', :path => '../../EGChainable'
   pod 'EGDeclarativeUIKit', :path => '../'
   pod 'EGDeclarativeUIKit/Ext', :path => '../'
   pod 'EGDeclarativeUIKit/Rx', :path => '../'

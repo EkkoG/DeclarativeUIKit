@@ -13,18 +13,19 @@ The builder runs once when you call it. It does not rebuild the view tree when s
 - Combine: iOS 13 or later.
 - Optional dependencies can have their own minimum OS versions. The example lock file fixes the versions used for tests.
 
-Use a local checkout to use the APIs in this revision. Adjust the path for your app:
+Install with CocoaPods:
 
 ```ruby
-pod 'EGDeclarativeUIKit', :path => '../DeclarativeUIKit'
-pod 'EGDeclarativeUIKit/Rx', :path => '../DeclarativeUIKit'       # optional
-pod 'EGDeclarativeUIKit/Combine', :path => '../DeclarativeUIKit'  # optional
-pod 'EGDeclarativeUIKit/SnapKit', :path => '../DeclarativeUIKit'  # optional
-pod 'EGDeclarativeUIKit/Chainable', :path => '../DeclarativeUIKit' # optional
-pod 'EGChainable', :path => '../EGChainable' # required for the local Chainable revision
+pod 'EGDeclarativeUIKit'
+pod 'EGDeclarativeUIKit/Rx'        # optional
+pod 'EGDeclarativeUIKit/Combine'   # optional
+pod 'EGDeclarativeUIKit/SnapKit'   # optional
+pod 'EGDeclarativeUIKit/Chainable' # optional; includes EGChainable as a dependency
 ```
 
 The default subspecs are Core and Ext. They do not require RxSwift, Combine, SnapKit, or EGChainable. `UIListView` is available only when SnapKit can be imported; it uses a scroll view and a stack, with no cell reuse.
+
+EGChainable retains its existing default class selection. Add a class subspec, such as `pod 'EGChainable/UITextField'`, for generated classes outside that selection. These source changes have not been published to CocoaPods yet. The repository example uses local paths for development; they are not required for normal installation.
 
 ## Build and configure views
 
@@ -61,6 +62,7 @@ The Chainable subspec adds methods that return the original object. Parent metho
 import EGChainable
 
 let label = UILabel("Title").backgroundColor(.white).textColor(.black)
+// Add the EGChainable/UITextField subspec for this example.
 let email = UITextField().placeholder("Email").keyboardType(.emailAddress).accessibilityLabel("Email")
 let controller = UIViewController().title("Profile").hidesBottomBarWhenPushed(true)
 ```

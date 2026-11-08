@@ -11,18 +11,19 @@ builder 在调用时执行一次。状态变化不会自动重建其中的条件
 - Combine：iOS 13+。
 - 可选依赖有各自的系统要求；示例的锁文件固定了本项目验证使用的依赖版本。
 
-使用当前源码版本时，指向本地 checkout；根据应用目录调整路径：
+通过 CocoaPods 安装：
 
 ```ruby
-pod 'EGDeclarativeUIKit', :path => '../DeclarativeUIKit'
-pod 'EGDeclarativeUIKit/Rx', :path => '../DeclarativeUIKit'       # 按需
-pod 'EGDeclarativeUIKit/Combine', :path => '../DeclarativeUIKit'  # 按需
-pod 'EGDeclarativeUIKit/SnapKit', :path => '../DeclarativeUIKit'  # 按需
-pod 'EGDeclarativeUIKit/Chainable', :path => '../DeclarativeUIKit' # 按需
-pod 'EGChainable', :path => '../EGChainable' # 本地 Chainable 新版所需
+pod 'EGDeclarativeUIKit'
+pod 'EGDeclarativeUIKit/Rx'        # 按需
+pod 'EGDeclarativeUIKit/Combine'   # 按需
+pod 'EGDeclarativeUIKit/SnapKit'   # 按需
+pod 'EGDeclarativeUIKit/Chainable' # 按需，自动依赖 EGChainable
 ```
 
 默认安装 Core 和 Ext，不强制引入 RxSwift、Combine、SnapKit 或 EGChainable。`UIListView` 仅在可导入 SnapKit 时可用；其实现是 ScrollView 加 Stack，不具备列表单元格复用。
+
+EGChainable 保留原默认类清单，清单外的生成类型按类添加 subspec，例如 `pod 'EGChainable/UITextField'`。当前源码改动尚未发布到 CocoaPods；仓库示例中的本地路径用于开发联调，不是正常安装的前置要求。
 
 ## 创建与配置视图
 
@@ -59,6 +60,7 @@ let content = VStack(spacing: 12, alignment: .fill) {
 import EGChainable
 
 let label = UILabel("标题").backgroundColor(.white).textColor(.black)
+// 此示例需添加 EGChainable/UITextField subspec。
 let email = UITextField().placeholder("邮箱").keyboardType(.emailAddress).accessibilityLabel("邮箱")
 let controller = UIViewController().title("账户").hidesBottomBarWhenPushed(true)
 ```
