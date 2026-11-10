@@ -3,6 +3,8 @@
 //
 
 
+import UIKit
+
 public protocol Snap {
     associatedtype S
     var S: SnapObject<S> { get }

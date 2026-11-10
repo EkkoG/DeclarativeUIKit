@@ -145,9 +145,28 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## 要求
 
-iOS 10+
+- CocoaPods：iOS 10+，其中 Combine 要求 iOS 13+。
+- Swift Package Manager：iOS 15+，Xcode 26.5，Swift 5 语言模式。
 
 ## 安装
+
+### Swift Package Manager
+
+在 Xcode 中添加 `https://github.com/EkkoG/DeclarativeUIKit.git`，选择 `codex/spm-backport` 分支及 `EGDeclarativeUIKit` 产品。单一产品包含 Core、Ext、Chainable、Rx、Combine 和 SnapKit。使用 `import EGDeclarativeUIKit`，使用其他库的 API 时正常导入 `EGChainable`、`RxSwift` 或 `SnapKit`。
+
+此分支基于重构前的 API 添加 SPM，保留 `apply`、`asBuildItems`、`asView`、`.R`、`.S`、`.chainable`；示例中的 `.C` 仍由示例自身定义。SPM 依赖 EGChainable 的同名 `codex/spm-backport` 分支，RxSwift/RxCocoa 使用从 6.10.2 开始的 6.x，SnapKit 使用从 6.0.0 开始的 6.x。两个分支都推送后，才能通过远程 URL 安装。
+
+本地验证时，将配套 EGChainable checkout 放在本仓库旁边，运行：
+
+```sh
+xcrun simctl list devices available
+# 将 SIMULATOR_ID 设为可用的 iPhone 模拟器 UUID。
+python3 scripts/check-spm.py --simulator "$SIMULATOR_ID"
+```
+
+脚本构建两个包，在只选择 `EGDeclarativeUIKit` 产品的消费包中编译原始示例，并运行四项冒烟测试。EGChainable 的本地覆盖仅用于此检查；原有示例工程继续使用 CocoaPods。
+
+### CocoaPods
 
 DeclarativeUIKit is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:

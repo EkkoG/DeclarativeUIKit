@@ -2,7 +2,7 @@
 // Created by Kevin Guo on 2022/7/4.
 //
 
-import Foundation
+import UIKit
 
 public class CircleView: UIView {
     public override func layoutSubviews() {

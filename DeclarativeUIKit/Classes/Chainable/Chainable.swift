@@ -1,3 +1,4 @@
+import UIKit
 import EGChainable
 
 extension ChainableObject: BodyBuilderItemable where Base: UIView {

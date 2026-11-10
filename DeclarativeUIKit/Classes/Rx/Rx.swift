@@ -2,6 +2,8 @@
 // Created by Kevin Guo on 2022/7/6.
 //
 
+import UIKit
+
 public protocol Rx {
     associatedtype S
     var R: RxObject<S> { get }
